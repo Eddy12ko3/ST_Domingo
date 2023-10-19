@@ -1,0 +1,30 @@
+<form [formGroup]="formRegister" (ngSubmit)="registrarUsuario()">
+    <label>Usuario:</label>
+    <input type="number" formControlName="usuario">
+    <br>
+    <label>Contraseña:</label>
+    <input type="text" formControlName="contraseña">
+    <br>
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre">
+    <br>
+    <label>Apellidos:</label>
+    <input type="text" formControlName="apellidos">
+    <br>
+    <label>Fecha de nacimiento:</label>
+    <input type="date" formControlName="fecha_nac">
+    <br>
+    <select class="custom-select" formControlName="genero">
+        <option value="">Seleccione</option>
+        <option [ngValue]="1">Masculino</option>
+        <option [ngValue]="2">Femenino</option>
+    </select>
+    <br>
+    <select class="custom-select" formControlName="tipodoc">
+        <option value="">Seleccione</option>
+        <option [ngValue]="1">Dni</option>
+        <option [ngValue]="2">Carnet de extranjeria</option>
+    </select>
+    <br>
+    <button type="submit" [disabled]="!formRegister.valid">Registrar</button>
+</form>
