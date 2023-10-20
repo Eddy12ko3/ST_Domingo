@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiUserService } from '../service/api.user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { ApiUserService } from '../service/api.user.service';
 export class LoginComponent implements OnInit{
   formLogin!: FormGroup; 
 
-  constructor(private apiService: ApiUserService, private formGroup: FormBuilder){}
+  constructor(private apiService: ApiUserService, private formGroup: FormBuilder, private router: Router){}
   ngOnInit(): void {
     this.formLogin = this.formGroup.group({
       usuario: ["", [Validators.required, Validators.maxLength(8)]],
@@ -23,8 +24,17 @@ export class LoginComponent implements OnInit{
       this.apiService.login({
         dni: this.formLogin.get("usuario")?.value ?? 0,
         password: this.formLogin.get("contraseña")?.value ?? '',
-      }).subscribe((user)=>{
-        localStorage.setItem("SessionToken", user)
+      }).subscribe({
+        next: (user) => {
+          console.log(user) 
+          localStorage.setItem('yoken', user)
+          localStorage.setItem("SessionToken", user);
+          this.router.navigate(['/productos'])
+        },
+        error: (err) => {
+          console.log(err) 
+          
+        },
       })
     }
   }

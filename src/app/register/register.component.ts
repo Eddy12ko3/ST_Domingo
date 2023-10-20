@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ApiUserService } from '../service/api.user.service';
+import { Router } from '@angular/router';
 
 export interface Auth{
   dni: number;
@@ -23,7 +24,7 @@ interface User extends Auth{
 export class RegisterComponent implements OnInit{
   formRegister!: FormGroup;
   dataUsers: Array<User> = new Array<User>;
-  constructor(private apiservice: ApiUserService,private formgroup: FormBuilder){}
+  constructor(private apiservice: ApiUserService,private formgroup: FormBuilder, private router: Router){}
 
   ngOnInit(): void {
     this.formRegister = this.formgroup.group({
@@ -51,7 +52,9 @@ export class RegisterComponent implements OnInit{
       }).subscribe((user)=>{
         console.log(user);
         this.dataUsers.push(user);
+        this.router.navigate(['/login'])
       })
+
     }
 
   }
