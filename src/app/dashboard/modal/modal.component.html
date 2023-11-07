@@ -1,0 +1,111 @@
+
+<router-outlet></router-outlet>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet">
+<body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
+	
+	
+	  <div class="modal">
+		<div class="modal_cerrar" routerLink="/dashboard/puestos" >
+		  <span>x</span>
+		</div>
+		<div class="modal_mensaje">
+		  <h2>REGISTRO DE ASOCIADO</h2>
+          <form action="#">
+            <div class="input-field-modal">
+
+              <div class="fields-modal">
+                  <div class="input-field-modal">
+                      <label>NOMBRE</label>
+                      <input type="text" placeholder="Ingresar Nombre" required>
+                  </div>
+                  <div class="input-field-modal">
+                      <label>APELLIDO</label>
+                      <input type="text" placeholder="Ingresar Apellido" required>
+                  </div>
+                  <div class="input-field-modal">
+                    <label>EDAD</label>
+                    <input type="number" placeholder="Ingresar Edad" required>
+                  </div>
+                  <div class="input-field-modal">
+                    <label>DNI</label>
+                    <input type="number" placeholder="Ingresar DNI" required>
+                  </div>
+                  <div class="input-field-modal">
+                    <label>FECHA NACIMIENTO</label>
+                    <input type="date" placeholder="Ingresar Fecha" required>
+                  </div>
+                  <div class="input-field-modal">
+                    <label>SEXO</label>
+                    <select name="sexo" required>
+                      <option value="" disabled selected>Seleccione</option>
+                      <option value="hombre">Hombre</option>
+                      <option value="mujer">Mujer</option>
+                      <option value="no_señalar">No señalar</option>
+                  </select>  
+                  </div>
+                  <div class="input-field-modal">
+                    <label>TELEFONO</label>
+                    <input type="number" placeholder="Ingresar Telefono" required>
+                  </div><div class="input-field-modal">
+                    <label>DIRECCION</label>
+                    <input type="text" placeholder="Ingresar Direccion" required>
+                  </div>                              
+              </div>
+            </div>
+          </form>
+          <br>
+          <h2>REGISTRO DE PAGOS</h2>
+          <div class="fields-modal">
+            <div class="input-field-modal">
+                <label for="rubro">RUBRO</label>
+                <input type="text" id="rubro" name="rubro" list="rubros" required>
+            </div>
+            
+            <datalist id="rubros" class="details">
+                <option value="Abarrotes">
+                <option value="Bazar">
+                <option value="Carnes">
+                <option value="Comedores">
+                <option value="Embutidos">
+                <option value="Frutas">
+                <option value="Golosinas">
+                <option value="Jugueria">
+                <option value="Mayorista">
+                <option value="Miscaleno">
+                <option value="Pasamaneria">
+                <option value="Pescado">
+                <option value="Pollo">
+                <option value="Porcino">
+                <option value="Tiendas">
+                <option value="Tuberculos">
+            </datalist>
+            
+                  <div class="input-field-modal">
+                    <label>AREA</label>
+                    <input type="text" placeholder="Ingresar Area" required>
+                  </div><div class="input-field-modal">
+                    <label>CONDUCIDO</label>
+                    <input type="text" placeholder="Conducido por" required>
+                  </div>   
+
+                 </div>
+                    <div class="container_button_modal">
+                      <button class="guardarBtn" (click)="cambiarEstadoBoton()">
+                        <span class="material-icons-sharp">{{ icon }}</span>
+                        <span class="btnText">{{ buttonText }}</span>
+                    </button>
+                        <button class="limpiarBtn" routerLink="/dashboard/puestos">
+                            <span class="material-icons-sharp">delete_forever</span>
+                            <span class="btnText">Descartar</span>
+                        </button>
+                    </div>
+            </div>
+                   
+			  
+		
+	 
+	
+	</div>
+	 
+</body>

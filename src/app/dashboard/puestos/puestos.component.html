@@ -1,0 +1,282 @@
+
+<body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
+    <div class="container">
+        
+        <!--INICIO PAGINA PRINCIPAL-->
+        
+        <main>
+            
+             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
+            <div class="notifications">
+                <h2>BUSCAR SOCIO</h2>
+                <form action="#">
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>DNI</label>
+                            <input type="number" placeholder="Ingresar Dni" required>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label for="rubro">RUBRO</label>
+                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                        </div>
+                        
+                        <datalist id="rubros" class="details">
+                            <option value="Abarrotes">
+                            <option value="Bazar">
+                            <option value="Carnes">
+                            <option value="Comedores">
+                            <option value="Embutidos">
+                            <option value="Frutas">
+                            <option value="Golosinas">
+                            <option value="Jugueria">
+                            <option value="Mayorista">
+                            <option value="Miscaleno">
+                            <option value="Pasamaneria">
+                            <option value="Pescado">
+                            <option value="Pollo">
+                            <option value="Porcino">
+                            <option value="Tiendas">
+                            <option value="Tuberculos">
+                        </datalist>
+                        
+                        <div class="input-field">
+                            <label>TELEFONO</label>
+                            <input type="number" placeholder="Ingresar Telefono" required>
+                        </div>
+                        <div class="container_button_socios">
+                            <button class="guardarBtn" >
+                                <span class="material-icons-sharp">save</span>
+                                <span class="btnText">Buscar</span>
+                            </button>
+                            
+                            <button class="borrarBtn">
+                                <span class="material-icons-sharp">delete_forever</span>
+                                <span class="btnText">Limpiar</span>
+                            </button>
+                            
+                            <button class="registerBtn" (click)="openModal()">
+                                <span class="material-icons-sharp">person_add</span>
+                                <span class="btnText" >Registrar</span>
+                            </button>
+  
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+  
+             <div class="notifications1">
+                <h2>LISTAR SOCIOS</h2>
+                <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dni </th>
+                            <th>Celular</th>
+                            <th>Rubro</th>
+                            <th>Pagos</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Roberto </td>
+                            <td>Frutas </td>
+                            <td>S/300</td>
+                            <td>das</td>
+                            <td>ad</td>
+                            <td>
+                                <button class="confirmBtn" >
+                                    <i class="material-icons-sharp">edit</i>
+                                </button>
+                                <button class="rejectBtn">
+                                    <i class="material-icons-sharp">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Roberto </td>
+                            <td>Frutas </td>
+                            <td>S/300</td>
+                            <td>das</td>
+                            <td>ad</td>
+                            <td>
+                                <button class="confirmBtn" >
+                                    <i class="material-icons-sharp">edit</i>
+                                </button>
+                                <button class="rejectBtn">
+                                    <i class="material-icons-sharp">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Roberto </td>
+                            <td>Frutas </td>
+                            <td>S/300</td>
+                            <td>das</td>
+                            <td>ad</td>
+                            <td>
+                                <button class="confirmBtn" >
+                                    <i class="material-icons-sharp">edit</i>
+                                </button>
+                                <button class="rejectBtn">
+                                    <i class="material-icons-sharp">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Roberto </td>
+                            <td>Frutas </td>
+                            <td>S/300</td>
+                            <td>das</td>
+                            <td>ad</td>
+                            <td>
+                                <button class="confirmBtn" >
+                                    <i class="material-icons-sharp">edit</i>
+                                </button>
+                                <button class="rejectBtn">
+                                    <i class="material-icons-sharp">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Roberto </td>
+                            <td>Frutas </td>
+                            <td>S/300</td>
+                            <td>das</td>
+                            <td>ad</td>
+                            <td>
+                                <button class="confirmBtn" >
+                                    <i class="material-icons-sharp">edit</i>
+                                </button>
+                                <button class="rejectBtn">
+                                    <i class="material-icons-sharp">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <div class="modal-bg" *ngIf="showModal">
+            <div class="modal">
+                <div class="modal_cerrar" (click)="closeModal()" >
+                  <span>x</span>
+                </div>
+                <div class="modal_mensaje">
+                  <h2>REGISTRO DE ASOCIADO</h2>
+                  <div class="upload">
+                    <img [src]="imageUrl" width="100" height="100" alt="">
+                    <div class="round">
+                      <input type="file" (change)="onFileSelected($event)">
+                      <i class="fa fa-camera" style="color: #fff"></i>
+                    </div>
+                  </div>
+                  <form action="#">
+                    <div class="input-field-modal">
+        
+                      <div class="fields-modal">
+                          <div class="input-field-modal">
+                              <label>NOMBRE</label>
+                              <input type="text" placeholder="Ingresar Nombre" required>
+                          </div>
+                          <div class="input-field-modal">
+                              <label>APELLIDO</label>
+                              <input type="text" placeholder="Ingresar Apellido" required>
+                          </div>
+                          <div class="input-field-modal">
+                            <label>EDAD</label>
+                            <input type="number" placeholder="Ingresar Edad" required>
+                          </div>
+                          <div class="input-field-modal">
+                            <label>DNI</label>
+                            <input type="number" placeholder="Ingresar DNI" required>
+                          </div>
+                          <div class="input-field-modal">
+                            <label>FECHA NACIMIENTO</label>
+                            <input type="date" placeholder="Ingresar Fecha" required>
+                          </div>
+                          <div class="input-field-modal">
+                            <label>SEXO</label>
+                            <select name="sexo" required>
+                              <option value="" disabled selected>Seleccione</option>
+                              <option value="hombre">Hombre</option>
+                              <option value="mujer">Mujer</option>
+                              <option value="no_señalar">No señalar</option>
+                          </select>  
+                          </div>
+                          <div class="input-field-modal">
+                            <label>TELEFONO</label>
+                            <input type="number" placeholder="Ingresar Telefono" required>
+                          </div><div class="input-field-modal">
+                            <label>DIRECCION</label>
+                            <input type="text" placeholder="Ingresar Direccion" required>
+                          </div>                              
+                      </div>
+                    </div>
+                  </form>
+                  <br>
+                  <h2>REGISTRO DE PAGOS</h2>
+                  <div class="fields-modal">
+                    <div class="input-field-modal">
+                        <label for="rubro">RUBRO</label>
+                        <input type="text" id="rubro" name="rubro" list="rubros" required>
+                    </div>
+                    
+                    <datalist id="rubros" class="details">
+                        <option value="Abarrotes">
+                        <option value="Bazar">
+                        <option value="Carnes">
+                        <option value="Comedores">
+                        <option value="Embutidos">
+                        <option value="Frutas">
+                        <option value="Golosinas">
+                        <option value="Jugueria">
+                        <option value="Mayorista">
+                        <option value="Miscaleno">
+                        <option value="Pasamaneria">
+                        <option value="Pescado">
+                        <option value="Pollo">
+                        <option value="Porcino">
+                        <option value="Tiendas">
+                        <option value="Tuberculos">
+                    </datalist>
+                    
+                          <div class="input-field-modal">
+                            <label>AREA</label>
+                            <input type="text" placeholder="Ingresar Area" required>
+                          </div><div class="input-field-modal">
+                            <label>CONDUCIDO</label>
+                            <input type="text" placeholder="Conducido por" required>
+                          </div>   
+        
+                         </div>
+                            <div class="container_button_modal">
+                                <button class="guardarBtn" (click)="cambiarEstadoBoton()">
+                                    <span class="material-icons-sharp">{{ icon }}</span>
+                                    <span class="btnText">{{ buttonText }}</span>
+                                </button>
+                                <button class="limpiarBtn" (click)="closeModal()">
+                                    <span class="material-icons-sharp">delete_forever</span>
+                                    <span class="btnText">Descartar</span>
+                                </button>
+                            </div>
+                    </div>
+                           
+            </div>
+        </div>
+        </main>
+         
+         
+    </div>
+    
+
+</body>

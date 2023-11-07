@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductosComponent } from './productos/productos.component';
+
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './service/router-protected.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: "productos", component: ProductosComponent, canActivate: [AuthGuard]},
-  {path: "login", component: LoginComponent},
-  {path: "register", component: RegisterComponent}
+  {path: "login", component: LoginComponent , canActivate: [AuthGuard]},
+  {path: "register", component: RegisterComponent},
+  {path: "dashboard", component: DashboardComponent},
+  {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(x => x.DashboardModule) },
+  {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({

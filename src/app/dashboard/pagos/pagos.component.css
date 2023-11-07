@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+.container{
+    padding-top: 55px;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    
+}
+
+a{
+    color: var(--color-dark);
+}
+
+
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-size: 1.4rem
+}
+h3{
+    font-size: 0,87rem;
+}
+
+h4{
+    font-size: 0.8rem;
+}
+
+h5{
+    font-size: 0.77rem;
+}
+
+
+/*MAIN*/
+
+main{
+    margin-top: 1.4rem;
+}
+
+
+
+
+/*NOTIFICACIONES*/
+ main .notifications{
+    margin-top: 2rem;
+ }
+
+ main .notifications h2{
+    margin-bottom: 0.8rem;
+ }
+
+ main .notifications table{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+ }
+
+ main .notifications table:hover{
+    box-shadow: none;
+ }
+
+ main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+ }
+
+ main table tbody tr:last-child td{
+    border: none;
+ }
+
+ main .notifications a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+ }
+
+
+/*REALIZAR PAGO*/
+
+main .notifications .fields{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+ }
+
+ main .notifications .fields .input-field{
+    display: flex;
+    width: calc(100% / 5 - 40px);
+    flex-direction: column;
+    margin: 4px 0;
+ }
+
+ .input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    height: 1.5rem;
+    color: var(--color-dark-variant);
+ }
+ .input-field input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;;
+    background-color: var(--color-label);
+    
+ }
+ 
+
+ .input-field input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+ }
+
+ main .notifications .container_button{
+    display: block;
+    
+ }
+
+ main .notifications button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    max-width: 100px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 25px;
+    margin-bottom: 15px;
+    transition: all 0.3s linear;
+    cursor: pointer;
+    
+ }
+
+ .container_button .guardarBtn:first-child {
+    background-color: var(--color-primary);
+  }
+
+  .container_button .guardarBtn:first-child:hover {
+    background-color: rgb(12, 192, 75);
+  }
+
+  .container_button .limpiarBtn:last-child {
+    background-color: var(--color-danger);
+  }
+
+  .container_button .limpiarBtn:last-child:hover {
+    background-color: red;
+  }
+
+ .notifications button span{
+    margin: 0 4px;
+ }
+
+ /*REGISTRAR PAGO*/
+
+ main .notifications .fields-pago{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+ }
+
+ main .notifications .fields-pago .input-field-pago{
+    display: flex;
+    width: calc(100% / 5 - 40px);
+    flex-direction: column;
+    margin: 4px 0;
+ }
+
+ .input-field-pago label{
+    font-size: 12px;
+    font-weight: 500;
+    height: 1.5rem;
+    color: var(--color-dark-variant);
+ }
+ .input-field-pago input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;;
+    background-color: var(--color-label);
+    
+ }
+
+ .input-field-pago input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+ }
+
+.input-field-pago input[type="date"]{
+    color: #707070;
+    font-size: 14px;
+    font-family: poppins, sans-serif;
+}
+.input-field-pago input[type="date"]:valid{
+    color: #333;
+}
+
+ main .notifications .container_button-pago{
+    display: block;
+    
+ }
+
+ main .notifications .button-pago{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 25px;
+    
+    transition: all 0.3s linear;
+    cursor: pointer;
+    
+ }
+
+ .container_button-pago .guardarBtn:first-child {
+    background-color: var(--color-primary);
+  }
+
+  .container_button-pago .guardarBtn:first-child:hover {
+    background-color: rgb(12, 192, 75);
+  }
+
+  .container_button-pago .limpiarBtn:last-child {
+    background-color: var(--color-danger);
+  }
+
+  .container_button-pago .limpiarBtn:last-child:hover {
+    background-color: red;
+  }
+
+ .notifications button span{
+    margin: 0 4px;
+ }
+
+
+ /*SCROLL*/
+
+ main .notifications1{
+    margin-top: 2rem;
+ }
+
+ main .notifications1 h2{
+    margin-bottom: 0.8rem;
+ }
+
+ main .notifications1 table{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+ }
+
+ main .notifications1 .table-container {
+    max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto; /* Activa el desplazamiento vertical si es necesario */
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .notifications1 .table-container:hover {
+    box-shadow: none;
+}
+
+main .notifications1 table {
+    width: 100%;
+}
+
+main table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main table tbody tr:last-child td {
+    border: none;
+}
+
+main .notifications1 a {
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+}
+
+
+ main .notifications1 table:hover{
+    box-shadow: none;
+ }
+
+ main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+ }
+
+ main table tbody tr:last-child td{
+    border: none;
+ }
+
+ main .notifications1 a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+ }
+
+ /* BARRA DESPLAZAMIENTO */
+main .notifications1 .table-container::-webkit-scrollbar {
+    width: 10px; 
+}
+
+main .notifications1 .table-container::-webkit-scrollbar-thumb {
+    background: var(--color-primary); 
+    border-radius: 30px; 
+}
+
+/* OCULTAR LA FLECHA DE AUMENTO Y DISMINUCION DE TIPO NUMBERS */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}

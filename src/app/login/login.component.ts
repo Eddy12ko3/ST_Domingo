@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit{
           console.log(user) 
           localStorage.setItem('yoken', user)
           localStorage.setItem("SessionToken", user);
-          this.router.navigate(['/productos'])
+          this.router.navigate(['/dashboard/inicio'])
         },
         error: (err) => {
           console.log(err) 

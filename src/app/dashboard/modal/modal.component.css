@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+
+
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+.container{
+    padding-top: 55px;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    
+}
+
+a{
+    color: var(--color-dark);
+}
+
+
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-size: 1.4rem
+}
+h3{
+    font-size: 0,87rem;
+}
+
+h4{
+    font-size: 0.8rem;
+}
+
+h5{
+    font-size: 0.77rem;
+}
+
+
+
+
+
+.text-muted{
+    color: var(--color-info-dark);
+}
+
+p{
+    color: var(--color-dark-variant);
+}
+
+b{
+    color: var(--color-dark);
+}
+
+.primary{
+    color: var(--color-primary);
+}
+
+
+
+
+
+.warning {
+    color: var(--color-warning);
+}
+
+
+
+
+   
+/* OCULTAR LA FLECHA DE AUMENTO Y DISMINUCION DE TIPO NUMBERS */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+  .modal{
+    background: var(--color-white);
+    width: 900px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 30px;
+   
+  }
+  
+  
+  .modal_cerrar{
+    background: var(--color-white);
+    position: absolute;
+    right: -25px;
+    color: var(--color-primary);
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .modal_cerrar:hover{
+    background-color: var(--color-danger);
+    color: var(--color-botton);
+  }
+  .modal_cerrar span{
+    
+    align-items: center;
+    font-size: 25px;
+  }
+  
+  
+  .modal_mensaje{
+    padding:  30px;
+    
+  }
+  
+  .modal_botones{
+    width: 100%;
+    background: white;
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .boton {
+    background: white;
+    padding: 8px 30px;
+    color: #7d8da1;
+    text-decoration: none;
+    border-radius: 25px;
+    border: 2px solid #47F5C1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .material-icons-sharp {
+    margin-right: 10px;
+  }
+  
+  .boton:hover{
+    background: #47F5C1;
+    color: white;
+  }
+  
+  
+  /*REGISTRO*/
+  
+  
+  .fields-modal {
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: left;
+    align-items: top;
+    grid-column-gap: 10px;
+    display: grid;
+    
+  }
+
+  .input-field-modal {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+    }
+  
+  
+  .input-field-modal label{
+    font-size: 12px;
+    font-weight: 500;
+    height: 1.5rem;
+    color: var(--text-color);
+  }
+  .input-field-modal input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    border: 1px solid  var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;;
+    background-color: var(--color-label);
+    
+  }
+
+  .container_button_modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    cursor: pointer;
+  }
+
+  
+  
+  .guardarBtn {
+    display: flex; 
+    align-items: center; 
+    background-color: var(--color-primary);
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 150px;
+    cursor: pointer;
+  }
+  
+  .guardarBtn .material-icons-sharp,
+  .limpiarBtn .material-icons-sharp {
+    margin-right: 10px; 
+  }
+  
+  
+  .guardarBtn:hover {
+    background-color: rgb(12, 192, 75);
+  }
+  
+  .limpiarBtn {
+    display: flex;
+    background-color: var(--color-danger);
+    align-items: center; 
+    color: white; 
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px; 
+    cursor: pointer;
+  }
+  
+  .limpiarBtn:hover {
+    background-color: red;
+  }
+  
+
+  .input-field-modal select{
+    outline: none;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;
+    background-color: var(--color-label);
+    
+    
+  }
+  
+  .input-field-modal select {
+    color: #363949;
+    
+    
+  }
+
+
+
+  .input-field-modal input[type="date"] {
+    color: #363949;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    background-color: var(--color-label);
+    font-family: sans-serif;
+    
+ 
+  }
+
+  .details{
+    border-radius: 20px;
+  }
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+

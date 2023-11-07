@@ -1,0 +1,672 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+
+
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+}
+
+.container{
+    padding-top: 55px;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    
+}
+
+a{
+    color: var(--color-dark);
+}
+
+
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-size: 1.4rem
+}
+h3{
+    font-size: 0,87rem;
+}
+
+h4{
+    font-size: 0.8rem;
+}
+
+h5{
+    font-size: 0.77rem;
+}
+
+
+
+
+
+
+
+p{
+    color: var(--color-dark-variant);
+}
+
+b{
+    color: var(--color-dark);
+}
+
+
+
+
+
+
+/*MAIN*/
+main{
+    margin-top: 1.4rem;
+}
+
+
+/*NOTIFICACIONES*/
+ main .notifications{
+    margin-top: 2rem;
+     
+ }
+
+
+ main .notifications h2{
+    margin-bottom: 0.8rem;
+    
+ }
+
+
+ main .notifications table{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+ }
+
+ main .notifications table:hover{
+    box-shadow: none;
+ }
+
+ main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+ }
+
+ main table tbody tr:last-child td{
+    border: none;
+ }
+
+ main .notifications a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+ }
+
+
+/*REALIZAR PAGO*/
+
+main .notifications .fields{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+ }
+
+ main .notifications .fields .input-field{
+    display: flex;
+    width: calc(100% / 5 - 40px);
+    flex-direction: column;
+    margin: 4px 0;
+ }
+
+ .input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    height: 1.5rem;
+    color: var(--color-dark-variant);
+ }
+ .input-field input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;;
+    background-color: var(--color-label);
+    
+ }
+
+ .input-field input:is(:focus, :valid){
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+ }
+
+
+
+
+
+ 
+
+
+  /*TRASFERENCIAS*/
+  
+  
+  .notifications .confirmBtn,
+  .notifications .rejectBtn {
+    display: inline-block;
+    width: 25px;
+    height: 100%;
+    line-height: 0;
+    border-radius: 0 15px 0 15px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 10px;
+  }
+  
+  .notifications .confirmBtn i,
+  .notifications .rejectBtn i {
+    font-size: 18px;
+    border-radius: 50%;
+  }
+
+
+
+.notifications .confirmBtn:first-child {
+    background-color: var(--color-primary);
+  }
+
+  .notifications .confirmBtn:first-child:hover {
+    background-color: rgb(12, 192, 75);
+  }
+
+  .notifications .rejectBtn:last-child {
+    background-color: var(--color-danger);
+  }
+
+  .notifications .rejectBtn:last-child:hover {
+    background-color: red;
+  }
+
+
+   /*SCROLL*/
+
+   main .notifications1{
+    margin-top: 2rem;
+ }
+
+ main .notifications1 h2{
+    margin-bottom: 0.8rem;
+ }
+
+ main .notifications1 table{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+ }
+
+ main .notifications1 .table-container {
+    max-height: 340px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto; /* Activa el desplazamiento vertical si es necesario */
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .notifications1 .table-container:hover {
+    box-shadow: none;
+}
+
+main .notifications1 table {
+    width: 100%;
+}
+
+main table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main table tbody tr:last-child td {
+    border: none;
+}
+
+main .notifications1 a {
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+}
+
+
+ main .notifications1 table:hover{
+    box-shadow: none;
+ }
+
+ main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+ }
+
+ main table tbody tr:last-child td{
+    border: none;
+ }
+
+ main .notifications1 a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+ }
+
+/* BARRA DESPLAZAMIENTO */
+main .notifications1 .table-container::-webkit-scrollbar {
+    width: 10px; 
+}
+
+main .notifications1 .table-container::-webkit-scrollbar-thumb {
+    background: var(--color-primary); 
+    border-radius: 30px; 
+}
+
+/* OCULTAR LA FLECHA DE AUMENTO Y DISMINUCION DE TIPO NUMBERS */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+
+
+main .notifications button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    max-width: 100px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 25px;
+    margin-bottom: 15px;
+    transition: all 0.3s linear;
+    cursor: pointer;
+    
+ }
+ .container_button_socios .guardarBtn {
+    background-color: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .guardarBtn:hover {
+    background-color: rgb(12, 192, 75);
+}
+
+.container_button_socios .borrarBtn {
+    background-color: var(--color-danger);
+    color: white;
+    border: 1px solid var(--color-danger);
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .borrarBtn:hover {
+    background-color: red;
+}
+
+.container_button_socios .registerBtn {
+    background-color: var(--color-warning);
+    color: white;
+    border: 1px solid var(--color-warning);
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .registerBtn:hover {
+    background-color: rgb(241, 167, 6);
+}
+
+
+ 
+.notifications1 .confirmBtn,
+.notifications1 .rejectBtn{
+    
+   
+   
+    height: 40px;
+    max-width: 40px;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 0 15px 0 15px;
+    margin: 5px;
+    margin-bottom: 1px;
+    transition: all 0.3s linear;
+    cursor: pointer;
+    
+}
+
+.notifications1 .confirmBtn i,
+.notifications1 .rejectBtn i{
+    
+    margin: 2px;
+    
+}
+
+
+
+.notifications1 .confirmBtn:first-child {
+    background-color: var(--color-primary);
+  }
+
+  .notifications1 .confirmBtn:first-child:hover {
+    background-color: rgb(12, 192, 75);
+  }
+
+  .notifications1 .rejectBtn:last-child {
+    background-color: var(--color-danger);
+  }
+
+  .notifications1 .rejectBtn:last-child:hover {
+    background-color: red;
+  }
+
+
+  .material-icons-sharp {
+    margin-right: 10px;
+  }
+  
+ 
+
+  .input-field-pago input[type="date"] {
+    color: #363949;
+    border-radius: 10px;
+    border: 1px solid #7d8da1;
+    background-color: white;
+    font-family: sans-serif;
+  }
+
+/* MODAL */
+
+  .modal-bg {
+    background: rgba(0, 0, 0, 0.7); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal{
+    background: var(--color-white);
+    width: 900px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 30px;
+    
+  }
+  
+  
+  .modal_cerrar{
+    background: var(--color-white);
+    position: absolute;
+    right: -25px;
+    color: var(--color-primary);
+    top: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .modal_cerrar:hover{
+    background-color: var(--color-danger);
+    color: var(--color-botton);
+  }
+  .modal_cerrar span{
+    
+    align-items: center;
+    font-size: 25px;
+  }
+  
+  
+  .modal_mensaje{
+    padding:  30px;
+    
+  }
+  
+  .modal_botones{
+    width: 100%;
+    background: white;
+    padding-top: 60px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .boton {
+    background: white;
+    padding: 8px 30px;
+    color: #7d8da1;
+    text-decoration: none;
+    border-radius: 25px;
+    border: 2px solid #47F5C1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .material-icons-sharp {
+    margin-right: 10px;
+  }
+  
+  .boton:hover{
+    background: #47F5C1;
+    color: white;
+  }
+  
+  
+  /*REGISTRO*/
+  
+  
+  .fields-modal {
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: left;
+    align-items: top;
+    grid-column-gap: 10px;
+    display: grid;
+    
+  }
+
+  .input-field-modal {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0;
+    }
+  
+  
+  .input-field-modal label{
+    font-size: 12px;
+    font-weight: 500;
+    height: 1.5rem;
+    color: var(--text-color);
+  }
+  .input-field-modal input{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 10px;
+    border: 1px solid  var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;;
+    background-color: var(--color-label);
+    
+  }
+
+  .container_button_modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    cursor: pointer;
+  }
+
+  
+  
+  .guardarBtn {
+    display: flex; 
+    align-items: center; 
+    background-color: var(--color-primary);
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 150px;
+    cursor: pointer;
+  }
+  
+  .guardarBtn .material-icons-sharp,
+  .limpiarBtn .material-icons-sharp {
+    margin-right: 10px; 
+  }
+  
+  
+  .guardarBtn:hover {
+    background-color: rgb(12, 192, 75);
+  }
+  
+  .limpiarBtn {
+    display: flex;
+    background-color: var(--color-danger);
+    align-items: center; 
+    color: white; 
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px; 
+    cursor: pointer;
+  }
+  
+  .limpiarBtn:hover {
+    background-color: red;
+  }
+  
+
+  .input-field-modal select{
+    outline: none;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    padding: 0 15px;
+    height: 40px;
+    margin: 8px 0;
+    background-color: var(--color-label);
+    
+    
+  }
+  
+  .input-field-modal select {
+    color: #363949;
+    
+    
+  }
+
+
+
+  .input-field-modal input[type="date"] {
+    color: #363949;
+    border-radius: 10px;
+    border: 1px solid var(--color-dark-variant);
+    background-color: var(--color-label);
+    font-family: sans-serif;
+    
+ 
+  }
+
+  .details{
+    border-radius: 20px;
+  }
+
+
+  .upload {
+    width: 100px;
+    position: relative;
+    margin: auto;
+  }
+  
+  .upload img {
+    border-radius: 50%;
+    border: 6px solid #eaeaea;
+  }
+  
+  .upload .round {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #00b4ff;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 33px;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  
+  .upload .round input[type='file'] {
+    position: absolute;
+    transform: scale(2);
+    opacity: 0;
+  }
+  
+  input[type=file]::-webkit-file-upload-button {
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,165 @@
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
+<body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
+    <div class="container" >
+ 
+        <main class="main" >
+            
+             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
+            <div class="notifications">
+                <h2>REALIZAR PAGOS</h2>
+                <form action="#">
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>DNI</label>
+                            <input type="number" placeholder="Ingresar Dni" required>
+                        </div>
+                        <div class="input-field">
+                            <label>NOMBRE</label>
+                            <input type="text" placeholder="Ingresar Nombre" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="rubro">RUBRO</label>
+                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                        </div>
+                        
+                        <datalist id="rubros" class="details">
+                            <option value="Abarrotes">
+                            <option value="Bazar">
+                            <option value="Carnes">
+                            <option value="Comedores">
+                            <option value="Embutidos">
+                            <option value="Frutas">
+                            <option value="Golosinas">
+                            <option value="Jugueria">
+                            <option value="Mayorista">
+                            <option value="Miscaleno">
+                            <option value="Pasamaneria">
+                            <option value="Pescado">
+                            <option value="Pollo">
+                            <option value="Porcino">
+                            <option value="Tiendas">
+                            <option value="Tuberculos">
+                        </datalist>
+                        
+                        <div class="input-field">
+                            <label>MONTO</label>
+                            <input type="number" placeholder="Ingresar Monto" required>
+                        </div>
+                        <div class="input-field">
+                            <label>TELEFONO</label>
+                            <input type="number" placeholder="Ingresar Telefono" required>
+                        </div>
+                        <div class="container_button">
+                            <button class="guardarBtn">
+                                <span class="material-icons-sharp">save</span>
+                                <span class="btnText">Guardar</span>
+                            </button>
+                            <button class="limpiarBtn">
+                                <span class="material-icons-sharp">delete_forever</span>
+                                <span class="btnText">Limpiar</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        
+            <!-- REGISTRAR PAGOS  -->
+            <div class="notifications">
+                <h2>REGISTRO DE PAGOS</h2>
+                <form action="#">
+                    <div class="fields-pago">
+                        <div class="input-field-pago">
+                            <label>FECHA</label>
+                            <input type="date" placeholder="Ingresar fecha" required>
+                        </div>
+                        <div class="input-field-pago">
+                            <label>NOMBRE</label>
+                            <input type="text" placeholder="Ingresar Nombre" required>
+                        </div>
+                        <div class="input-field-pago">
+                            <label for="rubro">RUBRO</label>
+                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                        </div>
+                        
+                        <datalist id="rubros" class="details">
+                            <option value="Abarrotes">
+                            <option value="Bazar">
+                            <option value="Carnes">
+                            <option value="Comedores">
+                            <option value="Embutidos">
+                            <option value="Frutas">
+                            <option value="Golosinas">
+                            <option value="Jugueria">
+                            <option value="Mayorista">
+                            <option value="Miscaleno">
+                            <option value="Pasamaneria">
+                            <option value="Pescado">
+                            <option value="Pollo">
+                            <option value="Porcino">
+                            <option value="Tiendas">
+                            <option value="Tuberculos">
+                        </datalist>
+                        
+                        <div class="container_button-pago">
+                            <button class="guardarBtn">
+                                <span class="material-icons-sharp">search</span>
+                                <span class="btnText">Buscar</span>
+                            </button>
+                            <button class="limpiarBtn">
+                                <span class="material-icons-sharp">delete_forever</span>
+                                <span class="btnText">Limpiar</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+             
+
+        <div class="notifications1">
+            <h2>HISTORIAL DE PAGOS </h2>
+            <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th>Apellidos </th>
+                        <th>Fecha de pago</th>
+                        <th>Monto</th>
+                        <th>Rubro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Roberto</td>
+                        <td>Gomez Gomez </td>
+                        <td>17/09/2023 </td>
+                        <td>S/540.00</td>
+                        <td>Comedores</td>
+                    </tr>
+                    <tr>
+                        <td>Giovana</td>
+                        <td>Hilario Almora </td>
+                        <td>18/09/2023 </td>
+                        <td>S/500.00</td>
+                        <td>Comedores</td>
+                    </tr>
+                    <tr>
+                        <td>Roberto</td>
+                        <td>Hernandez Lopez </td>
+                        <td>17/10/2023 </td>
+                        <td>S/540.00</td>
+                        <td>Comedores</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <!-- REGISTRAR PAGOS FIN  -->
+    </main>
+</div>
+</body>
+
+

@@ -1,0 +1,103 @@
+<body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
+    <div class="container">
+       
+        <!--INICIO PAGINA PRINCIPAL-->
+        
+        <main>
+            <div class="container_reports">
+                <div class="reports">
+                    <div class="reports_conten">
+                        <h1>Bienvenido, Pablo</h1>
+                        <h3>Bienvenido a nuestra seccion panel de reportes  </h3>
+                    </div>
+                    
+                    <img src="assets/reporte/reports.svg" alt="">
+                    
+                </div>
+                <div class="vertical-container-container">
+
+                    <!-- Segundo contenedor vertical -->
+                    <div class="vertical-container">
+                        <div class="calender">
+                            
+                            <div class="month-navigation">
+                                <p>{{ currentDate | date:'MMMM y' }}</p>
+                                <button (click)="navigate(-1)"><span class="material-icons-sharp"> chevron_left </span></button>
+                                <button (click)="navigate(1)"><span class="material-icons-sharp"> chevron_right </span></button>
+                                
+                                
+                              </div>
+                          <table>
+                            <tr>
+                            <th>D</th>
+                              <th>L</th>
+                              <th>M</th>
+                              <th>M</th>
+                              <th>J</th>
+                              <th>V</th>
+                              <th>S</th>
+                            </tr>
+                            <tr *ngFor="let week of getMonthGrid()">
+                                <td *ngFor="let day of week" [class.inactive]="!day.isCurrentMonth" [ngClass]="{'current-day': isToday(day.date)}">
+                                  {{ day.date | date:'d' }}
+                                </td>
+                              </tr>
+                          </table>
+                          </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+
+            
+
+            <h2>PAGOS RECIENTES</h2>
+            <div class="notifications1">
+                <div class="table-container">
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>Nombres</th>
+                               <th>Apellidos </th>
+                               <th>Fecha de pago</th>
+                               <th>Monto</th>
+                               <th>Rubro</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>Roberto</td>
+                               <td>Gomez Gomez </td>
+                               <td>17/09/2023 </td>
+                               <td>S/540.00</td>
+                               <td>Comedores</td>
+                           </tr>
+                           <tr>
+                               <td>Giovana</td>
+                               <td>Hilario Almora </td>
+                               <td>18/09/2023 </td>
+                               <td>S/500.00</td>
+                               <td>Comedores</td>
+                           </tr>
+                           <tr>
+                               <td>Roberto</td>
+                               <td>Hernandez Lopez </td>
+                               <td>17/10/2023 </td>
+                               <td>S/540.00</td>
+                               <td>Comedores</td>
+                           </tr>
+                       </tbody>
+                   </table>
+                </div>
+                   
+               </div>
+           
+            
+        </main>
+        
+            
+         
+    </div>
+   
+</body>

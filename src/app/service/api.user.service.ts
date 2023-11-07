@@ -31,4 +31,3 @@ interface User extends Auth{
         return this.http.post(`${this.urlget}/login`, usuario);
       }
   }
-  

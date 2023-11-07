@@ -1,9 +1,40 @@
-<form [formGroup]="formLogin" (ngSubmit)="loginUser()">
-    <label>Usuario:</label>
-    <input type="number" formControlName="usuario">
-    <br>
-    <label>Contraseña:</label>
-    <input type="text" formControlName="contraseña">
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
-    <button type="submit" [disabled]="!formLogin.valid">Ingresar</button>
-</form>
+    <body>
+        <img class="wave" src="assets/login/ola.png">
+        <div class="container">
+            <div class="img">
+                <img src="assets/login/img.svg">
+            </div>
+            <div class="login-content">
+                <form [formGroup]="formLogin" (ngSubmit)="loginUser()">
+                    <h2 class="title">HOLA ,BIENVENIDO DE NUEVO </h2>
+                    <div class="input-div">
+                        <div class="i"> 
+                                   <i class="fas fa-id-card"></i>
+                              </div>
+                        <div class="username">
+                            <input type="number" formControlName="usuario">
+                            <label >Nº DOCUMENTO</label>
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <div class="i"> 
+                                   <i class="fas fa-lock"></i>
+                              </div>
+                        <div class="username">
+                            <input type="password" formControlName="contraseña">
+                            <label >PASSWORD</label>
+                        </div>
+                    </div>
+                    
+                      <a routerLink="/register">REGISTRARSE</a>
+
+                      <input type="submit"[disabled]="!formLogin.valid" class="btn" value="Login" >
+
+                </form>
+        </div>
+    </div>
+    
+</body>
