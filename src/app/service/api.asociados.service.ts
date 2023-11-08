@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Associate{
     folio: number;
@@ -12,7 +13,7 @@ export interface Associate{
     direccion: string
     celular: number,
     operador: number;
-    code: string, 
+    code: string,
     area: string,
     sector: string
     rubro: string;
@@ -26,5 +27,9 @@ export class ApiAsociadosService {
 
   public insertAsociado(asociados: Associate){
     return this.http.post(`${this.urlget}/create`, asociados);
+  }
+
+  public obtenerAsociado(): Observable<any>{
+    return this.http.get(`${this.urlget}/load`);
   }
 }

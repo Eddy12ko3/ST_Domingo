@@ -11,10 +11,10 @@ import { ApiAsociadosService, Associate } from 'src/app/service/api.asociados.se
 })
 export class PuestosComponent implements OnInit {
   isDarkTheme: boolean = false; // Estado del tema
-  icon = 'save'; // Icono inicial
-  buttonText = 'Guardar'; // Texto inicial
-  isButtonClicked = false; 
+
+  isButtonClicked = false;
   showModal = false;
+  showModalEdit = false;
   imageUrl: string = 'assets/registro/perfil.png';
   formAsociados!:FormGroup;
   dataAsociados: Array<Associate> = new Array<Associate>();
@@ -26,6 +26,7 @@ export class PuestosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerAsociados();
     this.formAsociados = this.formGroup.group({
       folio: ["" , [Validators.required, Validators.maxLength(7)]],
       nombre: ["" , [Validators.required, Validators.maxLength(50)]],
@@ -42,7 +43,7 @@ export class PuestosComponent implements OnInit {
       code: ["", [Validators.required ,Validators.maxLength(10)]],
       sector: ["", [Validators.required ,Validators.maxLength(20)]],
 
-        }); 
+        });
   }
   openModal() {
     this.showModal = true;
@@ -52,21 +53,20 @@ export class PuestosComponent implements OnInit {
     this.showModal = false;
   }
 
-  
+  abrir() {
+    this.showModalEdit = true;
+  }
+
+  cerrar() {
+    this.showModalEdit = false;
+  }
+
+
 
   toggleTheme() {
     this.themeService.toggleDarkMode();
   }
-  cambiarEstadoBoton() {
-    this.isButtonClicked = !this.isButtonClicked;
-    if (this.isButtonClicked) {
-      this.icon = 'check_circle'; // Cambiar a otro icono cuando se hace clic
-      this.buttonText = 'Guardado'; // Cambiar el texto cuando se hace clic
-    } else {
-      this.icon = 'save'; // Cambiar de vuelta al icono original
-      this.buttonText = 'Guardar'; // Cambiar de vuelta al texto original
-    }
-  }
+
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
@@ -80,7 +80,13 @@ export class PuestosComponent implements OnInit {
     }
   }
 
+  obtenerAsociados(){
+    this.asociadosService.obtenerAsociado().subscribe((asociado)=>{
+      this.dataAsociados= asociado
+    })
+  }
   registrarAsociados(){
+
     if (this.formAsociados.valid){
       this.asociadosService.insertAsociado({
         folio: this.formAsociados.get("folio")?.value ?? 0,
@@ -97,8 +103,11 @@ export class PuestosComponent implements OnInit {
         area: this.formAsociados.get("area")?.value ?? '',
         sector: this.formAsociados.get("sector")?.value ?? '',
         rubro: this.formAsociados.get("rubro")?.value ?? '',
-      }).subscribe((asociado)=>{
+      }).subscribe((asociado: any)=>{
         console.log(asociado,"success")
+        if(this.dataAsociados.length>0){
+          this.closeModal()
+        }
       })
     }
   }

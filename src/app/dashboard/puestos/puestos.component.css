@@ -21,7 +21,7 @@ body{
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
-    
+
 }
 
 a{
@@ -78,13 +78,13 @@ main{
 /*NOTIFICACIONES*/
  main .notifications{
     margin-top: 2rem;
-     
+
  }
 
 
  main .notifications h2{
     margin-bottom: 0.8rem;
-    
+
  }
 
 
@@ -132,7 +132,7 @@ main .notifications .fields{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
  }
 
  main .notifications .fields .input-field{
@@ -158,7 +158,7 @@ main .notifications .fields{
     height: 40px;
     margin: 8px 0;;
     background-color: var(--color-label);
-    
+
  }
 
  .input-field input:is(:focus, :valid){
@@ -169,12 +169,12 @@ main .notifications .fields{
 
 
 
- 
+
 
 
   /*TRASFERENCIAS*/
-  
-  
+
+
   .notifications .confirmBtn,
   .notifications .rejectBtn {
     display: inline-block;
@@ -188,7 +188,7 @@ main .notifications .fields{
     padding: 0px;
     margin-left: 10px;
   }
-  
+
   .notifications .confirmBtn i,
   .notifications .rejectBtn i {
     font-size: 18px;
@@ -252,15 +252,7 @@ main .notifications1 table {
     width: 100%;
 }
 
-main table tbody td {
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
-}
 
-main table tbody tr:last-child td {
-    border: none;
-}
 
 main .notifications1 a {
     text-align: center;
@@ -293,12 +285,12 @@ main .notifications1 a {
 
 /* BARRA DESPLAZAMIENTO */
 main .notifications1 .table-container::-webkit-scrollbar {
-    width: 10px; 
+    width: 10px;
 }
 
 main .notifications1 .table-container::-webkit-scrollbar-thumb {
-    background: var(--color-primary); 
-    border-radius: 30px; 
+    background: var(--color-primary);
+    border-radius: 30px;
 }
 
 /* OCULTAR LA FLECHA DE AUMENTO Y DISMINUCION DE TIPO NUMBERS */
@@ -326,7 +318,7 @@ main .notifications button{
     margin-bottom: 15px;
     transition: all 0.3s linear;
     cursor: pointer;
-    
+
  }
  .container_button_socios .guardarBtn {
     background-color: var(--color-primary);
@@ -365,12 +357,12 @@ main .notifications button{
 }
 
 
- 
+
 .notifications1 .confirmBtn,
 .notifications1 .rejectBtn{
-    
-   
-   
+
+
+
     height: 40px;
     max-width: 40px;
     border: none;
@@ -381,14 +373,14 @@ main .notifications button{
     margin-bottom: 1px;
     transition: all 0.3s linear;
     cursor: pointer;
-    
+
 }
 
 .notifications1 .confirmBtn i,
 .notifications1 .rejectBtn i{
-    
+
     margin: 2px;
-    
+
 }
 
 
@@ -413,8 +405,8 @@ main .notifications button{
   .material-icons-sharp {
     margin-right: 10px;
   }
-  
- 
+
+
 
   .input-field-pago input[type="date"] {
     color: #363949;
@@ -427,7 +419,7 @@ main .notifications button{
 /* MODAL */
 
   .modal-bg {
-    background: rgba(0, 0, 0, 0.7); 
+    background: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;
     left: 0;
@@ -451,10 +443,10 @@ main .notifications button{
     justify-content: space-evenly;
     align-items: center;
     border-radius: 30px;
-    
+
   }
-  
-  
+
+
   .modal_cerrar{
     background: var(--color-white);
     position: absolute;
@@ -474,17 +466,17 @@ main .notifications button{
     color: var(--color-botton);
   }
   .modal_cerrar span{
-    
+
     align-items: center;
     font-size: 25px;
   }
-  
-  
+
+
   .modal_mensaje{
     padding:  30px;
-    
+
   }
-  
+
   .modal_botones{
     width: 100%;
     background: white;
@@ -492,7 +484,7 @@ main .notifications button{
     display: flex;
     justify-content: space-evenly;
   }
-  
+
   .boton {
     background: white;
     padding: 8px 30px;
@@ -503,27 +495,27 @@ main .notifications button{
     display: flex;
     align-items: center;
   }
-  
+
   .material-icons-sharp {
     margin-right: 10px;
   }
-  
+
   .boton:hover{
     background: #47F5C1;
     color: white;
   }
-  
-  
+
+
   /*REGISTRO*/
-  
-  
+
+
   .fields-modal {
     grid-template-columns: repeat(4, 1fr);
     justify-content: left;
     align-items: top;
     grid-column-gap: 10px;
     display: grid;
-    
+
   }
 
   .input-field-modal {
@@ -531,8 +523,8 @@ main .notifications button{
     flex-direction: column;
     margin: 8px 0;
     }
-  
-  
+
+
   .input-field-modal label{
     font-size: 12px;
     font-weight: 500;
@@ -549,7 +541,7 @@ main .notifications button{
     height: 40px;
     margin: 8px 0;;
     background-color: var(--color-label);
-    
+
   }
 
   .container_button_modal {
@@ -559,11 +551,11 @@ main .notifications button{
     cursor: pointer;
   }
 
-  
-  
+
+
   .guardarBtn {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     background-color: var(--color-primary);
     color: white;
     padding: 8px 20px;
@@ -572,33 +564,33 @@ main .notifications button{
     margin-right: 150px;
     cursor: pointer;
   }
-  
+
   .guardarBtn .material-icons-sharp,
   .limpiarBtn .material-icons-sharp {
-    margin-right: 10px; 
+    margin-right: 10px;
   }
-  
-  
+
+
   .guardarBtn:hover {
     background-color: rgb(12, 192, 75);
   }
-  
+
   .limpiarBtn {
     display: flex;
     background-color: var(--color-danger);
-    align-items: center; 
-    color: white; 
+    align-items: center;
+    color: white;
     padding: 8px 20px;
     border: none;
     border-radius: 5px;
-    margin-left: 10px; 
+    margin-left: 10px;
     cursor: pointer;
   }
-  
+
   .limpiarBtn:hover {
     background-color: red;
   }
-  
+
 
   .input-field-modal select{
     outline: none;
@@ -609,14 +601,14 @@ main .notifications button{
     height: 40px;
     margin: 8px 0;
     background-color: var(--color-label);
-    
-    
+
+
   }
-  
+
   .input-field-modal select {
     color: #363949;
-    
-    
+
+
   }
 
 
@@ -627,8 +619,8 @@ main .notifications button{
     border: 1px solid var(--color-dark-variant);
     background-color: var(--color-label);
     font-family: sans-serif;
-    
- 
+
+
   }
 
   .details{
@@ -641,12 +633,12 @@ main .notifications button{
     position: relative;
     margin: auto;
   }
-  
+
   .upload img {
     border-radius: 50%;
     border: 6px solid #eaeaea;
   }
-  
+
   .upload .round {
     position: absolute;
     bottom: 0;
@@ -659,14 +651,13 @@ main .notifications button{
     overflow: hidden;
     border-radius: 30px;
   }
-  
+
   .upload .round input[type='file'] {
     position: absolute;
     transform: scale(2);
     opacity: 0;
   }
-  
+
   input[type=file]::-webkit-file-upload-button {
     cursor: pointer;
   }
-  
