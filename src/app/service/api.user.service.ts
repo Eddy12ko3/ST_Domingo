@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Auth{
-    dni: number;
+    numDocument: number;
     password: string;
 }
 

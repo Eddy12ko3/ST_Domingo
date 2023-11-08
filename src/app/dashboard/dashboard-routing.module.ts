@@ -7,15 +7,16 @@ import { PuestosComponent } from './puestos/puestos.component';
 import { TrasferenciasComponent } from './trasferencias/trasferencias.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { ModalComponent } from './modal/modal.component';
+import { AuthGuard } from '../service/router-protected.guard';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, children:[
-    {path: 'inicio', component: InicioComponent},
-    {path: 'reportes', component: ReportesComponent},
-    {path: 'puestos', component: PuestosComponent},
-    {path: 'trasferencias', component: TrasferenciasComponent},
-    {path: 'pagos', component: PagosComponent},
-    {path: 'modal', component: ModalComponent},
+    {path: 'inicio', component: InicioComponent, canActivate: [AuthGuard]},
+    {path: 'reportes', component: ReportesComponent, canActivate: [AuthGuard]},
+    {path: 'puestos', component: PuestosComponent, canActivate: [AuthGuard]},
+    {path: 'trasferencias', component: TrasferenciasComponent, canActivate: [AuthGuard]},
+    {path: 'pagos', component: PagosComponent, canActivate: [AuthGuard]},
+    {path: 'modal', component: ModalComponent, canActivate: [AuthGuard]},
     
   ]
 }

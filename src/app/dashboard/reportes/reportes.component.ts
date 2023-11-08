@@ -1,5 +1,5 @@
 import { Component , OnInit } from '@angular/core';
-import { ThemeService } from './../theme.service';
+import { ThemeService } from '../../service/theme.service';
 import { addDays, startOfMonth, endOfMonth, startOfWeek, endOfWeek, format, isSameMonth, addMonths, subMonths } from 'date-fns';
 import { es } from 'date-fns/locale';
 

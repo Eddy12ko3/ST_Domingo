@@ -1,19 +1,49 @@
-import { Component } from '@angular/core';
-import { ThemeService } from './../theme.service';
+import { Component , OnInit } from '@angular/core';
+import { ThemeService } from '../../service/theme.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiAsociadosService, Associate } from 'src/app/service/api.asociados.service';
 
 @Component({
   selector: 'app-puestos',
   templateUrl: './puestos.component.html',
   styleUrls: ['./puestos.component.css']
 })
-export class PuestosComponent {
+export class PuestosComponent implements OnInit {
   isDarkTheme: boolean = false; // Estado del tema
   icon = 'save'; // Icono inicial
   buttonText = 'Guardar'; // Texto inicial
   isButtonClicked = false; 
   showModal = false;
   imageUrl: string = 'assets/registro/perfil.png';
- 
+  formAsociados!:FormGroup;
+  dataAsociados: Array<Associate> = new Array<Associate>();
+
+  constructor(private themeService: ThemeService, private asociadosService: ApiAsociadosService, private formGroup: FormBuilder, private router: Router) {
+    this.themeService.isDarkMode$.subscribe(isDarkMode => {
+      this.isDarkTheme = isDarkMode;
+    });
+  }
+
+  ngOnInit(): void {
+    this.formAsociados = this.formGroup.group({
+      folio: ["" , [Validators.required, Validators.maxLength(7)]],
+      nombre: ["" , [Validators.required, Validators.maxLength(50)]],
+      apellido: ["" , [Validators.required, Validators.maxLength(50)]],
+      numDocumento: ["" , [Validators.required, Validators.maxLength(12)]],
+      fecha_nac: ["", [Validators.required]],
+      document: ["", [Validators.required]],
+      genero: ["",  [Validators.required]],
+      telefono: ["", [Validators.required, Validators.maxLength(9)]],
+      operador: ["", [Validators.required]],
+      direccion: ["", [Validators.required, Validators.maxLength(100)]],
+      rubro: ["", [Validators.required]],
+      area: ["", [Validators.required ,Validators.maxLength(20)]],
+      code: ["", [Validators.required ,Validators.maxLength(10)]],
+      sector: ["", [Validators.required ,Validators.maxLength(20)]],
+
+        }); 
+  }
   openModal() {
     this.showModal = true;
   }
@@ -22,11 +52,7 @@ export class PuestosComponent {
     this.showModal = false;
   }
 
-  constructor(private themeService: ThemeService) {
-    this.themeService.isDarkMode$.subscribe(isDarkMode => {
-      this.isDarkTheme = isDarkMode;
-    });
-  }
+  
 
   toggleTheme() {
     this.themeService.toggleDarkMode();
@@ -51,6 +77,29 @@ export class PuestosComponent {
       };
 
       reader.readAsDataURL(file);
+    }
+  }
+
+  registrarAsociados(){
+    if (this.formAsociados.valid){
+      this.asociadosService.insertAsociado({
+        folio: this.formAsociados.get("folio")?.value ?? 0,
+        numDocument: this.formAsociados.get("numDocumento")?.value ?? 0,
+        name: this.formAsociados.get("nombre")?.value ?? '',
+        lastname: this.formAsociados.get("apellido")?.value ?? '',
+        date_birth: this.formAsociados.get("fecha_nac")?.value ?? '',
+        gender: this.formAsociados.get("genero")?.value ?? '',
+        document: this.formAsociados.get("document")?.value ?? '',
+        direccion: this.formAsociados.get("direccion")?.value ?? '',
+        celular: this.formAsociados.get("telefono")?.value ?? 0,
+        operador: this.formAsociados.get("operador")?.value ?? '',
+        code: this.formAsociados.get("code")?.value ?? '',
+        area: this.formAsociados.get("area")?.value ?? '',
+        sector: this.formAsociados.get("sector")?.value ?? '',
+        rubro: this.formAsociados.get("rubro")?.value ?? '',
+      }).subscribe((asociado)=>{
+        console.log(asociado,"success")
+      })
     }
   }
 }

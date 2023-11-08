@@ -4,7 +4,7 @@ import {ApiUserService } from '../service/api.user.service';
 import { Router } from '@angular/router';
 
 export interface Auth{
-  dni: number;
+  numDocument: number;
   password: string;
 }
 
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit{
     console.log(this.formRegister.value)
     if(this.formRegister.valid){
       this.apiservice.register({
-        dni: this.formRegister.get("usuario")?.value ?? 0,
+        numDocument: this.formRegister.get("usuario")?.value ?? 0,
         password: this.formRegister.get("contraseña")?.value ?? '',
         name: this.formRegister.get("nombre")?.value ?? '',
         lastname: this.formRegister.get("apellidos")?.value ?? '',
@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit{
         gender: this.formRegister.get("genero")?.value ?? '',
         document: this.formRegister.get("tipodoc")?.value ?? '',
       }).subscribe((user)=>{
-        console.log(user);
         this.dataUsers.push(user);
         this.router.navigate(['/login'])
       })

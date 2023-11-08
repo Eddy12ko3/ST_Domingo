@@ -180,103 +180,132 @@
                       <i class="fa fa-camera" style="color: #fff"></i>
                     </div>
                   </div>
-                  <form action="#">
+                  <form [formGroup]="formAsociados" (ngSubmit)="registrarAsociados()">
                     <div class="input-field-modal">
         
                       <div class="fields-modal">
+                        
+                        <div class="input-field-modal">
+                            <label>FOLIO</label>
+                            <input type="number" placeholder="Ingresar # Folio" required formControlName="folio">
+                        </div>
                           <div class="input-field-modal">
                               <label>NOMBRE</label>
-                              <input type="text" placeholder="Ingresar Nombre" required>
+                              <input type="text" placeholder="Ingresar Nombre" required formControlName="nombre">
                           </div>
                           <div class="input-field-modal">
                               <label>APELLIDO</label>
-                              <input type="text" placeholder="Ingresar Apellido" required>
-                          </div>
+                              <input type="text" placeholder="Ingresar Apellido" required formControlName="apellido">
+                          </div> 
                           <div class="input-field-modal">
                             <label>EDAD</label>
-                            <input type="number" placeholder="Ingresar Edad" required>
+                            <input type="number" placeholder="Ingresar Edad" required >
                           </div>
                           <div class="input-field-modal">
-                            <label>DNI</label>
-                            <input type="number" placeholder="Ingresar DNI" required>
+                            <label>TIPO_DOCUMENTO</label>
+                            <select name="tipo_documento" required formControlName="document">
+                              <option value="" disabled selected>Seleccione</option>
+                              <option value="DNI">Dni</option>
+                              <option value="Carnet_Exranjeria">Carnet_Exranjeria</option>
+                          </select>  
+                          </div>
+                          <div class="input-field-modal">
+                            <label>N° DOCUMENTO</label>
+                            <input type="number" placeholder="Ingresar N° Documento" required formControlName="numDocumento">
                           </div>
                           <div class="input-field-modal">
                             <label>FECHA NACIMIENTO</label>
-                            <input type="date" placeholder="Ingresar Fecha" required>
+                            <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac">
                           </div>
                           <div class="input-field-modal">
                             <label>SEXO</label>
-                            <select name="sexo" required>
+                            <select name="sexo" required formControlName="genero">
                               <option value="" disabled selected>Seleccione</option>
                               <option value="hombre">Hombre</option>
                               <option value="mujer">Mujer</option>
-                              <option value="no_señalar">No señalar</option>
                           </select>  
                           </div>
                           <div class="input-field-modal">
                             <label>TELEFONO</label>
-                            <input type="number" placeholder="Ingresar Telefono" required>
-                          </div><div class="input-field-modal">
+                            <input type="number" placeholder="Ingresar Telefono" required formControlName="telefono">
+                          </div>
+                          <div class="input-field-modal">
+                            <label>OPEDADOR</label>
+                            <select name="opedador" required formControlName="operador">
+                              <option value="" disabled selected>Seleccione</option>
+                              <option value="Claro">Claro</option>
+                              <option value="Entel">Entel</option>
+                              <option value="Bitel">Bitel</option>
+                              <option value="Movistar">Movistar</option>
+                          </select>  
+                          </div>
+                          <div class="input-field-modal">
                             <label>DIRECCION</label>
-                            <input type="text" placeholder="Ingresar Direccion" required>
-                          </div>                              
+                            <input type="text" placeholder="Ingresar Direccion" required formControlName="direccion">
+                          </div> 
+                          <div class="input-field-modal">
+                            <label>SECTOR</label>
+                            <input type="text" placeholder="Ingresar Sector" required formControlName="sector">
+                          </div>                               
                       </div>
+                      
                     </div>
-                  </form>
-                  <br>
-                  <h2>REGISTRO DE PAGOS</h2>
-                  <div class="fields-modal">
-                    <div class="input-field-modal">
-                        <label for="rubro">RUBRO</label>
+                    
+                    <div class="fields-modal">
+                        <div class="input-field-modal">
+                            <label for="rubro">RUBRO</label>
                         <input type="text" id="rubro" name="rubro" list="rubros" required>
                     </div>
                     
                     <datalist id="rubros" class="details">
                         <option value="Abarrotes">
-                        <option value="Bazar">
+                            <option value="Bazar">
                         <option value="Carnes">
-                        <option value="Comedores">
+                            <option value="Comedores">
                         <option value="Embutidos">
                         <option value="Frutas">
                         <option value="Golosinas">
                         <option value="Jugueria">
-                        <option value="Mayorista">
-                        <option value="Miscaleno">
-                        <option value="Pasamaneria">
-                        <option value="Pescado">
-                        <option value="Pollo">
-                        <option value="Porcino">
-                        <option value="Tiendas">
-                        <option value="Tuberculos">
-                    </datalist>
-                    
+                            <option value="Mayorista">
+                                <option value="Miscaleno">
+                                    <option value="Pasamaneria">
+                                        <option value="Pescado">
+                                            <option value="Pollo">
+                                                <option value="Porcino">
+                                                    <option value="Tiendas">
+                                                        <option value="Tuberculos">
+                                                        </datalist>
+                                                        
+                                                        <div class="input-field-modal">
+                                                            <label>AREA</label>
+                                                            <input type="text" placeholder="Ingresar Area" required>
+                                                        </div>
                           <div class="input-field-modal">
-                            <label>AREA</label>
-                            <input type="text" placeholder="Ingresar Area" required>
-                          </div><div class="input-field-modal">
                             <label>CONDUCIDO</label>
                             <input type="text" placeholder="Conducido por" required>
-                          </div>   
-        
-                         </div>
+                          </div> 
+                          <div class="input-field-modal">
+                            <label>CODE</label>
+                            <input type="text" placeholder="Ingresar Code" required>
+                          </div>     
+                          
+                          
+                        </div>
                             <div class="container_button_modal">
-                                <button class="guardarBtn" (click)="cambiarEstadoBoton()">
-                                    <span class="material-icons-sharp">{{ icon }}</span>
-                                    <span class="btnText">{{ buttonText }}</span>
-                                </button>
+                                <input type="submit" class="guardarBtn" [disabled]="!formAsociados.valid">regisrar
                                 <button class="limpiarBtn" (click)="closeModal()">
                                     <span class="material-icons-sharp">delete_forever</span>
                                     <span class="btnText">Descartar</span>
                                 </button>
                             </div>
-                    </div>
-                           
+                    </form>
+                </div>
             </div>
         </div>
-        </main>
-         
+    </main>
+    
          
     </div>
     
-
+    
 </body>

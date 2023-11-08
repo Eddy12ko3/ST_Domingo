@@ -22,12 +22,10 @@ export class LoginComponent implements OnInit{
   loginUser(){
     if(this.formLogin.valid){
       this.apiService.login({
-        dni: this.formLogin.get("usuario")?.value ?? 0,
+        numDocument: this.formLogin.get("usuario")?.value ?? 0,
         password: this.formLogin.get("contraseña")?.value ?? '',
       }).subscribe({
         next: (user) => {
-          console.log(user) 
-          localStorage.setItem('yoken', user)
           localStorage.setItem("SessionToken", user);
           this.router.navigate(['/dashboard/inicio'])
         },

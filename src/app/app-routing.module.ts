@@ -7,9 +7,9 @@ import { AuthGuard } from './service/router-protected.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: "login", component: LoginComponent , canActivate: [AuthGuard]},
+  {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "dashboard", component: DashboardComponent},
+  {path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(x => x.DashboardModule) },
   {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
