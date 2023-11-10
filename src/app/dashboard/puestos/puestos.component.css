@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-
-
-
-
-
 body{
     width: 100vw;
     height: 100vh;
@@ -51,11 +46,6 @@ h5{
 }
 
 
-
-
-
-
-
 p{
     color: var(--color-dark-variant);
 }
@@ -63,11 +53,6 @@ p{
 b{
     color: var(--color-dark);
 }
-
-
-
-
-
 
 /*MAIN*/
 main{
@@ -81,12 +66,10 @@ main{
 
  }
 
-
  main .notifications h2{
     margin-bottom: 0.8rem;
 
  }
-
 
  main .notifications table{
     background: var(--color-white);
@@ -165,13 +148,6 @@ main .notifications .fields{
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
  }
 
-
-
-
-
-
-
-
   /*TRASFERENCIAS*/
 
 
@@ -195,8 +171,6 @@ main .notifications .fields{
     border-radius: 50%;
   }
 
-
-
 .notifications .confirmBtn:first-child {
     background-color: var(--color-primary);
   }
@@ -212,7 +186,6 @@ main .notifications .fields{
   .notifications .rejectBtn:last-child:hover {
     background-color: red;
   }
-
 
    /*SCROLL*/
 
@@ -251,8 +224,6 @@ main .notifications1 .table-container:hover {
 main .notifications1 table {
     width: 100%;
 }
-
-
 
 main .notifications1 a {
     text-align: center;
@@ -300,8 +271,6 @@ input[type="number"]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
-
-
 
 main .notifications button{
     display: flex;
@@ -356,12 +325,8 @@ main .notifications button{
     background-color: rgb(241, 167, 6);
 }
 
-
-
 .notifications1 .confirmBtn,
 .notifications1 .rejectBtn{
-
-
 
     height: 40px;
     max-width: 40px;
@@ -373,7 +338,6 @@ main .notifications button{
     margin-bottom: 1px;
     transition: all 0.3s linear;
     cursor: pointer;
-
 }
 
 .notifications1 .confirmBtn i,
@@ -382,8 +346,6 @@ main .notifications button{
     margin: 2px;
 
 }
-
-
 
 .notifications1 .confirmBtn:first-child {
     background-color: var(--color-primary);
@@ -401,12 +363,9 @@ main .notifications button{
     background-color: red;
   }
 
-
   .material-icons-sharp {
     margin-right: 10px;
   }
-
-
 
   .input-field-pago input[type="date"] {
     color: #363949;
@@ -446,7 +405,6 @@ main .notifications button{
 
   }
 
-
   .modal_cerrar{
     background: var(--color-white);
     position: absolute;
@@ -471,10 +429,8 @@ main .notifications button{
     font-size: 25px;
   }
 
-
   .modal_mensaje{
     padding:  30px;
-
   }
 
   .modal_botones{
@@ -505,9 +461,7 @@ main .notifications button{
     color: white;
   }
 
-
   /*REGISTRO*/
-
 
   .fields-modal {
     grid-template-columns: repeat(4, 1fr);
@@ -551,8 +505,6 @@ main .notifications button{
     cursor: pointer;
   }
 
-
-
   .guardarBtn {
     display: flex;
     align-items: center;
@@ -569,7 +521,6 @@ main .notifications button{
   .limpiarBtn .material-icons-sharp {
     margin-right: 10px;
   }
-
 
   .guardarBtn:hover {
     background-color: rgb(12, 192, 75);
@@ -591,7 +542,6 @@ main .notifications button{
     background-color: red;
   }
 
-
   .input-field-modal select{
     outline: none;
     font-size: 14px;
@@ -601,17 +551,11 @@ main .notifications button{
     height: 40px;
     margin: 8px 0;
     background-color: var(--color-label);
-
-
   }
 
   .input-field-modal select {
     color: #363949;
-
-
   }
-
-
 
   .input-field-modal input[type="date"] {
     color: #363949;
@@ -619,15 +563,11 @@ main .notifications button{
     border: 1px solid var(--color-dark-variant);
     background-color: var(--color-label);
     font-family: sans-serif;
-
-
   }
 
   .details{
     border-radius: 20px;
   }
-
-
   .upload {
     width: 100px;
     position: relative;

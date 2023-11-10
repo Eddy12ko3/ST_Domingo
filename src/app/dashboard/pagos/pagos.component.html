@@ -7,55 +7,29 @@
             
              <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
-                <h2>REALIZAR PAGOS</h2>
-                <form action="#">
+                <h2>GUARDAR PAGOS</h2>
+                <form [formGroup]="formPagos" (ngSubmit)="registrarPagos()">
                     <div class="fields">
                         <div class="input-field">
-                            <label>DNI</label>
-                            <input type="number" placeholder="Ingresar Dni" required>
+                            <label>FECHA PAGO</label>
+                            <input type="date" placeholder="Ingresar Fecha" required formControlName="datepayment" >
                         </div>
                         <div class="input-field">
                             <label>NOMBRE</label>
-                            <input type="text" placeholder="Ingresar Nombre" required>
+                            <input type="text" placeholder="Ingresar Nombre" required  formControlName="person">
                         </div>
-                        <div class="input-field">
-                            <label for="rubro">RUBRO</label>
-                            <input type="text" id="rubro" name="rubro" list="rubros" required>
-                        </div>
-                        
-                        <datalist id="rubros" class="details">
-                            <option value="Abarrotes">
-                            <option value="Bazar">
-                            <option value="Carnes">
-                            <option value="Comedores">
-                            <option value="Embutidos">
-                            <option value="Frutas">
-                            <option value="Golosinas">
-                            <option value="Jugueria">
-                            <option value="Mayorista">
-                            <option value="Miscaleno">
-                            <option value="Pasamaneria">
-                            <option value="Pescado">
-                            <option value="Pollo">
-                            <option value="Porcino">
-                            <option value="Tiendas">
-                            <option value="Tuberculos">
-                        </datalist>
                         
                         <div class="input-field">
                             <label>MONTO</label>
-                            <input type="number" placeholder="Ingresar Monto" required>
+                            <input type="number" placeholder="Ingresar Monto" required formControlName="amount">
                         </div>
-                        <div class="input-field">
-                            <label>TELEFONO</label>
-                            <input type="number" placeholder="Ingresar Telefono" required>
-                        </div>
+                        
                         <div class="container_button">
-                            <button class="guardarBtn">
+                            <button  type="submit" [disabled]="!formPagos.valid"   class="guardarBtn">
                                 <span class="material-icons-sharp">save</span>
                                 <span class="btnText">Guardar</span>
                             </button>
-                            <button class="limpiarBtn">
+                            <button class="limpiarBtn"  (click)="limpiarFormulario()">
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
@@ -67,47 +41,29 @@
         
             <!-- REGISTRAR PAGOS  -->
             <div class="notifications">
-                <h2>REGISTRO DE PAGOS</h2>
-                <form action="#">
+                <h2>BUSCAR PAGO</h2>
+                <form [formGroup]="buscarForm" (ngSubmit)="buscarPorMonto()">
                     <div class="fields-pago">
-                        <div class="input-field-pago">
+                        <!--<div class="input-field-pago">
                             <label>FECHA</label>
-                            <input type="date" placeholder="Ingresar fecha" required>
+                            <input type="date" placeholder="Ingresar fecha" required formControlName="datepayment">
                         </div>
                         <div class="input-field-pago">
                             <label>NOMBRE</label>
-                            <input type="text" placeholder="Ingresar Nombre" required>
-                        </div>
+                            <input type="text" placeholder="Ingresar Nombre" required formControlName="person">
+                        </div>-->
                         <div class="input-field-pago">
-                            <label for="rubro">RUBRO</label>
-                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                            <label  for="amountToSearch">MONTO</label>
+                            <input type="number" placeholder="Ingresar Monto" required formControlName="amountToSearch">
                         </div>
                         
-                        <datalist id="rubros" class="details">
-                            <option value="Abarrotes">
-                            <option value="Bazar">
-                            <option value="Carnes">
-                            <option value="Comedores">
-                            <option value="Embutidos">
-                            <option value="Frutas">
-                            <option value="Golosinas">
-                            <option value="Jugueria">
-                            <option value="Mayorista">
-                            <option value="Miscaleno">
-                            <option value="Pasamaneria">
-                            <option value="Pescado">
-                            <option value="Pollo">
-                            <option value="Porcino">
-                            <option value="Tiendas">
-                            <option value="Tuberculos">
-                        </datalist>
-                        
+
                         <div class="container_button-pago">
                             <button class="guardarBtn">
                                 <span class="material-icons-sharp">search</span>
                                 <span class="btnText">Buscar</span>
                             </button>
-                            <button class="limpiarBtn">
+                            <button class="limpiarBtn" (click)="limpiarFormulario()">
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
@@ -116,43 +72,28 @@
                 </form>
                 
             </div>
-             
+            
 
         <div class="notifications1">
             <h2>HISTORIAL DE PAGOS </h2>
             <div class="table-container">
             <table>
                 <thead>
-                    <tr>
-                        <th>Nombres</th>
-                        <th>Apellidos </th>
+                    <tr >
                         <th>Fecha de pago</th>
+                        <th>Nombres</th>
                         <th>Monto</th>
-                        <th>Rubro</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Roberto</td>
-                        <td>Gomez Gomez </td>
-                        <td>17/09/2023 </td>
-                        <td>S/540.00</td>
-                        <td>Comedores</td>
+                    <tr *ngFor="let pago of dataPagos">
+                        <td>{{ pago.person.date_birth| date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ pago.person.name }} </td>
+                        <td>{{ pago.amount }} </td>
                     </tr>
-                    <tr>
-                        <td>Giovana</td>
-                        <td>Hilario Almora </td>
-                        <td>18/09/2023 </td>
-                        <td>S/500.00</td>
-                        <td>Comedores</td>
-                    </tr>
-                    <tr>
-                        <td>Roberto</td>
-                        <td>Hernandez Lopez </td>
-                        <td>17/10/2023 </td>
-                        <td>S/540.00</td>
-                        <td>Comedores</td>
-                    </tr>
+                    <tr *ngIf="dataPagos.length === 0">
+                        <td colspan="3">No hay resultados de búsqueda.</td>
+                      </tr>
                 </tbody>
             </table>
             </div>

@@ -50,7 +50,7 @@
                                 <span class="btnText">Buscar</span>
                             </button>
 
-                            <button class="borrarBtn">
+                            <button class="borrarBtn" >
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
@@ -66,54 +66,47 @@
                 </form>
             </div>
 
-             <div class="notifications1">
-                <h2>LISTAR SOCIOS</h2>
-                <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Dni </th>
-                            <th>Celular</th>
-                            <th>Rubro</th>
-                            <th>Pagos</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let asociado of dataAsociados">
-                            <td>{{asociado.name}} </td>
-                            <td>{{asociado.lastname}} </td>
-                            <td>{{asociado.numDocument}}</td>
-                            <td>{{asociado.celular}}</td>
-                            <td>{{asociado.rubro}}</td>
-                            <td>{{asociado.sector}}</td>
-                            <td>
-                                <button class="confirmBtn" (click)="abrir()" >
-                                    <i class="material-icons-sharp">edit</i>
-                                </button>
-                                <button class="rejectBtn">
-                                    <i class="material-icons-sharp">delete</i>
-                                </button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-                <ul>
-                  <li *ngFor="let asociados of dataAsociados">
-                    {{asociados.folio}}
-                    {{asociados.lastname}}
-                    {{asociados.numDocument}}
-                    {{asociados.celular}}
-                    {{asociados.rubro}}
-                    {{asociados.sector}}
-                  </li>
-                </ul>
-            </div>
-            </div>
+            <div class="notifications1">
+              <h2>LISTAR SOCIOS</h2>
+              <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Folio</th>
+                              <th>Nombre</th>
+                              <th>Apellido</th>
+                              <th>Documento</th>
+                              <th>Sexo</th>
+                              <th>Area</th>
+                              <th>Opciones</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let asociado of dataAsociados">
+                              <td>{{ asociado.folio }}</td>
+                              <td>{{ asociado.name }}</td>
+                              <td>{{ asociado.lastname }}</td>
+                              <td>{{ asociado.numDocument.numDocument }}</td>
+                              <td></td>
+                              <td></td>
+                              <td>
+                                  <button class="confirmBtn" (click)="abrir()">
+                                      <i class="material-icons-sharp">edit</i>
+                                  </button>
+                                  <button class="rejectBtn">
+                                      <i class="material-icons-sharp">delete</i>
+                                  </button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          
+          
+          
+          
+          
             <div class="modal-bg" *ngIf="showModal">
             <div class="modal">
                 <div class="modal_cerrar" (click)="closeModal()" >
@@ -226,7 +219,7 @@
 
                           <div class="input-field-modal">
                               <label>AREA</label>
-                              <input type="text" placeholder="Ingresar Area" required formControlName="area">
+                              <input type="text" placeholder="Ingresar Area" required formControlName="area" >
                           </div>
                           <div class="input-field-modal">
                             <label>CONDUCIDO</label>
@@ -249,6 +242,7 @@
                                     <span class="btnText">Descartar</span>
                                 </button>
                             </div>
+                            
 
                     </form>
                 </div>

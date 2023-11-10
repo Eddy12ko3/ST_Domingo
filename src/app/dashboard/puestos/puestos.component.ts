@@ -18,6 +18,7 @@ export class PuestosComponent implements OnInit {
   imageUrl: string = 'assets/registro/perfil.png';
   formAsociados!:FormGroup;
   dataAsociados: Array<Associate> = new Array<Associate>();
+  
 
   constructor(private themeService: ThemeService, private asociadosService: ApiAsociadosService, private formGroup: FormBuilder, private router: Router) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
@@ -82,7 +83,8 @@ export class PuestosComponent implements OnInit {
 
   obtenerAsociados(){
     this.asociadosService.obtenerAsociado().subscribe((asociado)=>{
-      this.dataAsociados= asociado
+      this.dataAsociados= asociado;
+      console.log('Datos de asociados:', this.dataAsociados);
     })
   }
   registrarAsociados(){
@@ -104,11 +106,16 @@ export class PuestosComponent implements OnInit {
         sector: this.formAsociados.get("sector")?.value ?? '',
         rubro: this.formAsociados.get("rubro")?.value ?? '',
       }).subscribe((asociado: any)=>{
-        console.log(asociado,"success")
+        console.log(asociado,"success");
         if(this.dataAsociados.length>0){
           this.closeModal()
+          console.log('Datos de asociados:', this.dataAsociados);
+          
         }
       })
     }
+    
   }
+ 
+
 }

@@ -29,5 +29,10 @@ interface User extends Auth{
 
     public login(usuario: Auth): Observable<any>{
         return this.http.post(`${this.urlget}/login`, usuario);
-      }
+    }
+   
+  
+
+  
+    
   }
