@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
 
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -23,6 +22,8 @@ export class NavbarComponent {
     this.isMoonIcon = !this.isMoonIcon;
   }
   
-  
+  logout(): void{
+    localStorage.clear();
+  }
 }
 

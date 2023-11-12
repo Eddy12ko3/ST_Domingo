@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit{
       nombre: ["", [Validators.required, Validators.maxLength(50)]],
       apellidos: ["", [Validators.required, Validators.maxLength(50)]],
       fecha_nac: ["", [Validators.required]],
-      genero: ["", [Validators.required]],
       tipodoc: ["", [Validators.required]],
     })
   }
@@ -47,7 +46,6 @@ export class RegisterComponent implements OnInit{
         name: this.formRegister.get("nombre")?.value ?? '',
         lastname: this.formRegister.get("apellidos")?.value ?? '',
         date_birth: this.formRegister.get("fecha_nac")?.value ?? '',
-        gender: this.formRegister.get("genero")?.value ?? '',
         document: this.formRegister.get("tipodoc")?.value ?? '',
       }).subscribe((user)=>{
         this.dataUsers.push(user);

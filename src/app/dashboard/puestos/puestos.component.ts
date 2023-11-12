@@ -2,7 +2,10 @@ import { Component , OnInit } from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiAsociadosService, Associate } from 'src/app/service/api.asociados.service';
+import { ApiAsociadosService } from 'src/app/service/api.asociados.service';
+import { AssociateId } from 'src/app/interfaces/asociado-extend.interface';
+import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-puestos',
@@ -11,16 +14,19 @@ import { ApiAsociadosService, Associate } from 'src/app/service/api.asociados.se
 })
 export class PuestosComponent implements OnInit {
   isDarkTheme: boolean = false; // Estado del tema
-
   isButtonClicked = false;
   showModal = false;
   showModalEdit = false;
   imageUrl: string = 'assets/registro/perfil.png';
   formAsociados!:FormGroup;
-  dataAsociados: Array<Associate> = new Array<Associate>();
+  dataAsociados: Array<AssociateId> = new Array<AssociateId>();
+  suscription!: Subscription;
   
 
-  constructor(private themeService: ThemeService, private asociadosService: ApiAsociadosService, private formGroup: FormBuilder, private router: Router) {
+  constructor(private themeService: ThemeService, 
+    private asociadosService: ApiAsociadosService, 
+    private formGroup: FormBuilder,
+    private toastr: ToastrService) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
     });
@@ -45,6 +51,9 @@ export class PuestosComponent implements OnInit {
       sector: ["", [Validators.required ,Validators.maxLength(20)]],
 
         });
+    this.suscription = this.asociadosService.refresh.subscribe(()=> {
+      this.obtenerAsociados();
+    });
   }
   openModal() {
     this.showModal = true;
@@ -61,8 +70,6 @@ export class PuestosComponent implements OnInit {
   cerrar() {
     this.showModalEdit = false;
   }
-
-
 
   toggleTheme() {
     this.themeService.toggleDarkMode();
@@ -82,13 +89,16 @@ export class PuestosComponent implements OnInit {
   }
 
   obtenerAsociados(){
-    this.asociadosService.obtenerAsociado().subscribe((asociado)=>{
-      this.dataAsociados= asociado;
-      console.log('Datos de asociados:', this.dataAsociados);
+    this.asociadosService.obtenerAsociado().subscribe((asociados)=>{
+      if (asociados && asociados.length > 0) {
+        this.dataAsociados = asociados;
+      } else {
+        console.log("no hay registros")
+      }
+      
     })
   }
   registrarAsociados(){
-
     if (this.formAsociados.valid){
       this.asociadosService.insertAsociado({
         folio: this.formAsociados.get("folio")?.value ?? 0,
@@ -106,16 +116,9 @@ export class PuestosComponent implements OnInit {
         sector: this.formAsociados.get("sector")?.value ?? '',
         rubro: this.formAsociados.get("rubro")?.value ?? '',
       }).subscribe((asociado: any)=>{
-        console.log(asociado,"success");
-        if(this.dataAsociados.length>0){
-          this.closeModal()
-          console.log('Datos de asociados:', this.dataAsociados);
-          
-        }
+        this.closeModal()
+        this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
       })
     }
-    
   }
- 
-
 }

@@ -9,7 +9,6 @@
             </div>
             <div class="login-content">
 
-
                 <form [formGroup]="formRegister" (ngSubmit)="registrarUsuario()">
                     <h2 class="title">REGISTRARSE </h2>
                     <div class="input-div">
@@ -17,7 +16,9 @@
                                 <i class="fas fa-user"></i>
                             </div>
                         <div class="username">
-                            <input type="text" formControlName="nombre">
+                            <input
+                            [class.is-invalid]="formRegister.get('nombre')?.touched && formRegister.get('nombre')?.invalid" 
+                            type="text" formControlName="nombre">
                             <label >NOMBRE</label>
                         </div>
                     </div>
@@ -73,20 +74,6 @@
                         <div class="username">
                             <input type="date" formControlName="fecha_nac">
                         <label >FECHA</label>
-                        </div>
-                    </div>
-
-                    <div class="select-div">
-                        <div class="i">
-                        <i class="fas fa-venus-mars"></i>
-                        </div>
-                        <div class="select-container" >
-                        <label for="sex" class="select-label">SEXO</label>
-                        <select class="select" id="sex" name="sex" formControlName="genero">
-                            <option value=""></option>
-                            <option [ngValue]="1">MASCULINO</option>
-                            <option [ngValue]="2">FEMENINO</option>
-                        </select>
                         </div>
                     </div>
 

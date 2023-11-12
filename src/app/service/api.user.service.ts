@@ -1,19 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../interfaces/user.interface';
+import { Auth } from '../interfaces/auth.interface';
 
-export interface Auth{
-    numDocument: number;
-    password: string;
-}
-
-interface User extends Auth{
-    name: string;
-    lastname: string;
-    date_birth: Date;
-    gender: string;
-    document: string;
-}
 @Injectable({
     providedIn: 'root'
   })
