@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './puestos.component.html',
   styleUrls: ['./puestos.component.css']
 })
-export class PuestosComponent implements OnInit {
+export class PuestosComponent implements OnInit, OnDestroy {
   isDarkTheme: boolean = false; // Estado del tema
   isButtonClicked = false;
   showModal = false;
@@ -54,6 +54,10 @@ export class PuestosComponent implements OnInit {
     this.suscription = this.asociadosService.refresh.subscribe(()=> {
       this.obtenerAsociados();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.suscription.unsubscribe();
   }
   openModal() {
     this.showModal = true;

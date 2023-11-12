@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
+import { ApiUserService } from 'src/app/service/api.user.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isDarkTheme: boolean = false;
   isMoonIcon: boolean = true;
+  userInfo: any;
 
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService, private userService: ApiUserService) {
     this.themeService.isDarkMode$.subscribe((isDark) => {
       this.isDarkTheme = isDark;
     });
+  }
+
+  ngOnInit(): void {
+    this.loadUserInfo()
   }
 
   toggleTheme() {
@@ -23,7 +29,12 @@ export class NavbarComponent {
   }
   
   logout(): void{
-    localStorage.clear();
+    this.userService.logout();
+  }
+
+  loadUserInfo(): void{
+    const datos = this.userService.getUserInfo();
+    this.userInfo = JSON.parse(datos.userId) 
   }
 }
 
