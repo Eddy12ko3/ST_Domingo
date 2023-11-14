@@ -9,16 +9,16 @@
              <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
                 <h2>BUSCAR SOCIO</h2>
-                <form action="#">
+                <form (ngSubmit)="buscarAsociados()">
                     <div class="fields">
-                        <div class="input-field">
-                            <label>DNI</label>
-                            <input type="number" placeholder="Ingresar Dni" required>
+                        <div class="input-field" >
+                            <label >DNI</label>
+                            <input [(ngModel)]="busquedaDni"  name="busquedaDni" type="number" placeholder="Ingresar Dni" required> 
                         </div>
 
                         <div class="input-field">
                             <label for="rubro">RUBRO</label>
-                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                            <input [(ngModel)]="busquedaRubro"  type="text" id="rubro" name="rubro" list="rubros" required >
                         </div>
 
                         <datalist id="rubros" class="details">
@@ -40,17 +40,21 @@
                             <option value="Tuberculos">
                         </datalist>
 
-                        <div class="input-field">
-                            <label>TELEFONO</label>
-                            <input type="number" placeholder="Ingresar Telefono" required>
+                         <div class="input-field">
+                            <label>Nombre</label>
+                            <input [(ngModel)]="busquedaNombre" name="busquedaNombre" type="text" placeholder="Ingresar Nombre" required>
                         </div>
+                        <div class="input-field">
+                          <label>Apellido</label>
+                          <input [(ngModel)]="busquedaApellido" name="busquedaApellido" type="text" placeholder="Ingresar Apellido" required>
+                      </div>
                         <div class="container_button_socios">
-                            <button class="guardarBtn" >
-                                <span class="material-icons-sharp">save</span>
+                            <button class="guardarBtn" (click)="buscarAsociados()">
+                                <span class="material-icons-sharp" >search</span>
                                 <span class="btnText">Buscar</span>
                             </button>
 
-                            <button class="borrarBtn">
+                            <button class="borrarBtn" (click)="limpiarBusqueda()" >
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
@@ -82,8 +86,9 @@
                             <th>Opciones</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let asociado of dataAsociados">
+                    <tbody >
+                      <ng-container *ngIf="resultadosBusqueda.length > 0; else noResultados">
+                        <tr *ngFor="let asociado of (resultadosBusqueda.length > 0 ? resultadosBusqueda : dataAsociados)">
                           <td>{{asociado.associateId}}</td>
                           <td>{{ asociado.persons.name }}</td>
                           <td>{{ asociado.persons.lastname }}</td>
@@ -95,15 +100,23 @@
                                 <button class="confirmBtn" (click)="abrir()" >
                                     <i class="material-icons-sharp">edit</i>
                                 </button>
-                                <button class="rejectBtn">
+                                <button class="rejectBtn" >
                                     <i class="material-icons-sharp">delete</i>
                                 </button>
                             </td>
                         </tr>
-
+                      </ng-container>
+                        <ng-template #noResultados>
+                          <tr *ngIf="busquedaDni || busquedaRubro">
+                            
+                              <td colspan="8">No se encontraron resultados de búsqueda.</td>
+                          </tr>
+                      </ng-template>
                     </tbody>
+                   
                 </table>
             </div>
+            
             </div>
             <div class="modal-bg" *ngIf="showModal">
             <div class="modal">

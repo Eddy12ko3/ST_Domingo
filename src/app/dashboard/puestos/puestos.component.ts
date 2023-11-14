@@ -21,6 +21,12 @@ export class PuestosComponent implements OnInit, OnDestroy {
   formAsociados!:FormGroup;
   dataAsociados: Array<AssociateId> = new Array<AssociateId>();
   suscription!: Subscription;
+  busquedaDni: string = '';
+  busquedaRubro: string = '';
+  busquedaNombre: string = '';
+  busquedaApellido: string = '';
+  resultadosBusqueda: any[] = [];
+  
   
 
   constructor(private themeService: ThemeService, 
@@ -65,6 +71,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.showModal = false;
+    this.formAsociados.reset();
   }
 
   abrir() {
@@ -93,14 +100,11 @@ export class PuestosComponent implements OnInit, OnDestroy {
   }
 
   obtenerAsociados(){
-    this.asociadosService.obtenerAsociado().subscribe((asociados)=>{
-      if (asociados && asociados.length > 0) {
-        this.dataAsociados = asociados;
-      } else {
-        console.log("no hay registros")
-      }
-      
-    })
+    this.asociadosService.obtenerAsociado().subscribe((asociados) => {
+      this.dataAsociados = asociados;
+      // Inicializar resultadosBusqueda con la lista completa al principio
+      this.resultadosBusqueda = [...this.dataAsociados];
+    });
   }
   registrarAsociados(){
     if (this.formAsociados.valid){
@@ -122,7 +126,30 @@ export class PuestosComponent implements OnInit, OnDestroy {
       }).subscribe((asociado: any)=>{
         this.closeModal()
         this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
+        
       })
     }
   }
+  buscarAsociados() {
+    this.resultadosBusqueda = this.dataAsociados.filter(
+      (asociado) =>
+        asociado.numDocument.numDocument
+          .toString()
+          .includes(this.busquedaDni.toString()) &&
+        asociado.persons.stands[0]?.rubro?.nameField
+          .toLowerCase()
+          .includes(this.busquedaRubro.toLowerCase()) &&
+          asociado.persons.name.toLowerCase().includes(this.busquedaNombre.toLocaleLowerCase()) &&
+          asociado.persons.lastname.toLocaleLowerCase().includes(this.busquedaApellido.toLocaleLowerCase())
+  );
+    
+    
+  }
+limpiarBusqueda() {
+  this.busquedaDni = '';
+  this.busquedaRubro = '';
+  this.busquedaNombre = '';
+  this.busquedaApellido = '';
+  this.resultadosBusqueda = [];
+}
 }

@@ -56,10 +56,12 @@ export class PagosComponent {
   registrarPagos(){
 
     if (this.formPagos.valid){
+      
       this.pagosService.insertPagos({
         person: this.formPagos.get("person")?.value ?? '',
         amount: this.formPagos.get("amount")?.value ?? 0,
         datepayment: this.formPagos.get("datepayment")?.value ?? new Date(),
+        
       }).subscribe((pagos: any)=>{
         console.log(pagos,"success")
 
