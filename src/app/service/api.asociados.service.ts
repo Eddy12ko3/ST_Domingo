@@ -13,13 +13,13 @@ export class ApiAsociadosService {
   constructor(private http: HttpClient) { }
 
   get refresh(){
-    return this._refresh; 
+    return this._refresh;
   }
   public insertAsociado(asociados: Associate){
     return this.http.post(`${this.urlget}/create`, asociados)
       .pipe(
         tap(()=> {
-          this._refresh.next(); 
+          this._refresh.next();
         })
       )
   }
@@ -28,5 +28,21 @@ export class ApiAsociadosService {
     return this.http.get(`${this.urlget}/load`);
   }
 
-  
+  public updateAsociado(id:string,asociados: Associate){
+    return this.http.put(`${this.urlget}/update/${id}`, asociados)
+      .pipe(
+        tap(()=> {
+          this._refresh.next();
+        })
+      )
+  }
+
+  public deleteAsociado(id:string){
+    return this.http.delete(`${this.urlget}/delete/${id}`)
+      .pipe(
+        tap(()=> {
+          this._refresh.next();
+        })
+      )
+  }
 }

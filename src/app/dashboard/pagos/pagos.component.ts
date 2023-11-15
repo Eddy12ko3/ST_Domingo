@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { DetailPayments } from 'src/app/interfaces/pagos.get.interface';
 import { DetailPaymentId } from 'src/app/interfaces/pagos-extend.interface';
+import { PersonId } from 'src/app/interfaces/persona-extend.interface';
+import { ApiPersonasService } from 'src/app/service/api.persona.service';
 
 @Component({
   selector: 'app-pagos',
@@ -18,19 +20,22 @@ export class PagosComponent implements OnInit{
 
   formPagos!:FormGroup;
   dataPagos: Array<DetailPaymentId> = new Array<DetailPaymentId>();
+  dataPersona: Array<PersonId> = new Array<PersonId>();
   buscarForm!: FormGroup;
   suscription?: Subscription
-  
 
-  constructor(private themeService: ThemeService, private pagosService: ApiPagosService, 
-    private formGroup: FormBuilder  ) {
+
+  constructor(private themeService: ThemeService, private pagosService: ApiPagosService,
+    private formGroup: FormBuilder ,
+    private personService: ApiPersonasService ) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
     });
   }
-  
+
   ngOnInit(): void {
     this.obtenerPagos();
+    this.obtenerPersona();
     this.formPagos = this.formGroup.group({
       datepayment: ["", [Validators.required]],
       person: ["" , [Validators.required, Validators.maxLength(50)]],
@@ -44,7 +49,7 @@ export class PagosComponent implements OnInit{
     }
     )
   }
-  
+
   ngOnDestroy(): void {
     this.suscription?.unsubscribe();
   }
@@ -53,7 +58,7 @@ export class PagosComponent implements OnInit{
     this.themeService.toggleDarkMode();
   }
 
- 
+
 
   obtenerPagos(){
     this.pagosService.obtenerPagos().subscribe((pagos)=>{
@@ -61,30 +66,37 @@ export class PagosComponent implements OnInit{
       console.log('Datos de Pagos:', this.dataPagos);
     })
   }
- 
+
+  obtenerPersona(){
+    this.personService.obtenerPersona().subscribe((personas)=>{
+      this.dataPersona= personas;
+      console.log(this.dataPersona);
+    })
+  }
+
   registrarPagos(){
 
     if (this.formPagos.valid){
-      
+
       this.pagosService.insertPagos({
         person: this.formPagos.get("person")?.value ?? '',
         amount: this.formPagos.get("amount")?.value ?? 0,
         datepayment: this.formPagos.get("datepayment")?.value ?? '',
-        
+
       }).subscribe((pagos: any)=>{
         console.log(pagos,"success")
 
         this.obtenerPagos();
         this.limpiarFormulario();
       });
-      
+
     }
-    
+
   }
-  
+
   limpiarFormulario() {
-    this.buscarForm.get('amountToSearch')?.setValue(''); 
-    this.obtenerPagos(); 
+    this.buscarForm.get('amountToSearch')?.setValue('');
+    this.obtenerPagos();
     this.formPagos.reset();
   }
 
@@ -103,5 +115,5 @@ export class PagosComponent implements OnInit{
       }
     }
   }
-  
+
 }

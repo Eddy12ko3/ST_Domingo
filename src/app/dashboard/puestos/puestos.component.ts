@@ -29,8 +29,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
   selectedAsociado: any;
 
 
-  constructor(private themeService: ThemeService, 
-    private asociadosService: ApiAsociadosService, 
+  constructor(private themeService: ThemeService,
+    private asociadosService: ApiAsociadosService,
     private formGroup: FormBuilder,
     private toastr: ToastrService) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
@@ -110,7 +110,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+
 
   registrarAsociados(){
     if (this.formAsociados.valid){
@@ -133,13 +133,45 @@ export class PuestosComponent implements OnInit, OnDestroy {
         this.closeModal()
         this.formAsociados.reset();
         this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
-       
-        
-        
       })
-      
+
     }
   }
+
+  actualizarAsociados(){
+    if (this.formAsociados.valid){
+      this.asociadosService.updateAsociado(this.selectedAsociado?.associateId,{
+        folio: this.formAsociados.get("folio")?.value ?? 0,
+        numDocument: this.formAsociados.get("numDocumento")?.value ?? 0,
+        name: this.formAsociados.get("nombre")?.value ?? '',
+        lastname: this.formAsociados.get("apellido")?.value ?? '',
+        date_birth: this.formAsociados.get("fecha_nac")?.value ?? '',
+        gender: this.formAsociados.get("genero")?.value ?? '',
+        document: this.formAsociados.get("document")?.value ?? '',
+        direccion: this.formAsociados.get("direccion")?.value ?? '',
+        celular: this.formAsociados.get("telefono")?.value ?? 0,
+        operador: this.formAsociados.get("operador")?.value ?? '',
+        code: this.formAsociados.get("code")?.value ?? '',
+        area: this.formAsociados.get("area")?.value ?? '',
+        sector: this.formAsociados.get("sector")?.value ?? '',
+        rubro: this.formAsociados.get("rubro")?.value ?? '',
+      }).subscribe((asociado: any)=>{
+        this.cerrar();
+        this.formAsociados.reset();
+        this.toastr.success("Asociado actualizado correctamente", "¡Exito!", { closeButton: true});
+      })
+
+    }
+  }
+
+  eliminarAsociados(asociadoId: string) {
+    if (this.formAsociados.valid) {
+      this.asociadosService.deleteAsociado(asociadoId).subscribe( (asociadoId)=> {
+      console.log(asociadoId)
+      })
+    }
+  }
+
   buscarAsociados() {
     this.resultadosBusqueda = this.dataAsociados.filter(
       (asociado) =>
@@ -152,24 +184,26 @@ export class PuestosComponent implements OnInit, OnDestroy {
           asociado.persons.name.toLowerCase().includes(this.busquedaNombre.toLocaleLowerCase()) &&
           asociado.persons.lastname.toLocaleLowerCase().includes(this.busquedaApellido.toLocaleLowerCase())
   );
-    
-    
+
+
   }
-limpiarBusqueda() {
-  this.busquedaDni = '';
-  this.busquedaRubro = '';
-  this.busquedaNombre = '';
-  this.busquedaApellido = '';
-  this.resultadosBusqueda = [];
-}
-addMts() {
-  const areaControl = this.formAsociados.get('area');
-  if (areaControl) {
-    let areaValue = areaControl.value;
-    if (areaValue && !areaValue.endsWith('mts.')) {
-      areaValue += ' mts.';
-      areaControl.setValue(areaValue);
+
+
+  limpiarBusqueda() {
+    this.busquedaDni = '';
+    this.busquedaRubro = '';
+    this.busquedaNombre = '';
+    this.busquedaApellido = '';
+    this.resultadosBusqueda = [];
+  }
+  addMts() {
+    const areaControl = this.formAsociados.get('area');
+    if (areaControl) {
+      let areaValue = areaControl.value;
+      if (areaValue && !areaValue.endsWith('mts.')) {
+        areaValue += ' mts.';
+        areaControl.setValue(areaValue);
+      }
     }
   }
-}
 }

@@ -13,7 +13,7 @@
                     <div class="fields">
                         <div class="input-field" >
                             <label >DNI</label>
-                            <input [(ngModel)]="busquedaDni"  name="busquedaDni" type="number" placeholder="Ingresar Dni" required> 
+                            <input [(ngModel)]="busquedaDni"  name="busquedaDni" type="number" placeholder="Ingresar Dni" required>
                         </div>
 
                         <div class="input-field">
@@ -100,7 +100,7 @@
                                 <button class="confirmBtn" (click)="abrir(asociado)" >
                                     <i class="material-icons-sharp">edit</i>
                                 </button>
-                                <button class="rejectBtn" >
+                                <button class="rejectBtn" (click)="eliminarAsociados(asociado.associateId)">
                                     <i class="material-icons-sharp">delete</i>
                                 </button>
                             </td>
@@ -108,15 +108,15 @@
                       </ng-container>
                         <ng-template #noResultados>
                           <tr *ngIf="busquedaDni || busquedaRubro || busquedaNombre || busquedaApellido">
-                            
+
                               <td colspan="8">No se encontraron resultados de búsqueda.</td>
                           </tr>
                       </ng-template>
                     </tbody>
-                   
+
                 </table>
             </div>
-            
+
             </div>
             <div class="modal-bg" *ngIf="showModal">
             <div class="modal">
@@ -231,7 +231,7 @@
                           <div class="input-field-modal">
                               <label>AREA</label>
                               <input type="text" placeholder="Ingresar Area" required formControlName="area" (input)="addMts()">
-                              
+
                           </div>
                           <div class="input-field-modal">
                             <label>CONDUCIDO</label>
@@ -273,7 +273,7 @@
                 <i class="fa fa-camera" style="color: #fff"></i>
               </div>
             </div>
-            <form [formGroup]="formAsociados">
+            <form [formGroup]="formAsociados" (ngSubmit)="actualizarAsociados()">
               <div class="input-field-modal">
 
                 <div class="fields-modal">
@@ -383,7 +383,7 @@
 
                   </div>
                       <div class="container_button_modal">
-                        <button type="submit" [disabled]="!formAsociados.valid" class="guardarBtn" (click)="cerrar()">
+                        <button type="submit" [disabled]="!formAsociados.valid" class="guardarBtn" >
                           <span class="material-icons-sharp">save</span>
                           <span class="btnText">Guardar</span>
                         </button>

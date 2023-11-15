@@ -2,9 +2,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
 <body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
     <div class="container" >
- 
+
         <main class="main" >
-            
+
              <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
                 <h2>GUARDAR PAGOS</h2>
@@ -14,19 +14,19 @@
                             <label>FECHA PAGO</label>
                             <input type="date" placeholder="Ingresar Fecha" required formControlName="datepayment" >
                         </div>
-                        <div class="input-field">
+                        <div class="input-field-modal">
                             <label>NOMBRE</label>
-                            <select name="personas" id="">
-                                <option *ngFor="let pagos of dataPagos" [ngValue]="pagos.detailPaymentId">{{pagos.person.name + " " + pagos.person.lastname}}</option>
+                            <select name="personas" id="" formControlName="person">
+                                <option *ngFor="let personas of dataPersona" [ngValue]="personas.personId">{{personas.name + " " + personas.lastname}}</option>
                             </select>
-                            <input type="text" placeholder="Ingresar Nombre" required  formControlName="person">
+
                         </div>
-                        
+
                         <div class="input-field">
                             <label>MONTO</label>
                             <input type="number" placeholder="Ingresar Monto" required formControlName="amount">
                         </div>
-                        
+
                         <div class="container_button">
                             <button  type="submit" [disabled]="!formPagos.valid"   class="guardarBtn">
                                 <span class="material-icons-sharp">save</span>
@@ -38,10 +38,10 @@
                             </button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
-        
+
             <!-- REGISTRAR PAGOS  -->
             <div class="notifications">
                 <h2>BUSCAR PAGO</h2>
@@ -59,7 +59,7 @@
                             <label  for="amountToSearch">MONTO</label>
                             <input type="number" placeholder="Ingresar Monto" required formControlName="amountToSearch">
                         </div>
-                        
+
 
                         <div class="container_button-pago">
                             <button class="guardarBtn">
@@ -73,9 +73,9 @@
                         </div>
                     </div>
                 </form>
-                
+
             </div>
-            
+
 
         <div class="notifications1">
             <h2>HISTORIAL DE PAGOS </h2>
