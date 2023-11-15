@@ -207,7 +207,7 @@ main .notifications .fields{
  }
 
  main .notifications1 .table-container {
-    max-height: 340px; /* Ajusta la altura máxima según tus necesidades */
+    max-height: 380px; /* Ajusta la altura máxima según tus necesidades */
     overflow-y: auto; /* Activa el desplazamiento vertical si es necesario */
     background: var(--color-white);
     border-radius: var(--card-border-radius);
@@ -497,6 +497,8 @@ main .notifications button{
     background-color: var(--color-label);
 
   }
+
+  
 
   .container_button_modal {
     display: flex;

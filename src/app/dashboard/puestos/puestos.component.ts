@@ -28,6 +28,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
   resultadosBusqueda: any[] = [];
   selectedAsociado: any;
 
+
   constructor(private themeService: ThemeService, 
     private asociadosService: ApiAsociadosService, 
     private formGroup: FormBuilder,
@@ -108,6 +109,9 @@ export class PuestosComponent implements OnInit, OnDestroy {
       console.log(this.dataAsociados);
     });
   }
+
+  
+
   registrarAsociados(){
     if (this.formAsociados.valid){
       this.asociadosService.insertAsociado({
@@ -129,8 +133,11 @@ export class PuestosComponent implements OnInit, OnDestroy {
         this.closeModal()
         this.formAsociados.reset();
         this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
+       
+        
         
       })
+      
     }
   }
   buscarAsociados() {
@@ -154,5 +161,15 @@ limpiarBusqueda() {
   this.busquedaNombre = '';
   this.busquedaApellido = '';
   this.resultadosBusqueda = [];
+}
+addMts() {
+  const areaControl = this.formAsociados.get('area');
+  if (areaControl) {
+    let areaValue = areaControl.value;
+    if (areaValue && !areaValue.endsWith('mts.')) {
+      areaValue += ' mts.';
+      areaControl.setValue(areaValue);
+    }
+  }
 }
 }

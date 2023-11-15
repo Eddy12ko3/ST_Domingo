@@ -88,8 +88,8 @@
                     </thead>
                     <tbody >
                       <ng-container *ngIf="resultadosBusqueda.length > 0; else noResultados">
-                        <tr *ngFor="let asociado of (resultadosBusqueda.length > 0 ? resultadosBusqueda : dataAsociados)">
-                          <td>{{asociado.associateId}}</td>
+                        <tr *ngFor="let asociado of resultadosBusqueda.length > 0 ? resultadosBusqueda : dataAsociados; let i = index">
+                          <td>{{i + 1 }}</td>
                           <td>{{ asociado.persons.name }}</td>
                           <td>{{ asociado.persons.lastname }}</td>
                           <td>{{ asociado.numDocument.numDocument }}</td>
@@ -107,7 +107,7 @@
                         </tr>
                       </ng-container>
                         <ng-template #noResultados>
-                          <tr *ngIf="busquedaDni || busquedaRubro">
+                          <tr *ngIf="busquedaDni || busquedaRubro || busquedaNombre || busquedaApellido">
                             
                               <td colspan="8">No se encontraron resultados de búsqueda.</td>
                           </tr>
@@ -230,7 +230,8 @@
 
                           <div class="input-field-modal">
                               <label>AREA</label>
-                              <input type="text" placeholder="Ingresar Area" required formControlName="area">
+                              <input type="text" placeholder="Ingresar Area" required formControlName="area" (input)="addMts()">
+                              
                           </div>
                           <div class="input-field-modal">
                             <label>CONDUCIDO</label>

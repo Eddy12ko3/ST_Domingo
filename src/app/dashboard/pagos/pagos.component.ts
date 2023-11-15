@@ -90,19 +90,16 @@ export class PagosComponent implements OnInit{
 
   buscarPorMonto() {
     const amountToSearch = this.buscarForm.get('amountToSearch')?.value;
-    
 
-    if (amountToSearch !== null && amountToSearch !== undefined) {
-      const amountToSearchNumber = parseFloat(amountToSearch);
-  
-      if (!isNaN(amountToSearchNumber)) {
-        
-        this.dataPagos = this.dataPagos.filter(
-          (pago) => Math.floor(pago.amount) === Math.floor(amountToSearchNumber)
-        );
-      } else {
-       
-        console.warn('Ingrese un número válido para buscar.');
+  if (amountToSearch !== null && amountToSearch !== undefined) {
+    const amountToSearchNumber = parseFloat(amountToSearch);
+
+    if (!isNaN(amountToSearchNumber)) {
+      this.dataPagos = this.dataPagos.filter(
+        (pago) => Math.abs(pago.amount - amountToSearchNumber) < 0.01
+      );
+    } else {
+      console.warn('Ingrese un número válido para buscar.');
       }
     }
   }

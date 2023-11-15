@@ -12,14 +12,14 @@
                     <div class="middle">
                         <div class="lef">
                             <h3>Total Socios</h3>
-                            <h1>1000</h1>
+                            <h1>{{ cantidadTotalSocios }}</h1>
                         </div>
                         <div class="progress">
                             <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
+                                <circle cx="38" cy="38" r="36" [attr.stroke-dasharray]="dashArrayTotalSocios" [attr.stroke-dashoffset]="dashOffsetTotalSocios"></circle>
                             </svg>
                             <div class="number">
-                                <p>92%</p>
+                                <p>{{ porcentajeTotalSocios.toFixed(0) }}%</p>
                             </div>
                         </div>
                     </div>
@@ -33,14 +33,14 @@
                     <div class="middle">
                         <div class="lef">
                             <h3>Locales Ocupados</h3>
-                            <h1>955</h1>
+                            <h1>{{ cantidadAsociados }}</h1>
                         </div>
                         <div class="progress">
                             <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
+                                <circle cx="38" cy="38" r="36" [attr.stroke-dasharray]="dashArray" [attr.stroke-dashoffset]="dashOffset"></circle>
                             </svg>
                             <div class="number">
-                                <p>90%</p>
+                                <p>{{ porcentajeOcupado.toFixed(0) }}%</p>
                             </div>
                         </div>
                     </div>
@@ -54,14 +54,16 @@
                     <div class="middle">
                         <div class="lef">
                             <h3>Locales Disponibles</h3>
-                            <h1>45</h1>
+                            <h1>{{ cantidadLocalesDisponibles }}</h1>
                         </div>
                         <div class="progress">
                             <svg>
-                                <circle cx="38" cy="38" r="36"></circle>
+                                <circle cx="38" 
+                                cy="38" 
+                                r="36" [attr.stroke-dasharray]="dashArrayDisponible" [attr.stroke-dashoffset]="dashOffsetDisponible"></circle>
                             </svg>
                             <div class="number">
-                                <p>10%</p>
+                                <p>{{ porcentajeDisponible.toFixed(0) }}%</p>
                             </div>
                         </div>
                     </div>

@@ -104,6 +104,7 @@ main .insights h3{
     stroke-dashoffset: 35;
     stroke-dasharray: 110;
  }
+ 
 
  main .insights .progress .number{
     position: absolute;
