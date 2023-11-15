@@ -22,6 +22,10 @@ export interface Associates {
         cellNumber: number;
         operators: { operatorId: number; name: string };
       }>;
+      gender: {
+        genderId: number,
+        description: string
+      };
       stands: Array<{
         standId: number;
         code: string;

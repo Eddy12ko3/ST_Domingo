@@ -1,9 +1,11 @@
 import { Component , OnInit} from '@angular/core';
 import { ThemeService } from '../../service/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ApiPagosService, DetailPayment } from 'src/app/service/api.pagos.service';
+import { ApiPagosService } from 'src/app/service/api.pagos.service';
 import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { DetailPayments } from 'src/app/interfaces/pagos.get.interface';
+import { DetailPaymentId } from 'src/app/interfaces/pagos-extend.interface';
 
 @Component({
   selector: 'app-pagos',
@@ -11,16 +13,17 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./pagos.component.css'],
   providers: [DatePipe]
 })
-export class PagosComponent {
+export class PagosComponent implements OnInit{
   isDarkTheme: boolean = false;
 
   formPagos!:FormGroup;
-  dataPagos: Array<DetailPayment> = new Array<DetailPayment>();
+  dataPagos: Array<DetailPaymentId> = new Array<DetailPaymentId>();
   buscarForm!: FormGroup;
+  suscription?: Subscription
   
 
   constructor(private themeService: ThemeService, private pagosService: ApiPagosService, 
-    private formGroup: FormBuilder, private router: Router  ) {
+    private formGroup: FormBuilder  ) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
     });
@@ -36,9 +39,15 @@ export class PagosComponent {
     this.buscarForm = this.formGroup.group({
       amountToSearch: ['', [Validators.required, Validators.maxLength(20)]],
     });
-    
+    this.suscription = this.pagosService.refresh.subscribe(() =>{
+      this.obtenerPagos();
+    }
+    )
   }
   
+  ngOnDestroy(): void {
+    this.suscription?.unsubscribe();
+  }
 
   toggleTheme() {
     this.themeService.toggleDarkMode();
@@ -60,7 +69,7 @@ export class PagosComponent {
       this.pagosService.insertPagos({
         person: this.formPagos.get("person")?.value ?? '',
         amount: this.formPagos.get("amount")?.value ?? 0,
-        datepayment: this.formPagos.get("datepayment")?.value ?? new Date(),
+        datepayment: this.formPagos.get("datepayment")?.value ?? '',
         
       }).subscribe((pagos: any)=>{
         console.log(pagos,"success")

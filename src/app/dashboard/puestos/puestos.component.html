@@ -97,7 +97,7 @@
                           <td>{{ asociado.persons.stands[0]?.rubro?.nameField || '' }}</td>
                           <td>{{ asociado.persons.stands[0]?.sector?.code || '' }}</td>
                             <td>
-                                <button class="confirmBtn" (click)="abrir()" >
+                                <button class="confirmBtn" (click)="abrir(asociado)" >
                                     <i class="material-icons-sharp">edit</i>
                                 </button>
                                 <button class="rejectBtn" >
@@ -272,22 +272,22 @@
                 <i class="fa fa-camera" style="color: #fff"></i>
               </div>
             </div>
-            <form [formGroup]="formAsociados" (ngSubmit)="registrarAsociados()">
+            <form [formGroup]="formAsociados">
               <div class="input-field-modal">
 
                 <div class="fields-modal">
 
                   <div class="input-field-modal">
                       <label>FOLIO</label>
-                      <input type="number" placeholder="Ingresar # Folio" required formControlName="folio">
+                      <input type="number" placeholder="Ingresar # Folio" required formControlName="folio" [ngModel]="selectedAsociado?.folio">
                   </div>
                     <div class="input-field-modal">
                         <label>NOMBRE</label>
-                        <input type="text" placeholder="Ingresar Nombre" required formControlName="nombre">
+                        <input type="text" placeholder="Ingresar Nombre" required formControlName="nombre" [ngModel]="selectedAsociado?.persons?.name">
                     </div>
                     <div class="input-field-modal">
                         <label>APELLIDO</label>
-                        <input type="text" placeholder="Ingresar Apellido" required formControlName="apellido">
+                        <input type="text" placeholder="Ingresar Apellido" required formControlName="apellido" [ngModel]="selectedAsociado?.persons?.lastname">
                     </div>
                     <div class="input-field-modal">
                       <label>EDAD</label>
@@ -295,23 +295,23 @@
                     </div>
                     <div class="input-field-modal">
                       <label>TIPO_DOCUMENTO</label>
-                      <select name="tipo_documento" required formControlName="document">
+                      <select name="tipo_documento" required formControlName="document" [ngModel]="selectedAsociado?.numDocument?.tipoDocumento?.tipoDocId">
                         <option value="" disabled selected>Seleccione</option>
                         <option [ngValue]="1">Dni</option>
-                        <option [ngValue]="2">Carnet_Exranjeria</option>
+                        <option [ngValue]="2">Carnet de Exranjeria</option>
                     </select>
                     </div>
                     <div class="input-field-modal">
                       <label>N° DOCUMENTO</label>
-                      <input type="number" placeholder="Ingresar N° Documento" required formControlName="numDocumento">
+                      <input type="number" placeholder="Ingresar N° Documento" required formControlName="numDocumento" [ngModel]="selectedAsociado?.numDocument?.numDocument">
                     </div>
                     <div class="input-field-modal">
                       <label>FECHA NACIMIENTO</label>
-                      <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac">
+                      <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac" [ngModel]="selectedAsociado?.persons?.date_birth">
                     </div>
                     <div class="input-field-modal">
                       <label>SEXO</label>
-                      <select name="sexo" required formControlName="genero">
+                      <select name="sexo" required formControlName="genero" [ngModel]="selectedAsociado?.persons?.gender?.genderId">
                         <option value="" disabled selected>Seleccione</option>
                         <option [ngValue]="1">Hombre</option>
                         <option [ngValue]="2">Mujer</option>
@@ -319,25 +319,25 @@
                     </div>
                     <div class="input-field-modal">
                       <label>TELEFONO</label>
-                      <input type="number" placeholder="Ingresar Telefono" required formControlName="telefono">
+                      <input type="number" placeholder="Ingresar Telefono" required formControlName="telefono" [ngModel]="selectedAsociado?.persons?.cellPhones[0]?.cellNumber">
                     </div>
                     <div class="input-field-modal">
                       <label>OPERADOR</label>
-                      <select name="opedador" required formControlName="operador">
+                      <select name="operador" required formControlName="operador" [ngModel]="selectedAsociado?.persons?.cellPhones[0]?.operators?.operatorId">
                         <option value="" disabled selected>Seleccione</option>
-                        <option [ngValue]="4">Claro</option>
                         <option [ngValue]="1">Entel</option>
                         <option [ngValue]="2">Bitel</option>
                         <option [ngValue]="3">Movistar</option>
+                        <option [ngValue]="4">Claro</option>
                     </select>
                     </div>
                     <div class="input-field-modal">
                       <label>DIRECCION</label>
-                      <input type="text" placeholder="Ingresar Direccion" required formControlName="direccion">
+                      <input type="text" placeholder="Ingresar Direccion" required formControlName="direccion" [ngModel]="selectedAsociado?.persons?.addresses[0]?.description">
                     </div>
                     <div class="input-field-modal">
                       <label>SECTOR</label>
-                      <input type="text" placeholder="Ingresar Sector" required formControlName="sector">
+                      <input type="text" placeholder="Ingresar Sector" required formControlName="sector" [ngModel]="selectedAsociado?.persons?.stands[0]?.sector?.code">
                     </div>
                 </div>
               </div>
@@ -345,7 +345,7 @@
               <div class="fields-modal">
                   <div class="input-field-modal">
                       <label for="rubro">RUBRO</label>
-                  <input type="text" id="rubro" name="rubro" list="rubros" required formControlName="rubro">
+                  <input type="text" id="rubro" name="rubro" list="rubros" required formControlName="rubro" [ngModel]="selectedAsociado?.persons?.stands[0]?.rubro?.nameField">
               </div>
 
               <datalist id="rubros" class="details">
@@ -365,11 +365,11 @@
                   <option value="Porcino">
                   <option value="Tiendas">
                   <option value="Tuberculos">
-                  </datalist>
+              </datalist>
 
                     <div class="input-field-modal">
                         <label>AREA</label>
-                        <input type="text" placeholder="Ingresar Area" required formControlName="area">
+                        <input type="text" placeholder="Ingresar Area" required formControlName="area" [ngModel]="selectedAsociado?.persons?.stands[0]?.areas?.size">
                     </div>
                     <div class="input-field-modal">
                       <label>CONDUCIDO</label>
@@ -377,7 +377,7 @@
                     </div>
                     <div class="input-field-modal">
                       <label>CODE</label>
-                      <input type="text" placeholder="Ingresar Code" required formControlName="code">
+                      <input type="text" placeholder="Ingresar Code" required formControlName="code" [ngModel]="selectedAsociado?.persons?.stands[0]?.code">
                     </div>
 
                   </div>

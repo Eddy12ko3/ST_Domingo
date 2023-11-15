@@ -16,6 +16,9 @@
                         </div>
                         <div class="input-field">
                             <label>NOMBRE</label>
+                            <select name="personas" id="">
+                                <option *ngFor="let pagos of dataPagos" [ngValue]="pagos.detailPaymentId">{{pagos.person.name + " " + pagos.person.lastname}}</option>
+                            </select>
                             <input type="text" placeholder="Ingresar Nombre" required  formControlName="person">
                         </div>
                         
@@ -87,7 +90,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let pago of dataPagos">
-                        <td>{{ pago.person.date_birth | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ pago.datePayment | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ pago.person.name }} </td>
                         <td>{{ pago.amount }} </td>
                     </tr>

@@ -26,8 +26,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
   busquedaNombre: string = '';
   busquedaApellido: string = '';
   resultadosBusqueda: any[] = [];
-  
-  
+  selectedAsociado: any;
 
   constructor(private themeService: ThemeService, 
     private asociadosService: ApiAsociadosService, 
@@ -74,12 +73,14 @@ export class PuestosComponent implements OnInit, OnDestroy {
     this.formAsociados.reset();
   }
 
-  abrir() {
+  abrir(asociado: any) {
+    this.selectedAsociado = asociado;
     this.showModalEdit = true;
   }
 
   cerrar() {
     this.showModalEdit = false;
+    this.formAsociados.reset();
   }
 
   toggleTheme() {
@@ -104,6 +105,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
       this.dataAsociados = asociados;
       // Inicializar resultadosBusqueda con la lista completa al principio
       this.resultadosBusqueda = [...this.dataAsociados];
+      console.log(this.dataAsociados);
     });
   }
   registrarAsociados(){
@@ -125,6 +127,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
         rubro: this.formAsociados.get("rubro")?.value ?? '',
       }).subscribe((asociado: any)=>{
         this.closeModal()
+        this.formAsociados.reset();
         this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
         
       })
