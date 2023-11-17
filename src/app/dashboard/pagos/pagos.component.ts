@@ -22,7 +22,7 @@ export class PagosComponent implements OnInit{
   dataPagos: Array<DetailPaymentId> = new Array<DetailPaymentId>();
   dataPersona: Array<PersonId> = new Array<PersonId>();
   buscarForm!: FormGroup;
-  suscription?: Subscription
+  suscription?: Subscription;
 
 
   constructor(private themeService: ThemeService, private pagosService: ApiPagosService,
@@ -77,7 +77,7 @@ export class PagosComponent implements OnInit{
   registrarPagos(){
 
     if (this.formPagos.valid){
-
+      
       this.pagosService.insertPagos({
         person: this.formPagos.get("person")?.value ?? '',
         amount: this.formPagos.get("amount")?.value ?? 0,
@@ -115,5 +115,13 @@ export class PagosComponent implements OnInit{
       }
     }
   }
+  onPersonInput() {
+    const inputValue = this.formPagos.get('person')?.value;
+    const selectedPerson = this.dataPersona.find(persona => (persona.name + ' ' + persona.lastname) === inputValue);
+
+    if (selectedPerson) {
+        this.formPagos.get('person')?.setValue(selectedPerson.personId);
+    }
+}
 
 }

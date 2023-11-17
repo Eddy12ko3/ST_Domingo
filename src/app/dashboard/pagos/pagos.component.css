@@ -391,3 +391,29 @@ input[type="number"]::-webkit-outer-spin-button {
 .input-field-modal select {
   color: #363949;
 }
+
+.input-field-modal {
+   display: flex;
+   flex-direction: column;
+   margin: 8px 0;
+   }
+
+
+ .input-field-modal label{
+   font-size: 12px;
+   font-weight: 500;
+   height: 1.5rem;
+   color: var(--text-color);
+ }
+ .input-field-modal input{
+   outline: none;
+   font-size: 14px;
+   font-weight: 400;
+   border-radius: 10px;
+   border: 1px solid  var(--color-dark-variant);
+   padding: 0 15px;
+   height: 40px;
+   margin: 8px 0;;
+   background-color: var(--color-label);
+
+ }

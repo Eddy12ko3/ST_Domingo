@@ -19,8 +19,20 @@
                             <select name="personas" id="" formControlName="person">
                                 <option *ngFor="let personas of dataPersona" [ngValue]="personas.personId">{{personas.name + " " + personas.lastname}}</option>
                             </select>
-
                         </div>
+
+
+                        
+                        <div class="input-field-modal">
+                            <label for="person">NOMBRE</label>
+                            <input type="text" id="person" name="person" list="persons" required formControlName="person" (input)="onPersonInput()">
+
+                        
+                            <datalist id="persons" class="details">
+                                <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
+                            </datalist>
+                        </div>
+                    
 
                         <div class="input-field">
                             <label>MONTO</label>

@@ -603,3 +603,32 @@ main .notifications button{
   input[type=file]::-webkit-file-upload-button {
     cursor: pointer;
   }
+
+
+  .input-field-modal.error input,
+  .input-field-modal.error select,
+  .input-field-modal.error input[type="date"] {
+    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
+  }
+  
+  .input-field-modal.error label,
+  .input-field-modal.error div {
+    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
+    
+  }
+
+
+  .input-field-modal.error input[type="number"] {
+    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
+  }
+  
+  .input-field-modal.error label,
+  .input-field-modal.error div {
+    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
+  }
+  .error input {
+    border-color: red;  /* Cambia el color del borde a rojo */
+    color: red;        /* Cambia el color del texto a rojo */
+  }
+  
+  

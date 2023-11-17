@@ -41,20 +41,20 @@ export class PuestosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.obtenerAsociados();
     this.formAsociados = this.formGroup.group({
-      folio: ["" , [Validators.required, Validators.maxLength(7)]],
-      nombre: ["" , [Validators.required, Validators.maxLength(50)]],
-      apellido: ["" , [Validators.required, Validators.maxLength(50)]],
-      numDocumento: ["" , [Validators.required, Validators.maxLength(12)]],
+      folio: ["", [Validators.required, Validators.minLength(6)]],
+      nombre: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      apellido: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      numDocumento: ["", [Validators.required, Validators.minLength(8)]],
       fecha_nac: ["", [Validators.required]],
       document: ["", [Validators.required]],
-      genero: ["",  [Validators.required]],
+      genero: ["", [Validators.required]],
       telefono: ["", [Validators.required, Validators.maxLength(9)]],
       operador: ["", [Validators.required]],
-      direccion: ["", [Validators.required, Validators.maxLength(100)]],
+      direccion: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       rubro: ["", [Validators.required]],
-      area: ["", [Validators.required ,Validators.maxLength(20)]],
-      code: ["", [Validators.required ,Validators.maxLength(10)]],
-      sector: ["", [Validators.required ,Validators.maxLength(20)]],
+      area: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      code: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      sector: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
 
         });
     this.suscription = this.asociadosService.refresh.subscribe(()=> {
@@ -140,6 +140,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
 
   actualizarAsociados(){
     if (this.formAsociados.valid){
+      const asociadoId = this.selectedAsociado?.associateId;
       this.asociadosService.updateAsociado(this.selectedAsociado?.associateId,{
         folio: this.formAsociados.get("folio")?.value ?? 0,
         numDocument: this.formAsociados.get("numDocumento")?.value ?? 0,
@@ -159,18 +160,24 @@ export class PuestosComponent implements OnInit, OnDestroy {
         this.cerrar();
         this.formAsociados.reset();
         this.toastr.success("Asociado actualizado correctamente", "¡Exito!", { closeButton: true});
+        
       })
 
     }
   }
 
-  eliminarAsociados(asociadoId: string) {
-    if (this.formAsociados.valid) {
-      this.asociadosService.deleteAsociado(asociadoId).subscribe( (asociadoId)=> {
-      console.log(asociadoId)
-      })
+  // En tu componente
+  eliminarAsociado(asociadoId: string) {
+    if (confirm("¿Estás seguro de que deseas eliminar a este asociado?")) {
+      this.asociadosService.deleteAsociado(asociadoId).subscribe(() => {
+        this.toastr.success("Asociado eliminado correctamente", "¡Éxito!", { closeButton: true });
+        // Obtener la lista actualizada solo después de la eliminación completada
+        this.obtenerAsociados();
+      });
     }
   }
+  
+
 
   buscarAsociados() {
     this.resultadosBusqueda = this.dataAsociados.filter(
@@ -200,10 +207,90 @@ export class PuestosComponent implements OnInit, OnDestroy {
     const areaControl = this.formAsociados.get('area');
     if (areaControl) {
       let areaValue = areaControl.value;
-      if (areaValue && !areaValue.endsWith('mts.')) {
+  
+      // Verificar si el valor está vacío y establecer el error correspondiente
+      if (!areaValue) {
+        areaControl.setErrors({ required: true });
+        return;
+      }
+  
+      // Agregar 'mts.' al final del valor
+      if (!areaValue.endsWith('mts.')) {
         areaValue += ' mts.';
         areaControl.setValue(areaValue);
       }
+  
+      // Limpiar los errores si el valor es válido
+      areaControl.setErrors(null);
     }
   }
+  
+  
+validateFolioLength() {
+  const folioControl = this.formAsociados.get('folio');
+  if (folioControl && folioControl.value) {
+    const folioValue = folioControl.value.toString();
+    if (folioValue.length < 6) {
+      folioControl.setErrors({ minlength: true });
+    } else {
+      folioControl.setErrors(null);
+    }
+  }
+}
+
+validateNumDocumentoLength() {
+  const numDocumentoControl = this.formAsociados.get('numDocumento');
+  if (numDocumentoControl && numDocumentoControl.value) {
+    const numDocumentoValue = numDocumentoControl.value.toString();
+    if (numDocumentoValue.length < 8) {
+      numDocumentoControl.setErrors({ minlength: true });
+    } else {
+      numDocumentoControl.setErrors(null);
+    }
+  }
+}
+
+validateTelefonoLength() {
+  const telefonoControl = this.formAsociados.get('telefono');
+  if (telefonoControl && telefonoControl.value) {
+    const telefonoValue = telefonoControl.value.toString();
+    if (telefonoValue.length < 9) {
+      telefonoControl.setErrors({ minlength: true });
+    } else {
+      telefonoControl.setErrors(null);
+    }
+  }
+}
+validateFechaNac() {
+  const fechaNacControl = this.formAsociados.get('fecha_nac');
+
+  // Verifica si formAsociados y fechaNacControl están definidos antes de acceder a ellos
+  if (this.formAsociados && fechaNacControl) {
+    // Convertir la cadena de fecha a un objeto Date
+    const fechaNacValue = new Date(fechaNacControl.value);
+
+    // Verificar si la fecha es válida y si está en el pasado
+    if (!fechaNacValue || fechaNacValue > new Date()) {
+      fechaNacControl.setErrors({ invalidDate: true });
+    } else {
+      fechaNacControl.setErrors(null);
+    }
+  }
+}
+
+validateRubro() {
+  const rubroControl = this.formAsociados.get('rubro');
+  if (rubroControl) {
+    // Verificar si el valor está vacío y establecer el error correspondiente
+    if (!rubroControl.value) {
+      rubroControl.setErrors({ required: true });
+    } else {
+      // Limpiar los errores si el valor es válido
+      rubroControl.setErrors(null);
+    }
+  }
+}
+
+
+
 }
