@@ -1,20 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ApiUserService } from '../service/api.user.service';
+import {ApiUserService } from '../service/api/api.user.service';
 import { Router } from '@angular/router';
-
-export interface Auth{
-  numDocument: number;
-  password: string;
-}
-
-interface User extends Auth{
-  name: string;
-  lastname: string;
-  date_birth: Date;
-  gender: string;
-  document: string;
-}
+import { User } from 'src/interfaces/user.interface';
+import { NotificationService } from '../service/controllers/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +13,13 @@ interface User extends Auth{
 export class RegisterComponent implements OnInit{
   formRegister!: FormGroup;
   dataUsers: Array<User> = new Array<User>;
-  constructor(private apiservice: ApiUserService,private formgroup: FormBuilder, private router: Router){}
+
+  constructor(
+    private apiservice: ApiUserService,
+    private formgroup: FormBuilder, 
+    private router: Router,
+    private notificationService: NotificationService,
+  ){}
 
   ngOnInit(): void {
     this.formRegister = this.formgroup.group({
@@ -47,9 +42,14 @@ export class RegisterComponent implements OnInit{
         lastname: this.formRegister.get("apellidos")?.value ?? '',
         date_birth: this.formRegister.get("fecha_nac")?.value ?? '',
         document: this.formRegister.get("tipodoc")?.value ?? '',
-      }).subscribe((user)=>{
-        this.dataUsers.push(user);
-        this.router.navigate(['/login'])
+      }).subscribe({
+        next: (value)=>{
+          this.notificationService.success(value.success)
+          this.router.navigate(['/login'])
+        },
+        error: (value)=>{
+          this.notificationService.errorEvent(value)
+        }
       })
 
     }

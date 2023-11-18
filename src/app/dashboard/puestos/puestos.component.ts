@@ -1,11 +1,12 @@
 import { Component , OnDestroy, OnInit } from '@angular/core';
-import { ThemeService } from '../../service/theme.service';
+import { ThemeService } from '../../service/controllers/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiAsociadosService } from 'src/app/service/api.asociados.service';
-import { AssociateId } from 'src/app/interfaces/asociado-extend.interface';
+import { ApiAsociadosService } from 'src/app/service/api/api.asociados.service';
+import { AssociateId } from 'src/interfaces/asociado-extend.interface';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from 'src/app/service/controllers/notification.service';
 
 @Component({
   selector: 'app-puestos',
@@ -13,26 +14,26 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./puestos.component.css']
 })
 export class PuestosComponent implements OnInit, OnDestroy {
-  isDarkTheme: boolean = false; // Estado del tema
+  isDarkTheme = false; // Estado del tema
   isButtonClicked = false;
   showModal = false;
   showModalEdit = false;
-  imageUrl: string = 'assets/registro/perfil.png';
+  imageUrl = 'assets/registro/perfil.png';
   formAsociados!:FormGroup;
   dataAsociados: Array<AssociateId> = new Array<AssociateId>();
   suscription!: Subscription;
-  busquedaDni: string = '';
-  busquedaRubro: string = '';
-  busquedaNombre: string = '';
-  busquedaApellido: string = '';
+  busquedaDni = '';
+  busquedaRubro = '';
+  busquedaNombre = '';
+  busquedaApellido = '';
   resultadosBusqueda: any[] = [];
   selectedAsociado: any;
 
-
   constructor(private themeService: ThemeService,
     private asociadosService: ApiAsociadosService,
-    private formGroup: FormBuilder,
-    private toastr: ToastrService) {
+    private formGroup: FormBuilder, 
+    private notificationService: NotificationService
+  ) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
     });
@@ -76,6 +77,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
 
   abrir(asociado: any) {
     this.selectedAsociado = asociado;
+    this.selectedAsociado.persons.date_birth_string = new Date(this.selectedAsociado.persons.date_birth).toISOString().split('T')[0];
     this.showModalEdit = true;
   }
 
@@ -88,8 +90,6 @@ export class PuestosComponent implements OnInit, OnDestroy {
     this.themeService.toggleDarkMode();
   }
 
-  
-
   obtenerAsociados(){
     this.asociadosService.obtenerAsociado().subscribe((asociados) => {
       this.dataAsociados = asociados;
@@ -98,8 +98,6 @@ export class PuestosComponent implements OnInit, OnDestroy {
       console.log(this.dataAsociados);
     });
   }
-
-
 
   registrarAsociados(){
     if (this.formAsociados.valid){
@@ -118,13 +116,16 @@ export class PuestosComponent implements OnInit, OnDestroy {
         area: this.formAsociados.get("area")?.value ?? '',
         sector: this.formAsociados.get("sector")?.value ?? '',
         rubro: this.formAsociados.get("rubro")?.value ?? '',
-      }).subscribe((asociado: any)=>{
-        this.closeModal()
-        this.formAsociados.reset();
-        this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
+      }).subscribe({ 
+        next: (value: any)=>{
+          this.closeModal()
+          this.formAsociados.reset();
+          this.notificationService.success(value.success);
+        },
+        error: (value: any)=>{
+          this.notificationService.errorEvent(value);
+        }
       });
-      
-
     }
   }
 
@@ -146,29 +147,34 @@ export class PuestosComponent implements OnInit, OnDestroy {
         area: this.formAsociados.get("area")?.value ?? '',
         sector: this.formAsociados.get("sector")?.value ?? '',
         rubro: this.formAsociados.get("rubro")?.value ?? '',
-      }).subscribe((asociado: any)=>{
-        this.cerrar();
-        this.formAsociados.reset();
-        this.toastr.success("Asociado actualizado correctamente", "¡Exito!", { closeButton: true});
-        
+      }).subscribe({
+        next: (value: any) =>{
+          this.cerrar();
+          this.formAsociados.reset();
+          this.notificationService.success(value.success);
+        },
+        error: (value: any) =>{
+          this.notificationService.errorEvent(value.success);
+        },
       })
-
     }
   }
 
   // En tu componente
   eliminarAsociado(asociadoId: string) {
     if (confirm("¿Estás seguro de que deseas eliminar a este asociado?")) {
-      this.asociadosService.deleteAsociado(asociadoId).subscribe(() => {
-        this.toastr.success("Asociado eliminado correctamente", "¡Éxito!", { closeButton: true });
-        // Obtener la lista actualizada solo después de la eliminación completada
-        this.obtenerAsociados();
+      this.asociadosService.deleteAsociado(asociadoId).subscribe({
+        next: (value: any) => {
+          this.notificationService.success(value.success);
+          this.obtenerAsociados();
+        },
+        error: (value: any) => {
+          this.notificationService.errorEvent(value);
+        }
       });
     }
   }
   
-
-
   buscarAsociados() {
     this.resultadosBusqueda = this.dataAsociados.filter(
       (asociado) =>
@@ -180,11 +186,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
           .includes(this.busquedaRubro.toLowerCase()) &&
           asociado.persons.name.toLowerCase().includes(this.busquedaNombre.toLocaleLowerCase()) &&
           asociado.persons.lastname.toLocaleLowerCase().includes(this.busquedaApellido.toLocaleLowerCase())
-  );
-
-
+    );
   }
-
 
   limpiarBusqueda() {
     this.busquedaDni = '';
@@ -251,6 +254,7 @@ validateTelefonoLength() {
     }
   }
 }
+
 validateFechaNac() {
   const fechaNacControl = this.formAsociados.get('fecha_nac');
 

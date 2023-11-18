@@ -1,13 +1,14 @@
 import { Component , OnInit} from '@angular/core';
-import { ThemeService } from '../../service/theme.service';
+import { ThemeService } from '../../service/controllers/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiPagosService } from 'src/app/service/api.pagos.service';
+import { ApiPagosService } from 'src/app/service/api/api.pagos.service';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { DetailPayments } from 'src/app/interfaces/pagos.get.interface';
-import { DetailPaymentId } from 'src/app/interfaces/pagos-extend.interface';
-import { PersonId } from 'src/app/interfaces/persona-extend.interface';
-import { ApiPersonasService } from 'src/app/service/api.persona.service';
+import { DetailPayments } from 'src/interfaces/pagos.get.interface';
+import { DetailPaymentId } from 'src/interfaces/pagos-extend.interface';
+import { PersonId } from 'src/interfaces/persona-extend.interface';
+import { ApiPersonasService } from 'src/app/service/api/api.persona.service';
+import { NotificationService } from 'src/app/service/controllers/notification.service';
 
 @Component({
   selector: 'app-pagos',
@@ -26,10 +27,13 @@ export class PagosComponent implements OnInit{
   showModal = false;
   showModalEdit = false;
 
-
-  constructor(private themeService: ThemeService, private pagosService: ApiPagosService,
+  constructor(
+    private themeService: ThemeService, 
+    private pagosService: ApiPagosService,
     private formGroup: FormBuilder ,
-    private personService: ApiPersonasService ) {
+    private personService: ApiPersonasService,
+    private notificationService: NotificationService
+  ) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
     });
@@ -71,8 +75,6 @@ export class PagosComponent implements OnInit{
     this.themeService.toggleDarkMode();
   }
 
-
-
   obtenerPagos(){
     this.pagosService.obtenerPagos().subscribe((pagos)=>{
       this.dataPagos= pagos;
@@ -88,24 +90,23 @@ export class PagosComponent implements OnInit{
   }
 
   registrarPagos(){
-
     if (this.formPagos.valid){
-      
       this.pagosService.insertPagos({
         person: this.formPagos.get("person")?.value ?? '',
         amount: this.formPagos.get("amount")?.value ?? 0,
         datepayment: this.formPagos.get("datepayment")?.value ?? '',
-
-      }).subscribe((pagos: any)=>{
-        this.closeModal()
-        console.log(pagos,"success")
-
-        this.obtenerPagos();
-        this.limpiarFormulario();
+      }).subscribe({
+        next: (value: any) => {
+          this.closeModal()
+          this.notificationService.success(value.success);
+          this.obtenerPagos();
+          this.limpiarFormulario();
+        },
+        error: (value: any) => {
+          this.notificationService.errorEvent(value);
+        }
       });
-
     }
-
   }
 
   limpiarFormulario() {
@@ -129,6 +130,7 @@ export class PagosComponent implements OnInit{
       }
     }
   }
+
   onPersonInput() {
     const inputValue = this.formPagos.get('personName')?.value;
     const selectedPerson = this.dataPersona.find(persona => (persona.name + ' ' + persona.lastname) === inputValue);

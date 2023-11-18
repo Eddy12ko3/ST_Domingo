@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../service/theme.service';
-import { ApiUserService } from 'src/app/service/api.user.service';
+import { ThemeService } from '../../service/controllers/theme.service';
+import { ApiUserService } from 'src/app/service/api/api.user.service';
 
 @Component({
   selector: 'app-navbar',

@@ -13,6 +13,7 @@ export interface Associates {
       name: string;
       lastname: string;
       date_birth: Date;
+      date_birth_string: string;
       state: boolean;
       created_at: string;
       updated_at: string;

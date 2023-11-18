@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiUserService } from '../service/api.user.service';
+import { ApiUserService } from '../service/api/api.user.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../service/controllers/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   formLogin!: FormGroup; 
 
-  constructor(private apiService: ApiUserService, private formGroup: FormBuilder, private router: Router){}
+  constructor(
+    private apiService: ApiUserService, 
+    private formGroup: FormBuilder, 
+    private router: Router,
+    private notificationService: NotificationService,
+    ){}
   ngOnInit(): void {
     this.formLogin = this.formGroup.group({
       usuario: ["", [Validators.required, Validators.maxLength(8)]],
@@ -25,13 +31,13 @@ export class LoginComponent implements OnInit{
         numDocument: this.formLogin.get("usuario")?.value ?? 0,
         password: this.formLogin.get("contraseña")?.value ?? '',
       }).subscribe({
-        next: (user) => {
-          localStorage.setItem("SessionToken", user);
+        next: (value) => {
+          localStorage.setItem("SessionToken", value);
+          this.notificationService.success("Has sido logueado correctamente", "Bienvenido");
           this.router.navigate(['/dashboard/inicio'])
         },
-        error: (err) => {
-          console.log(err) 
-          
+        error: (value) => {
+          this.notificationService.errorEvent(value);
         },
       })
     }

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap} from 'rxjs';
-import { DetailPayment } from '../interfaces/pagos.interface';
+import { DetailPayment } from '../../../interfaces/pagos.interface';
+import { environment } from 'src/environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiPagosService {
-    private urlget = 'http://localhost:5000/pagos';
     private _refresh = new Subject<void>();
     
     constructor(private http: HttpClient) { }
@@ -16,7 +16,7 @@ export class ApiPagosService {
       return this._refresh; 
     }
     public insertPagos(pagos: DetailPayment){
-      return this.http.post(`${this.urlget}/create`, pagos)
+      return this.http.post(`${environment.API_REST.URL}/pagos/create`, pagos)
       .pipe(
         tap(()=> {
           this._refresh.next(); 
@@ -24,7 +24,7 @@ export class ApiPagosService {
       );
     }
     public obtenerPagos(): Observable<any>{
-      return this.http.get(`${this.urlget}/load`);
+      return this.http.get(`${environment.API_REST.URL}/pagos/load`);
     }
     
 }

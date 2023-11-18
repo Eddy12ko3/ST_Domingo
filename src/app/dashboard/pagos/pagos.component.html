@@ -5,7 +5,7 @@
 
         <main class="main" >
 
-             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
+            <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
 
             <!-- REGISTRAR PAGOS  -->
             
@@ -95,8 +95,7 @@
                                   * Este campo no puede estar vacío
                                 </div>
                               </div>
-                              
-    
+
                             <div class="input-field-modal" [class.error]="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
                                 <label>MONTO</label>
                                 <input type="number" placeholder="Ingresar Monto" required formControlName="amount">

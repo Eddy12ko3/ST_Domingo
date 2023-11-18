@@ -7,7 +7,7 @@ import { PuestosComponent } from './puestos/puestos.component';
 import { TrasferenciasComponent } from './trasferencias/trasferencias.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { ModalComponent } from './modal/modal.component';
-import { AuthGuard } from '../service/router-protected.guard';
+import { AuthGuard } from '../service/guard/router-protected.guard';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, children:[

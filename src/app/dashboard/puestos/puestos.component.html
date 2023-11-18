@@ -6,7 +6,7 @@
 
         <main>
 
-             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
+            <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
                 <h2>BUSCAR SOCIO</h2>
                 <form (ngSubmit)="buscarAsociados()">
@@ -41,11 +41,11 @@
                         </datalist>
 
                          <div class="input-field">
-                            <label>Nombre</label>
+                            <label for="">Nombre</label>
                             <input [(ngModel)]="busquedaNombre" name="busquedaNombre" type="text" placeholder="Ingresar Nombre" required>
                         </div>
                         <div class="input-field">
-                          <label>Apellido</label>
+                          <label for="">Apellido</label>
                           <input [(ngModel)]="busquedaApellido" name="busquedaApellido" type="text" placeholder="Ingresar Apellido" required>
                       </div>
                         <div class="container_button_socios">
@@ -120,7 +120,7 @@
             </div>
             <div class="modal-bg" *ngIf="showModal">
             <div class="modal">
-                <div class="modal_cerrar" (click)="closeModal()" >
+                <div class="modal_cerrar" (click)="closeModal()">
                   <span>x</span>
                 </div>
                 <div class="modal_mensaje">
@@ -357,7 +357,7 @@
                     </div>
                     <div class="input-field-modal">
                       <label>FECHA NACIMIENTO</label>
-                      <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac" [ngModel]="selectedAsociado?.persons?.date_birth">
+                      <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac" [ngModel]="selectedAsociado?.persons?.date_birth_string">
                     </div>
                     <div class="input-field-modal">
                       <label>SEXO</label>
@@ -399,10 +399,11 @@
               </div>
 
               <datalist id="rubros" class="details">
+                  <option value="" disabled selected>Seleccione</option>
                   <option value="Abarrotes">
-                      <option value="Bazar">
+                  <option value="Bazar">
                   <option value="Carnes">
-                      <option value="Comedores">
+                  <option value="Comedores">
                   <option value="Embutidos">
                   <option value="Frutas">
                   <option value="Golosinas">

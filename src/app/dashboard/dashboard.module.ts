@@ -10,7 +10,7 @@ import { TrasferenciasComponent } from './trasferencias/trasferencias.component'
 import { InicioComponent } from './inicio/inicio.component';
 import { PuestosComponent } from './puestos/puestos.component';
 import { ModalComponent } from './modal/modal.component';
-import { ThemeService } from '../service/theme.service';
+import { ThemeService } from '../service/controllers/theme.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 

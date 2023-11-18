@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../service/theme.service';
-import { ApiUserService } from 'src/app/service/api.user.service';
+import { ThemeService } from '../../service/controllers/theme.service';
+import { ApiUserService } from 'src/app/service/api/api.user.service';
+import { NotificationService } from 'src/app/service/controllers/notification.service';
 
 @Component({
   selector: 'app-inicio',
@@ -8,24 +9,34 @@ import { ApiUserService } from 'src/app/service/api.user.service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit{
-  isDarkTheme: boolean = false; // Estado del tema
+  isDarkTheme = false; // Estado del tema
   userInfo: any;
   
-
-
-
   // Datos para el primer gráfico
-  cantidadTotalSocios: number = 1000;
-  porcentajeTotalSocios: number = 100;
-
+  cantidadTotalSocios = 1000;
+  porcentajeTotalSocios = 100;
+  
   // Datos para el segundo gráfico
-  cantidadAsociados: number = 100;
-  porcentajeAsociados: number = 95;
-
+  cantidadAsociados = 100;
+  porcentajeAsociados = 95;
+  
   // Datos para el tercer gráfico
-  cantidadLocalesDisponibles: number = 20;
-  porcentajeLocalesDisponibles: number = 5;
+  cantidadLocalesDisponibles = 20;
+  porcentajeLocalesDisponibles = 5;
 
+  constructor(
+    private themeService: ThemeService,
+    private userService: ApiUserService,
+    private notificationService: NotificationService
+  ) {
+    this.themeService.isDarkMode$.subscribe(isDarkMode => {
+      this.isDarkTheme = isDarkMode;
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadUserInfo();
+  }
 
   // Métodos para el primer gráfico
   get dashArrayTotalSocios(): string {
@@ -74,20 +85,7 @@ export class InicioComponent implements OnInit{
   
     return `rgb(${targetColor.join(',')})`;
   }
-  
-  
 
-  constructor(private themeService: ThemeService,
-    private userService: ApiUserService) {
-    this.themeService.isDarkMode$.subscribe(isDarkMode => {
-      this.isDarkTheme = isDarkMode;
-    });
-  }
-
-  ngOnInit(): void {
-    this.loadUserInfo();
-    
-  }
   toggleTheme() {
     this.themeService.toggleDarkMode();
   }

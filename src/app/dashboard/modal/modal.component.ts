@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '../../service/theme.service';
+import { ThemeService } from '../../service/controllers/theme.service';
 
 @Component({
   selector: 'app-modal',
