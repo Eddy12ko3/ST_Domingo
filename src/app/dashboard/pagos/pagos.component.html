@@ -6,86 +6,38 @@
         <main class="main" >
 
              <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
-            <div class="notifications">
-                <h2>GUARDAR PAGOS</h2>
-                <form [formGroup]="formPagos" (ngSubmit)="registrarPagos()">
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>FECHA PAGO</label>
-                            <input type="date" placeholder="Ingresar Fecha" required formControlName="datepayment" >
-                        </div>
-                        <div class="input-field-modal">
-                            <label>NOMBRE</label>
-                            <select name="personas" id="" formControlName="person">
-                                <option *ngFor="let personas of dataPersona" [ngValue]="personas.personId">{{personas.name + " " + personas.lastname}}</option>
-                            </select>
-                        </div>
-
-
-                        
-                        <div class="input-field-modal">
-                            <label for="person">NOMBRE</label>
-                            <input type="text" id="person" name="person" list="persons" required formControlName="person" (input)="onPersonInput()">
-
-                        
-                            <datalist id="persons" class="details">
-                                <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
-                            </datalist>
-                        </div>
-                    
-
-                        <div class="input-field">
-                            <label>MONTO</label>
-                            <input type="number" placeholder="Ingresar Monto" required formControlName="amount">
-                        </div>
-
-                        <div class="container_button">
-                            <button  type="submit" [disabled]="!formPagos.valid"   class="guardarBtn">
-                                <span class="material-icons-sharp">save</span>
-                                <span class="btnText">Guardar</span>
-                            </button>
-                            <button class="limpiarBtn"  (click)="limpiarFormulario()">
-                                <span class="material-icons-sharp">delete_forever</span>
-                                <span class="btnText">Limpiar</span>
-                            </button>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
 
             <!-- REGISTRAR PAGOS  -->
+            
             <div class="notifications">
-                <h2>BUSCAR PAGO</h2>
+            <h2>BUSCAR PAGO</h2>
                 <form [formGroup]="buscarForm" (ngSubmit)="buscarPorMonto()">
-                    <div class="fields-pago">
-                        <!--<div class="input-field-pago">
-                            <label>FECHA</label>
-                            <input type="date" placeholder="Ingresar fecha" required formControlName="datepayment">
-                        </div>
-                        <div class="input-field-pago">
-                            <label>NOMBRE</label>
-                            <input type="text" placeholder="Ingresar Nombre" required formControlName="person">
-                        </div>-->
-                        <div class="input-field-pago">
-                            <label  for="amountToSearch">MONTO</label>
+                    <div class="fields">
+                        <div class="input-field" >
+                            <label >MONTO</label>
                             <input type="number" placeholder="Ingresar Monto" required formControlName="amountToSearch">
                         </div>
 
-
-                        <div class="container_button-pago">
+                        <div class="container_button_socios">
                             <button class="guardarBtn">
-                                <span class="material-icons-sharp">search</span>
+                                <span class="material-icons-sharp" >search</span>
                                 <span class="btnText">Buscar</span>
                             </button>
-                            <button class="limpiarBtn" (click)="limpiarFormulario()">
+
+                            <button class="borrarBtn" (click)="limpiarFormulario()" >
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
+
+                            <button class="registerBtn" (click)="openModal()">
+                                <span class="material-icons-sharp">payments</span>
+                                <span class="btnText" >Registrar</span>
+                            </button>
+
                         </div>
                     </div>
-                </form>
 
+                </form>
             </div>
 
 
@@ -111,6 +63,64 @@
                       </tr>
                 </tbody>
             </table>
+            </div>
+            <div class="modal-bg" *ngIf="showModal">
+                <div class="modal">
+                    <div class="modal_cerrar" (click)="closeModal()" >
+                      <span>x</span>
+                    </div>
+                    <div class="modal_mensaje">
+                      <h2>REGISTRO DE PAGOS</h2>
+                      <form [formGroup]="formPagos" (ngSubmit)="registrarPagos()">
+                        <div class="input-field-modal">
+                          <div class="fields-modal">
+
+                            <div class="input-field-modal" [ngClass]="{'error': formPagos.get('datepayment')?.hasError('required') && formPagos.get('datepayment')?.touched}">
+                                <label>FECHA PAGO</label>
+                                <input type="date" placeholder="Ingresar Fecha" required formControlName="datepayment" >
+                                <div *ngIf="formPagos.get('datepayment')?.hasError('required') && formPagos.get('datepayment')?.touched">
+                                    Este campo no puede estar vacío.
+                                  </div>
+                            </div>
+                            <div class="input-field-modal" [class.error]="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
+                                <label for="person">NOMBRE</label>
+                                <input type="text" id="person" list="persons" required formControlName="personName" (input)="onPersonInput()">
+                              
+                                <datalist id="persons" class="details">
+                                  <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
+                                </datalist>
+                              
+                                <!-- Mensaje de error -->
+                                <div *ngIf="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
+                                  * Este campo no puede estar vacío
+                                </div>
+                              </div>
+                              
+    
+                            <div class="input-field-modal" [class.error]="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
+                                <label>MONTO</label>
+                                <input type="number" placeholder="Ingresar Monto" required formControlName="amount">
+                                <div *ngIf="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
+                                    * Este campo no puede estar vacío
+                                </div>
+                            </div>
+                            
+                              
+                            </div>
+                        <div class="container_button_modal">
+                          <button type="submit" [disabled]="!formPagos.valid"   class="guardarBtn" >
+                            <span class="material-icons-sharp">save</span>
+                            <span class="btnText">Guardar</span>
+                          </button>
+                            <button class="limpiarBtn" (click)="closeModal()">
+                                <span class="material-icons-sharp">delete_forever</span>
+                                <span class="btnText">Descartar</span>
+                            </button>
+                        </div>
+                      </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- REGISTRAR PAGOS FIN  -->

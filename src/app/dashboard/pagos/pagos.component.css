@@ -185,101 +185,6 @@ main .notifications .fields{
 
  /*REGISTRAR PAGO*/
 
- main .notifications .fields-pago{
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
- }
-
- main .notifications .fields-pago .input-field-pago{
-    display: flex;
-    width: calc(100% / 5 - 40px);
-    flex-direction: column;
-    margin: 4px 0;
- }
-
- .input-field-pago label{
-    font-size: 12px;
-    font-weight: 500;
-    height: 1.5rem;
-    color: var(--color-dark-variant);
- }
- .input-field-pago input{
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    border-radius: 10px;
-    border: 1px solid var(--color-dark-variant);
-    padding: 0 15px;
-    height: 40px;
-    margin: 8px 0;;
-    background-color: var(--color-label);
-
- }
-
- .input-field-pago input:is(:focus, :valid){
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
- }
-
-.input-field-pago input[type="date"]{
-    color: #707070;
-    font-size: 14px;
-    font-family: poppins, sans-serif;
-}
-.input-field-pago input[type="date"]:valid{
-    color: #333;
-}
-
- main .notifications .container_button-pago{
-    display: block;
-
- }
-
- main .notifications .button-pago{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 45px;
-    max-width: 200px;
-    width: 100%;
-    border: none;
-    outline: none;
-    color: #fff;
-    border-radius: 5px;
-    margin: 0 25px;
-
-    transition: all 0.3s linear;
-    cursor: pointer;
-
- }
-
- .container_button-pago .guardarBtn:first-child {
-    background-color: var(--color-primary);
-  }
-
-  .container_button-pago .guardarBtn:first-child:hover {
-    background-color: rgb(12, 192, 75);
-  }
-
-  .container_button-pago .limpiarBtn:last-child {
-    background-color: var(--color-danger);
-  }
-
-  .container_button-pago .limpiarBtn:last-child:hover {
-    background-color: red;
-  }
-
- .notifications button span{
-    margin: 0 4px;
- }
-
 
  /*SCROLL*/
 
@@ -301,7 +206,7 @@ main .notifications .fields{
  }
 
  main .notifications1 .table-container {
-    max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+    max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
     overflow-y: auto; /* Activa el desplazamiento vertical si es necesario */
     background: var(--color-white);
     border-radius: var(--card-border-radius);
@@ -377,25 +282,223 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
-.input-field-modal select{
-  outline: none;
-  font-size: 14px;
-  border-radius: 10px;
-  border: 1px solid var(--color-dark-variant);
-  padding: 0 15px;
-  height: 40px;
-  margin: 8px 0;
-  background-color: var(--color-label);
-}
-
-.input-field-modal select {
-  color: #363949;
-}
 
 .input-field-modal {
    display: flex;
    flex-direction: column;
    margin: 8px 0;
+   }
+
+ .input-field-modal label{
+   font-size: 12px;
+   font-weight: 500;
+   height: 1.5rem;
+   color: var(--text-color);
+ }
+ .input-field-modal input{
+   outline: none;
+   font-size: 14px;
+   font-weight: 400;
+   border-radius: 10px;
+   border: 1px solid  var(--color-dark-variant);
+   padding: 0 15px;
+   height: 40px;
+   margin: 8px 0;;
+   background-color: var(--color-label);
+
+ }
+
+
+ .container_button_socios .guardarBtn {
+   background-color: var(--color-primary);
+   color: white;
+   border: 1px solid var(--color-primary);
+   border-radius: 4px;
+   transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .guardarBtn:hover {
+   background-color: rgb(12, 192, 75);
+}
+
+.container_button_socios .borrarBtn {
+   background-color: var(--color-danger);
+   color: white;
+   border: 1px solid var(--color-danger);
+   border-radius: 4px;
+   transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .borrarBtn:hover {
+   background-color: red;
+}
+
+.container_button_socios .registerBtn {
+   background-color: var(--color-warning);
+   color: white;
+   border: 1px solid var(--color-warning);
+   border-radius: 4px;
+   transition: background-color 0.2s ease-in-out;
+}
+
+.container_button_socios .registerBtn:hover {
+   background-color: rgb(241, 167, 6);
+}
+
+.notifications1 .confirmBtn,
+.notifications1 .rejectBtn{
+
+   height: 40px;
+   max-width: 40px;
+   border: none;
+   outline: none;
+   color: #fff;
+   border-radius: 0 15px 0 15px;
+   margin: 5px;
+   margin-bottom: 1px;
+   transition: all 0.3s linear;
+   cursor: pointer;
+}
+
+.notifications1 .confirmBtn i,
+.notifications1 .rejectBtn i{
+
+   margin: 2px;
+
+}
+
+.notifications1 .confirmBtn:first-child {
+   background-color: var(--color-primary);
+ }
+
+ .notifications1 .confirmBtn:first-child:hover {
+   background-color: rgb(12, 192, 75);
+ }
+
+ .notifications1 .rejectBtn:last-child {
+   background-color: var(--color-danger);
+ }
+
+ .notifications1 .rejectBtn:last-child:hover {
+   background-color: red;
+ }
+
+ .material-icons-sharp {
+   margin-right: 10px;
+ }
+
+ .input-field-pago input[type="date"] {
+   color: #363949;
+   border-radius: 10px;
+   border: 1px solid #7d8da1;
+   background-color: white;
+   font-family: sans-serif;
+ }
+
+
+ /* MODAL */
+
+ .modal-bg {
+   background: rgba(0, 0, 0, 0.7);
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 999;
+ }
+
+ .modal{
+   background: var(--color-white);
+   width: 650px;
+   height: 450px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   position: absolute;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   border-radius: 30px;
+
+ }
+
+ .modal_cerrar{
+   background: var(--color-white);
+   position: absolute;
+   right: -25px;
+   color: var(--color-primary);
+   top: -20px;
+   width: 40px;
+   height: 40px;
+   border-radius: 25px;
+   display: flex;
+   justify-content: center;
+   cursor: pointer;
+ }
+
+ .modal_cerrar:hover{
+   background-color: var(--color-danger);
+   color: var(--color-botton);
+ }
+ .modal_cerrar span{
+
+   align-items: center;
+   font-size: 25px;
+ }
+
+ .modal_mensaje{
+   padding:  30px;
+ }
+
+ .modal_botones{
+   width: 100%;
+   background: white;
+   padding-top: 60px;
+   display: flex;
+   justify-content: space-evenly;
+ }
+
+ .boton {
+   background: white;
+   padding: 8px 30px;
+   color: #7d8da1;
+   text-decoration: none;
+   border-radius: 25px;
+   border: 2px solid #47F5C1;
+   display: flex;
+   align-items: center;
+ }
+
+ .material-icons-sharp {
+   margin-right: 10px;
+ }
+
+ .boton:hover{
+   background: #47F5C1;
+   color: white;
+ }
+
+ /*REGISTRO*/
+
+ .fields-modal {
+   grid-template-columns: repeat(3, 1fr);
+   justify-content: left;
+   align-items: top;
+   grid-column-gap: 10px;
+   display: grid;
+   
+
+ }
+
+ .input-field-modal {
+   display: flex;
+   flex-direction: column;
+   margin: 8px 0;
+   box-sizing: border-box;
    }
 
 
@@ -417,3 +520,104 @@ input[type="number"]::-webkit-outer-spin-button {
    background-color: var(--color-label);
 
  }
+
+ 
+
+ .container_button_modal {
+   display: flex;
+   justify-content: center;
+   margin-top: 50px;
+   cursor: pointer;
+ }
+
+ .guardarBtn {
+   display: flex;
+   align-items: center;
+   background-color: var(--color-primary);
+   color: white;
+   padding: 8px 20px;
+   border: none;
+   border-radius: 5px;
+   margin-right: 150px;
+   cursor: pointer;
+ }
+
+ .guardarBtn .material-icons-sharp,
+ .limpiarBtn .material-icons-sharp {
+   margin-right: 10px;
+ }
+
+ .guardarBtn:hover {
+   background-color: rgb(12, 192, 75);
+ }
+
+ .limpiarBtn {
+   display: flex;
+   background-color: var(--color-danger);
+   align-items: center;
+   color: white;
+   padding: 8px 20px;
+   border: none;
+   border-radius: 5px;
+   margin-left: 10px;
+   cursor: pointer;
+ }
+
+ .limpiarBtn:hover {
+   background-color: red;
+ }
+
+ .input-field-modal select{
+   outline: none;
+   font-size: 14px;
+   border-radius: 10px;
+   border: 1px solid var(--color-dark-variant);
+   padding: 0 15px;
+   height: 40px;
+   margin: 8px 0;
+   background-color: var(--color-label);
+ }
+
+ .input-field-modal select {
+   color: #363949;
+ }
+
+ .input-field-modal input[type="date"] {
+   color: #363949;
+   border-radius: 10px;
+   border: 1px solid var(--color-dark-variant);
+   background-color: var(--color-label);
+   font-family: sans-serif;
+ }
+
+ .details{
+   border-radius: 20px;
+ }
+
+
+ .input-field-modal.error input,
+  .input-field-modal.error select,
+  .input-field-modal.error input[type="date"] {
+    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
+  }
+  
+  .input-field-modal.error label,
+  .input-field-modal.error div {
+    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
+    
+  }
+
+
+  .input-field-modal.error input[type="number"] {
+    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
+  }
+  
+  .input-field-modal.error label,
+  .input-field-modal.error div {
+    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
+  }
+  .error input {
+    border-color: red;  /* Cambia el color del borde a rojo */
+    color: red;        /* Cambia el color del texto a rojo */
+  }
+  

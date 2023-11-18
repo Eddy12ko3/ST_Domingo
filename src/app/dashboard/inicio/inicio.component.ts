@@ -10,82 +10,71 @@ import { ApiUserService } from 'src/app/service/api.user.service';
 export class InicioComponent implements OnInit{
   isDarkTheme: boolean = false; // Estado del tema
   userInfo: any;
-  cantidadAsociados: number = 980; 
-  cantidadLocalesDisponibles: number = 20;
+  
+
+
+
+  // Datos para el primer gráfico
   cantidadTotalSocios: number = 1000;
+  porcentajeTotalSocios: number = 100;
 
-  get porcentajeTotalSocios(): number {
-    // Calcula el porcentaje de socios
-    return (this.cantidadTotalSocios / 1000) * 100; // Suponiendo 1000 como el total máximo de socios
-  }
+  // Datos para el segundo gráfico
+  cantidadAsociados: number = 100;
+  porcentajeAsociados: number = 95;
 
-  get longitudCircunferenciaTotalSocios(): number {
-    // Calcula la longitud de la circunferencia completa para el total de socios
-    return 2 * Math.PI * 36; // El radio del círculo es 36
-  }
+  // Datos para el tercer gráfico
+  cantidadLocalesDisponibles: number = 20;
+  porcentajeLocalesDisponibles: number = 5;
 
-  get longitudPorcentajeTotalSocios(): number {
-    // Calcula la longitud de la porción de socios
-    const porcentaje = this.porcentajeTotalSocios > 100 ? 100 : this.porcentajeTotalSocios;
-    return (porcentaje / 100) * this.longitudCircunferenciaTotalSocios;
-  }
 
+  // Métodos para el primer gráfico
   get dashArrayTotalSocios(): string {
-    // Usa la longitud total del círculo como dashArray
-    return `${this.longitudCircunferenciaTotalSocios} ${this.longitudCircunferenciaTotalSocios}`;
+    return '283'; // 2 * π * radio
   }
 
   get dashOffsetTotalSocios(): string {
-    // Calcula el desplazamiento necesario para el efecto de llenado de socios
-    return `${this.longitudCircunferenciaTotalSocios - this.longitudPorcentajeTotalSocios}`;
+    const porcentajeDecimal = this.porcentajeTotalSocios / 100;
+    return String((1 - porcentajeDecimal) * parseFloat(this.dashArrayTotalSocios));
   }
 
-  get porcentajeOcupado(): number {
-    // Calcula el porcentaje ocupado
-    return (this.cantidadAsociados / 1000) * 100; // Suponiendo 1000 como la capacidad máxima
+  get progressBarColorTotalSocios(): string {
+    return this.calculateColor(this.porcentajeTotalSocios);
   }
 
-  get porcentajeDisponible(): number {
-    // Calcula el porcentaje disponible
-    return ((1000 - this.cantidadAsociados) / 1000) * 100; // Suponiendo 1000 como la capacidad máxima
+  // Métodos para el segundo gráfico
+  get dashArrayAsociados(): string {
+    return '283'; // 2 * π * radio
   }
 
-  get longitudCircunferencia(): number {
-    // Calcula la longitud de la circunferencia completa
-    return 2 * Math.PI * 36; // El radio del círculo es 36
+  get dashOffsetAsociados(): string {
+    const porcentajeDecimal = this.porcentajeAsociados / 100;
+    return String((1 - porcentajeDecimal) * parseFloat(this.dashArrayAsociados));
   }
 
-  get dashArray(): string {
-    // Calcula la longitud de la porción ocupada
-    const porcentaje = this.porcentajeOcupado > 100 ? 100 : this.porcentajeOcupado;
-    const longitudPorcentaje = (porcentaje / 100) * this.longitudCircunferencia;
-    return `${longitudPorcentaje} ${this.longitudCircunferencia}`;
+  get progressBarColorAsociados(): string {
+    return this.calculateColor(this.porcentajeAsociados);
   }
 
-  get dashOffset(): string {
-    // Calcula el desplazamiento necesario para el efecto de llenado
-    const porcentaje = this.porcentajeOcupado > 100 ? 100 : this.porcentajeOcupado;
-    const longitudPorcentaje = (porcentaje / 100) * this.longitudCircunferencia;
-    return `${this.longitudCircunferencia - longitudPorcentaje}`;
-  }
-  get longitudCircunferenciaDisponible(): number {
-    // Calcula la longitud de la circunferencia completa para los locales disponibles
-    return 2 * Math.PI * 36; // El radio del círculo es 36
+  // Métodos para el tercer gráfico
+  get dashArrayLocalesDisponibles(): string {
+    return '283'; // 2 * π * radio
   }
 
-  get dashArrayDisponible(): string {
-    // Calcula la longitud de la porción disponible
-    const porcentaje = this.porcentajeDisponible > 100 ? 100 : this.porcentajeDisponible;
-    const longitudPorcentaje = (porcentaje / 100) * this.longitudCircunferenciaDisponible;
-    return `${longitudPorcentaje} ${this.longitudCircunferenciaDisponible}`;
+  get dashOffsetLocalesDisponibles(): string {
+    const porcentajeDecimal = this.porcentajeLocalesDisponibles / 100;
+    return String((1 - porcentajeDecimal) * parseFloat(this.dashArrayLocalesDisponibles));
   }
 
-  get dashOffsetDisponible(): string {
-    // Calcula el desplazamiento necesario para el efecto de llenado de los locales disponibles
-    const porcentaje = this.porcentajeDisponible > 100 ? 100 : this.porcentajeDisponible;
-    const longitudPorcentaje = (porcentaje / 100) * this.longitudCircunferenciaDisponible;
-    return `${this.longitudCircunferenciaDisponible - longitudPorcentaje}`;
+  get progressBarColorLocalesDisponibles(): string {
+    return this.calculateColor(this.porcentajeLocalesDisponibles);
   }
+
+  private calculateColor(porcentaje: number): string {
+    const targetColor = [71, 245, 193]; // Color deseado #47F5C1
+  
+    return `rgb(${targetColor.join(',')})`;
+  }
+  
   
 
   constructor(private themeService: ThemeService,
@@ -97,6 +86,7 @@ export class InicioComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadUserInfo();
+    
   }
   toggleTheme() {
     this.themeService.toggleDarkMode();

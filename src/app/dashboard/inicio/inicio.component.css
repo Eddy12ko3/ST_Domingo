@@ -68,42 +68,43 @@ main .insights h3{
     margin: 1rem 0 0.6rem;
     font-size: 1rem;
 }
- main .insights .progress{
-    position: relative;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
- }
+ /* BARRAS CIRCULARES */
 
- main .insights svg{
-    width: 7rem;
-    height: 7rem;
+.progress-bar-container {
+   position: relative;
+   width: 90px; /* Ajusta el tamaño del contenedor según tus necesidades */
+   height: 90px;
  }
-
- main .insights svg circle{
-    fill: none;
-    stroke: var(--color-primary);
-    stroke-width: 14;
-    stroke-linecap: round;
-    transform: translate(5px, 5px);
-    stroke-dasharray: 110;
-    stroke-dashoffset: 92;
+ 
+ .progress-svg {
+   width: 100%;
+   height: 100%;
+   transform: rotate(-90deg);
  }
-
- main .insights .user svg circle{
-    stroke-dashoffset: -30;
-    stroke-dasharray: 200;
+ 
+ .progress-background {
+   fill: none;
+   stroke: #eee; /* Color del fondo del círculo */
+   stroke-width: 10; /* Grosor del círculo */
  }
-
- main .insights .busy svg circle{
-    stroke-dashoffset: 20;
-    stroke-dasharray: 90;
+ 
+ .progress-bar {
+   fill: none;
+   stroke: var(--color-primary);
+   stroke-width: 10; /* Grosor de la barra de progreso */
+   stroke-linecap: round;
+   transition: stroke-dasharray 0.5s ease;
  }
-
- main .insights .available svg circle{
-    stroke-dashoffset: 35;
-    stroke-dasharray: 110;
+ 
+ .progress-label {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 16px;
+   font-weight: bold;
  }
+ 
  
 
  main .insights .progress .number{
@@ -116,6 +117,9 @@ main .insights h3{
     justify-content: center;
     align-items: center;
  }
+
+ 
+
 
  main .insights small{
     margin-top: 1.3rem;
@@ -252,3 +256,6 @@ main .notifications1 .table-container::-webkit-scrollbar-thumb {
     background: var(--color-primary); 
     border-radius: 30px; 
 }
+
+
+ 

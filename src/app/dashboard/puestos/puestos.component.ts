@@ -88,18 +88,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
     this.themeService.toggleDarkMode();
   }
 
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    if (file) {
-      const reader: FileReader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }
+  
 
   obtenerAsociados(){
     this.asociadosService.obtenerAsociado().subscribe((asociados) => {
@@ -133,7 +122,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
         this.closeModal()
         this.formAsociados.reset();
         this.toastr.success("Asociado agregado correctamente", "¡Exito!", { closeButton: true});
-      })
+      });
+      
 
     }
   }

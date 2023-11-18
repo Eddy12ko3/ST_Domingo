@@ -23,6 +23,8 @@ export class PagosComponent implements OnInit{
   dataPersona: Array<PersonId> = new Array<PersonId>();
   buscarForm!: FormGroup;
   suscription?: Subscription;
+  showModal = false;
+  showModalEdit = false;
 
 
   constructor(private themeService: ThemeService, private pagosService: ApiPagosService,
@@ -39,7 +41,8 @@ export class PagosComponent implements OnInit{
     this.formPagos = this.formGroup.group({
       datepayment: ["", [Validators.required]],
       person: ["" , [Validators.required, Validators.maxLength(50)]],
-      amount: ["", [Validators.required ,Validators.maxLength(20)]],
+      amount: ["" , [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      personName: ["", [Validators.required, Validators.maxLength(50)]],
     });
     this.buscarForm = this.formGroup.group({
       amountToSearch: ['', [Validators.required, Validators.maxLength(20)]],
@@ -48,6 +51,16 @@ export class PagosComponent implements OnInit{
       this.obtenerPagos();
     }
     )
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.formPagos.reset();
+    
   }
 
   ngOnDestroy(): void {
@@ -84,6 +97,7 @@ export class PagosComponent implements OnInit{
         datepayment: this.formPagos.get("datepayment")?.value ?? '',
 
       }).subscribe((pagos: any)=>{
+        this.closeModal()
         console.log(pagos,"success")
 
         this.obtenerPagos();
@@ -116,12 +130,24 @@ export class PagosComponent implements OnInit{
     }
   }
   onPersonInput() {
-    const inputValue = this.formPagos.get('person')?.value;
+    const inputValue = this.formPagos.get('personName')?.value;
     const selectedPerson = this.dataPersona.find(persona => (persona.name + ' ' + persona.lastname) === inputValue);
 
     if (selectedPerson) {
+        // Mantén el nombre en la interfaz de usuario.
+        this.formPagos.get('personName')?.setValue(selectedPerson.name + ' ' + selectedPerson.lastname);
+
+        // Almacena el ID en el campo oculto.
         this.formPagos.get('person')?.setValue(selectedPerson.personId);
+    } else {
+        // Si la persona no se encuentra, mantén el nombre en lugar de asignar un ID.
+        this.formPagos.get('personName')?.setValue(inputValue);
+
+        // Restablece el campo oculto a un valor vacío en caso de que se haya establecido previamente.
+        this.formPagos.get('person')?.setValue('');
     }
 }
+
+
 
 }

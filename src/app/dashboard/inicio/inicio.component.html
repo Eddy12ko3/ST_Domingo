@@ -1,6 +1,7 @@
 <body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
     <div class="container">
         <main>
+
             <h1>Dashboard</h1>
             <!--INICIO PAGINA PRINCIPAL USER-->
             <div class="partners" *ngIf="userInfo">
@@ -14,14 +15,13 @@
                             <h3>Total Socios</h3>
                             <h1>{{ cantidadTotalSocios }}</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" [attr.stroke-dasharray]="dashArrayTotalSocios" [attr.stroke-dashoffset]="dashOffsetTotalSocios"></circle>
+                        <div class="progress-bar-container">
+                            <svg class="progress-svg" viewBox="0 0 100 100">
+                              <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                              <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayTotalSocios" [style.strokeDashoffset]="dashOffsetTotalSocios" [style.stroke]="progressBarColorTotalSocios"></circle>
                             </svg>
-                            <div class="number">
-                                <p>{{ porcentajeTotalSocios.toFixed(0) }}%</p>
-                            </div>
-                        </div>
+                            <div class="progress-label">{{ porcentajeTotalSocios }}%</div>
+                          </div>
                     </div>
                     <small class="text-muted">ultimas 24 horas</small>
                 </div>
@@ -31,21 +31,21 @@
                 <div class="busy">
                     <span class="material-icons-sharp">store</span>
                     <div class="middle">
-                        <div class="lef">
-                            <h3>Locales Ocupados</h3>
-                            <h1>{{ cantidadAsociados }}</h1>
-                        </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" cy="38" r="36" [attr.stroke-dasharray]="dashArray" [attr.stroke-dashoffset]="dashOffset"></circle>
-                            </svg>
-                            <div class="number">
-                                <p>{{ porcentajeOcupado.toFixed(0) }}%</p>
-                            </div>
-                        </div>
+                      <div class="lef">
+                        <h3>Locales Ocupados</h3>
+                        <h1>{{ cantidadAsociados }}</h1>
+                      </div>
+                      <div class="progress-bar-container">
+                        <svg class="progress-svg" viewBox="0 0 100 100">
+                          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                          <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayAsociados" [style.strokeDashoffset]="dashOffsetAsociados" [style.stroke]="progressBarColorAsociados"></circle>
+                        </svg>
+                        <div class="progress-label">{{ porcentajeAsociados.toFixed(0) }}%</div>
+                      </div>
                     </div>
-                    <small class="text-muted">ultimas 24 horas</small>
-                </div>
+                    <small class="text-muted">últimas 24 horas</small>
+                  </div>
+                  
                 <!--FIN PAGINA PRINCIPAL LOCALES-->
                 <!--INICIO PAGINA PRINCIPAL LOCALES DISPONIBLES-->
 
@@ -56,16 +56,13 @@
                             <h3>Locales Disponibles</h3>
                             <h1>{{ cantidadLocalesDisponibles }}</h1>
                         </div>
-                        <div class="progress">
-                            <svg>
-                                <circle cx="38" 
-                                cy="38" 
-                                r="36" [attr.stroke-dasharray]="dashArrayDisponible" [attr.stroke-dashoffset]="dashOffsetDisponible"></circle>
+                        <div class="progress-bar-container">
+                            <svg class="progress-svg" viewBox="0 0 100 100">
+                              <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                              <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayLocalesDisponibles" [style.strokeDashoffset]="dashOffsetLocalesDisponibles" [style.stroke]="progressBarColorLocalesDisponibles"></circle>
                             </svg>
-                            <div class="number">
-                                <p>{{ porcentajeDisponible.toFixed(0) }}%</p>
-                            </div>
-                        </div>
+                            <div class="progress-label">{{ porcentajeLocalesDisponibles.toFixed(0) }}%</div>
+                          </div>
                     </div>
                     <small class="text-muted">ultimas 24 horas</small>
                 </div>
