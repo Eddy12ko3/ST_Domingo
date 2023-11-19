@@ -44,23 +44,35 @@
         <div class="notifications1">
             <h2>HISTORIAL DE PAGOS </h2>
             <div class="table-container">
-            <table>
+                <div *ngIf="!resultadosEncontrados">
+                    <p>No hay resultados.</p>
+                </div>
+                <table *ngIf="dataPagos && dataPagos.length > 0">
                 <thead>
                     <tr >
+                        <th>N°</th>
                         <th>Fecha de pago</th>
                         <th>Nombres</th>
                         <th>Monto</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let pago of dataPagos">
+                    <tr *ngFor="let pago of dataPagos let i = index">
+                        <td>{{i + 1 }}</td>
                         <td>{{ pago.datePayment | date: 'dd/MM/yyyy' }}</td>
                         <td>{{ pago.person.name }} </td>
                         <td>{{ pago.amount }} </td>
+                        <td>
+                            <button class="confirmBtn"  (click)="abrirModal()">
+                                <i class="material-icons-sharp">edit</i>
+                            </button>
+                            <button class="rejectBtn" >
+                                <i class="material-icons-sharp">delete</i>
+                            </button>
+                        </td>
                     </tr>
-                    <tr *ngIf="dataPagos.length === 0">
-                        <td colspan="3">No hay resultados de búsqueda.</td>
-                      </tr>
+                   
                 </tbody>
             </table>
             </div>
@@ -69,7 +81,7 @@
                     <div class="modal_cerrar" (click)="closeModal()" >
                       <span>x</span>
                     </div>
-                    <div class="modal_mensaje">
+                    <div class="modal_mensaje" >
                       <h2>REGISTRO DE PAGOS</h2>
                       <form [formGroup]="formPagos" (ngSubmit)="registrarPagos()">
                         <div class="input-field-modal">
@@ -102,9 +114,7 @@
                                 <div *ngIf="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
                                     * Este campo no puede estar vacío
                                 </div>
-                            </div>
-                            
-                              
+                            </div>                           
                             </div>
                         <div class="container_button_modal">
                           <button type="submit" [disabled]="!formPagos.valid"   class="guardarBtn" >
@@ -122,8 +132,65 @@
                 </div>
             </div>
         </div>
+        
         <!-- REGISTRAR PAGOS FIN  -->
     </main>
+    <div class="modal-bg" *ngIf="showModalEdit">
+        <div class="modal">
+            <div class="modal_cerrar" (click)="cerrarModal()" >
+              <span>x</span>
+            </div>
+            <div class="modal_mensaje" >
+              <h2>EDITAR PAGOS</h2>
+              <form >
+                <div class="input-field-modal">
+                  <div class="fields-modal">
+
+                    <div class="input-field-modal" [ngClass]="{'error': formPagos.get('datepayment')?.hasError('required') && formPagos.get('datepayment')?.touched}">
+                        <label>FECHA PAGO</label>
+                        <input type="date" placeholder="Ingresar Fecha" required formControlName="datepayment" >
+                        <div *ngIf="formPagos.get('datepayment')?.hasError('required') && formPagos.get('datepayment')?.touched">
+                            Este campo no puede estar vacío.
+                          </div>
+                    </div>
+                    <div class="input-field-modal" [class.error]="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
+                        <label for="person">NOMBRE</label>
+                        <input type="text" id="person" list="persons" required formControlName="personName" (input)="onPersonInput()">
+                      
+                        <datalist id="persons" class="details">
+                          <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
+                        </datalist>
+                      
+                        <!-- Mensaje de error -->
+                        <div *ngIf="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
+                          * Este campo no puede estar vacío
+                        </div>
+                      </div>
+
+                    <div class="input-field-modal" [class.error]="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
+                        <label>MONTO</label>
+                        <input type="number" placeholder="Ingresar Monto" required formControlName="amount">
+                        <div *ngIf="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
+                            * Este campo no puede estar vacío
+                        </div>
+                    </div>                           
+                    </div>
+                <div class="container_button_modal">
+                  <button type="submit" [disabled]="!formPagos.valid"   class="guardarBtn" >
+                    <span class="material-icons-sharp">save</span>
+                    <span class="btnText">Guardar</span>
+                  </button>
+                    <button class="limpiarBtn" (click)="cerrarModal()">
+                        <span class="material-icons-sharp">delete_forever</span>
+                        <span class="btnText">Descartar</span>
+                    </button>
+                </div>
+              </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 

@@ -53,9 +53,9 @@ export class PuestosComponent implements OnInit, OnDestroy {
       operador: ["", [Validators.required]],
       direccion: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       rubro: ["", [Validators.required]],
-      area: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      code: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
-      sector: ["", [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      area: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      code: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      sector: ["", [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
 
         });
     this.suscription = this.asociadosService.refresh.subscribe(()=> {

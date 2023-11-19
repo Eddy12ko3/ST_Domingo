@@ -26,6 +26,8 @@ export class PagosComponent implements OnInit{
   suscription?: Subscription;
   showModal = false;
   showModalEdit = false;
+  resultadosEncontrados: boolean = true;
+  
 
   constructor(
     private themeService: ThemeService, 
@@ -59,6 +61,7 @@ export class PagosComponent implements OnInit{
 
   openModal() {
     this.showModal = true;
+    console.log('Abriendo modal');
   }
 
   closeModal() {
@@ -66,6 +69,16 @@ export class PagosComponent implements OnInit{
     this.formPagos.reset();
     
   }
+  abrirModal() {
+    this.showModalEdit = true;
+  }
+
+  cerrarModal() {
+    this.showModalEdit = false;
+  }
+
+
+  
 
   ngOnDestroy(): void {
     this.suscription?.unsubscribe();
@@ -113,23 +126,27 @@ export class PagosComponent implements OnInit{
     this.buscarForm.get('amountToSearch')?.setValue('');
     this.obtenerPagos();
     this.formPagos.reset();
+    this.resultadosEncontrados = true;
   }
 
   buscarPorMonto() {
     const amountToSearch = this.buscarForm.get('amountToSearch')?.value;
 
-  if (amountToSearch !== null && amountToSearch !== undefined) {
-    const amountToSearchNumber = parseFloat(amountToSearch);
+    if (amountToSearch !== null && amountToSearch !== undefined) {
+        const amountToSearchNumber = parseFloat(amountToSearch);
 
-    if (!isNaN(amountToSearchNumber)) {
-      this.dataPagos = this.dataPagos.filter(
-        (pago) => Math.abs(pago.amount - amountToSearchNumber) < 0.01
-      );
-    } else {
-      console.warn('Ingrese un número válido para buscar.');
-      }
+        if (!isNaN(amountToSearchNumber)) {
+            const filteredPagos = this.dataPagos.filter(
+                (pago) => Math.abs(pago.amount - amountToSearchNumber) < 0.01
+            );
+
+            this.dataPagos = filteredPagos;
+            this.resultadosEncontrados = filteredPagos.length > 0; // Actualiza la variable
+        } else {
+            console.warn('Ingrese un número válido para buscar.');
+        }
     }
-  }
+}
 
   onPersonInput() {
     const inputValue = this.formPagos.get('personName')?.value;

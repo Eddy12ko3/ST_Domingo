@@ -14,18 +14,24 @@
                         <div class="i"> 
                                    <i class="fas fa-id-card"></i>
                               </div>
-                        <div class="username">
+                        <div class="username" [ngClass]="{'error': formLogin.get('usuario')?.hasError('required') && formLogin.get('usuario')?.touched}">
                             <input type="number" formControlName="usuario">
                             <label >Nº DOCUMENTO</label>
+                            <div class="red" *ngIf="formLogin.get('usuario')?.hasError('required') && formLogin.get('usuario')?.touched">
+                                Campo requerido.
+                              </div>
                         </div>
                     </div>
                     <div class="input-div">
                         <div class="i"> 
                                    <i class="fas fa-lock"></i>
                               </div>
-                        <div class="username">
+                        <div class="username" [ngClass]="{'error': formLogin.get('contraseña')?.hasError('required') && formLogin.get('contraseña')?.touched}">
                             <input type="password" formControlName="contraseña">
                             <label >PASSWORD</label>
+                            <div class="red" *ngIf="formLogin.get('contraseña')?.hasError('required') && formLogin.get('contraseña')?.touched">
+                                Campo requerido.
+                              </div>
                         </div>
                     </div>
                     
