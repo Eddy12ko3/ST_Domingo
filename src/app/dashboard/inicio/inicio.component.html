@@ -67,52 +67,31 @@
             </div>
             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications1">
-                <h2>NOTIFICACIONES</h2>
+                <h2>ASOCIADOS POR RUBRO</h2>
                 <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nº</th>
-                                <th>Nombre</th>
-                                <th>Rubro </th>
-                                <th>Deuda</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Roberto </td>
-                                <td>Frutas </td>
-                                <td>S/300</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Roberto </td>
-                                <td>Frutas </td>
-                                <td>S/300</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Roberto </td>
-                                <td>Frutas </td>
-                                <td>S/300</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Roberto </td>
-                                <td>Frutas </td>
-                                <td>S/300</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Roberto </td>
-                                <td>Frutas </td>
-                                <td>S/300</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="count-por-rubro">
+                        <div *ngFor="let rubro of countPorRubro | keyvalue">
+                          <div class="rubro-item">
+                            <i class="material-icons-sharp">production_quantity_limits</i>
+                            <div class="barra" [style.width]="rubro.value + '%'">
+                              <div class="barra-fondo"></div>
+                            </div>
+                            <div class="etiqueta">
+                              <span class="value">{{ rubro.value | number:'1.0-2' }}%</span>
+                              <span class="key">{{ rubro.key }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                
+                  
+                  
+                  
+                  
+                  
             </div>
-            </div>
+            
         </main>
     </div>
 </body>

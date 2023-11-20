@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../service/controllers/theme.service';
 import { ApiUserService } from 'src/app/service/api/api.user.service';
 import { NotificationService } from 'src/app/service/controllers/notification.service';
+import { CountPorRubroService } from 'src/app/service/CountPorRubro.service';
 
 @Component({
   selector: 'app-inicio',
@@ -24,10 +25,13 @@ export class InicioComponent implements OnInit{
   cantidadLocalesDisponibles = 20;
   porcentajeLocalesDisponibles = 5;
 
+  countPorRubro: Record<string, number> = {}; 
+
   constructor(
     private themeService: ThemeService,
     private userService: ApiUserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private countPorRubroService: CountPorRubroService,
   ) {
     this.themeService.isDarkMode$.subscribe(isDarkMode => {
       this.isDarkTheme = isDarkMode;
@@ -36,6 +40,7 @@ export class InicioComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadUserInfo();
+    this.actualizarCountPorRubro();
   }
 
   // Métodos para el primer gráfico
@@ -94,4 +99,12 @@ export class InicioComponent implements OnInit{
     const datos = this.userService.getUserInfo();
     this.userInfo = JSON.parse(datos.userId) 
   }
+  private actualizarCountPorRubro() {
+    this.countPorRubroService.getCountPorRubro().subscribe((countPorRubro) => {
+      this.countPorRubro = countPorRubro;
+
+      
+    });
+  }
+
 }
