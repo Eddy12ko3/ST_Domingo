@@ -1,10 +1,9 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnDestroy, OnInit} from '@angular/core';
 import { ThemeService } from '../../service/controllers/theme.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiPagosService } from 'src/app/service/api/api.pagos.service';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { DetailPayments } from 'src/interfaces/pagos.get.interface';
 import { DetailPaymentId } from 'src/interfaces/pagos-extend.interface';
 import { PersonId } from 'src/interfaces/persona-extend.interface';
 import { ApiPersonasService } from 'src/app/service/api/api.persona.service';
@@ -16,9 +15,8 @@ import { NotificationService } from 'src/app/service/controllers/notification.se
   styleUrls: ['./pagos.component.css'],
   providers: [DatePipe]
 })
-export class PagosComponent implements OnInit{
-  isDarkTheme: boolean = false;
-
+export class PagosComponent implements OnInit, OnDestroy{
+  isDarkTheme = false;
   formPagos!:FormGroup;
   dataPagos: Array<DetailPaymentId> = new Array<DetailPaymentId>();
   dataPersona: Array<PersonId> = new Array<PersonId>();
@@ -26,9 +24,9 @@ export class PagosComponent implements OnInit{
   suscription?: Subscription;
   showModal = false;
   showModalEdit = false;
-  resultadosEncontrados: boolean = true;
+  resultadosEncontrados = true;
+  selectedPago: any;
   
-
   constructor(
     private themeService: ThemeService, 
     private pagosService: ApiPagosService,
@@ -69,16 +67,15 @@ export class PagosComponent implements OnInit{
     this.formPagos.reset();
     
   }
-  abrirModal() {
+  abrirModal(pago: DetailPaymentId) {
+    this.selectedPago = pago
+    this.selectedPago.datePayment_string = new Date(this.selectedPago.datePayment).toISOString().split('T')[0];
     this.showModalEdit = true;
   }
 
   cerrarModal() {
     this.showModalEdit = false;
   }
-
-
-  
 
   ngOnDestroy(): void {
     this.suscription?.unsubscribe();
@@ -91,14 +88,13 @@ export class PagosComponent implements OnInit{
   obtenerPagos(){
     this.pagosService.obtenerPagos().subscribe((pagos)=>{
       this.dataPagos= pagos;
-      console.log('Datos de Pagos:', this.dataPagos);
+      console.log(this.dataPagos)
     })
   }
 
   obtenerPersona(){
     this.personService.obtenerPersona().subscribe((personas)=>{
       this.dataPersona= personas;
-      console.log(this.dataPersona);
     })
   }
 
@@ -112,8 +108,41 @@ export class PagosComponent implements OnInit{
         next: (value: any) => {
           this.closeModal()
           this.notificationService.success(value.success);
-          this.obtenerPagos();
           this.limpiarFormulario();
+        },  
+        error: (value: any) => {
+          this.notificationService.errorEvent(value);
+        }
+      });
+    }
+  } 
+
+  actualizarPagos(){
+    if(this.formPagos.valid){
+      const pagosId = this.selectedPago?.detailPaymentId
+      this.pagosService.updatePagos(pagosId,{
+        person: this.formPagos.get("person")?.value ?? '',
+        amount: this.formPagos.get("amount")?.value ?? 0,
+        datepayment: this.formPagos.get("datepayment")?.value ?? '',
+      }).subscribe({
+        next: (value: any) => {
+          this.cerrarModal()
+          this.notificationService.success(value.success);
+          this.limpiarFormulario();
+        },
+        error: (value: any) => {
+          this.notificationService.errorEvent(value);
+        }
+      })
+    }
+  }
+
+  eliminarPagos(pagosId: string) {
+    if (confirm("¿Estás seguro de que deseas eliminar a este asociado?")) {
+      this.pagosService.deletePagos(pagosId).subscribe({
+        next: (value: any) => {
+          this.notificationService.success(value.success);
+          
         },
         error: (value: any) => {
           this.notificationService.errorEvent(value);

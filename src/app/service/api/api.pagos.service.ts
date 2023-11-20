@@ -23,8 +23,26 @@ export class ApiPagosService {
         })
       );
     }
+
     public obtenerPagos(): Observable<any>{
       return this.http.get(`${environment.API_REST.URL}/pagos/load`);
     }
+
+    public updatePagos(id: string, pagos: DetailPayment){
+      return this.http.put(`${environment.API_REST.URL}/pagos/update/${id}`, pagos)
+      .pipe(
+        tap(()=> {
+          this._refresh.next(); 
+        })
+      );
+    }
     
+    public deletePagos(id: string){
+      return this.http.delete(`${environment.API_REST.URL}/pagos/delete/${id}`)
+      .pipe(
+        tap(()=> {
+          this._refresh.next(); 
+        })
+      );
+    }
 }

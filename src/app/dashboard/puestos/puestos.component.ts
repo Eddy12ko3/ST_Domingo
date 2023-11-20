@@ -75,7 +75,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
     this.formAsociados.reset();
   }
 
-  abrir(asociado: any) {
+  abrir(asociado: AssociateId) {
     this.selectedAsociado = asociado;
     this.selectedAsociado.persons.date_birth_string = new Date(this.selectedAsociado.persons.date_birth).toISOString().split('T')[0];
     this.showModalEdit = true;
@@ -132,7 +132,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
   actualizarAsociados(){
     if (this.formAsociados.valid){
       const asociadoId = this.selectedAsociado?.associateId;
-      this.asociadosService.updateAsociado(this.selectedAsociado?.associateId,{
+      this.asociadosService.updateAsociado(asociadoId,{
         folio: this.formAsociados.get("folio")?.value ?? 0,
         numDocument: this.formAsociados.get("numDocumento")?.value ?? 0,
         name: this.formAsociados.get("nombre")?.value ?? '',
