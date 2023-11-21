@@ -12,18 +12,18 @@ import { CountPorRubroService } from 'src/app/service/CountPorRubro.service';
 export class InicioComponent implements OnInit{
   isDarkTheme = false; // Estado del tema
   userInfo: any;
+  totalAsociados: number = 0;
+
+
+  maxTotalAsociados: number = 1000;
+  diferenciaAsociados: number = 0;
+  porcentajeDiferencia: number = 0;
+  maxLocalesDisponibles: number = 1000; 
+
   
   // Datos para el primer gráfico
   cantidadTotalSocios = 1000;
   porcentajeTotalSocios = 100;
-  
-  // Datos para el segundo gráfico
-  cantidadAsociados = 100;
-  porcentajeAsociados = 95;
-  
-  // Datos para el tercer gráfico
-  cantidadLocalesDisponibles = 20;
-  porcentajeLocalesDisponibles = 5;
 
   countPorRubro: Record<string, number> = {}; 
 
@@ -57,33 +57,8 @@ export class InicioComponent implements OnInit{
     return this.calculateColor(this.porcentajeTotalSocios);
   }
 
-  // Métodos para el segundo gráfico
-  get dashArrayAsociados(): string {
-    return '283'; // 2 * π * radio
-  }
+  
 
-  get dashOffsetAsociados(): string {
-    const porcentajeDecimal = this.porcentajeAsociados / 100;
-    return String((1 - porcentajeDecimal) * parseFloat(this.dashArrayAsociados));
-  }
-
-  get progressBarColorAsociados(): string {
-    return this.calculateColor(this.porcentajeAsociados);
-  }
-
-  // Métodos para el tercer gráfico
-  get dashArrayLocalesDisponibles(): string {
-    return '283'; // 2 * π * radio
-  }
-
-  get dashOffsetLocalesDisponibles(): string {
-    const porcentajeDecimal = this.porcentajeLocalesDisponibles / 100;
-    return String((1 - porcentajeDecimal) * parseFloat(this.dashArrayLocalesDisponibles));
-  }
-
-  get progressBarColorLocalesDisponibles(): string {
-    return this.calculateColor(this.porcentajeLocalesDisponibles);
-  }
 
   private calculateColor(porcentaje: number): string {
     const targetColor = [71, 245, 193]; // Color deseado #47F5C1
@@ -100,11 +75,35 @@ export class InicioComponent implements OnInit{
     this.userInfo = JSON.parse(datos.userId) 
   }
   private actualizarCountPorRubro() {
-    this.countPorRubroService.getCountPorRubro().subscribe((countPorRubro) => {
+    this.countPorRubroService.getCountPorRubro().subscribe(({ countPorRubro, totalAsociados }) => {
       this.countPorRubro = countPorRubro;
+      this.totalAsociados = totalAsociados || 0;
       
-      
+      this.diferenciaAsociados = this.maxTotalAsociados - this.totalAsociados;
+
+      // Calcular el porcentaje
+      this.porcentajeDiferencia = (this.diferenciaAsociados / this.maxTotalAsociados) * 100;
     });
   }
+  calcularStrokeDasharray(): string {
+    const porcentaje = (this.totalAsociados / this.maxTotalAsociados) * 100;
+    const circunferencia = 2 * Math.PI * 45; // ajusta el radio según tu diseño
+    const longitudSegmento = (porcentaje / 100) * circunferencia;
+    const longitudRestante = circunferencia - longitudSegmento;
+
+    
+  
+    return `${longitudSegmento} ${longitudRestante}`;
+  }
+  calcularStrokeDasharrayLocalesDisponibles(): string {
+    const porcentaje = this.porcentajeDiferencia;
+    const circunferencia = 2 * Math.PI * 45; // ajusta el radio según tu diseño
+    const longitudSegmento = (porcentaje / 100) * circunferencia;
+    const longitudRestante = circunferencia - longitudSegmento;
+  
+    return `${longitudSegmento} ${longitudRestante}`;
+  }
+ 
+  
 
 }

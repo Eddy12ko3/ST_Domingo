@@ -27,9 +27,10 @@ export class CountPorRubroService {
       });
        
 
-      return countPorRubro;
+      return { countPorRubro, totalAsociados };
     }));
   }
 }
+
 
 

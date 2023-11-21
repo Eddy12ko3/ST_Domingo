@@ -5,92 +5,91 @@
             <h1>Dashboard</h1>
             <!--INICIO PAGINA PRINCIPAL USER-->
             <div class="insights">
-                <div class="user">
-                    <span class="material-icons-sharp">person</span>
-                    <div class="middle">
-                        <div class="lef">
-                            <h3>Total Socios</h3>
-                            <h1>{{ cantidadTotalSocios }}</h1>
-                        </div>
-                        <div class="progress-bar-container">
-                            <svg class="progress-svg" viewBox="0 0 100 100">
-                              <circle class="progress-background" cx="50" cy="50" r="45"></circle>
-                              <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayTotalSocios" [style.strokeDashoffset]="dashOffsetTotalSocios" [style.stroke]="progressBarColorTotalSocios"></circle>
-                            </svg>
-                            <div class="progress-label">{{ porcentajeTotalSocios }}%</div>
-                          </div>
-                    </div>
-                    <small class="text-muted">ultimas 24 horas</small>
-                </div>
-                <!--FIN PAGINA PRINCIPAL USER-->
-                <!--INICIO PAGINA PRINCIPAL LOCALES-->
-
-                <div class="busy">
-                    <span class="material-icons-sharp">store</span>
-                    <div class="middle">
+              <div class="user">
+                  <span class="material-icons-sharp">person</span>
+                  <div class="middle">
                       <div class="lef">
-                        <h3>Locales Ocupados</h3>
-                        <h1>{{ cantidadAsociados }}</h1>
+                          <h3>Total Socios</h3>
+                          <h1>{{ cantidadTotalSocios }}</h1>
                       </div>
                       <div class="progress-bar-container">
-                        <svg class="progress-svg" viewBox="0 0 100 100">
-                          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
-                          <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayAsociados" [style.strokeDashoffset]="dashOffsetAsociados" [style.stroke]="progressBarColorAsociados"></circle>
-                        </svg>
-                        <div class="progress-label">{{ porcentajeAsociados.toFixed(0) }}%</div>
-                      </div>
-                    </div>
-                    <small class="text-muted">últimas 24 horas</small>
+                          <svg class="progress-svg" viewBox="0 0 100 100">
+                            <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                            <circle class="progress-bar"cx="50" cy="50" r="45"></circle>
+                          </svg>
+                          <div class="progress-label">{{ porcentajeTotalSocios }}%</div>
+                        </div>
                   </div>
-                  
-                <!--FIN PAGINA PRINCIPAL LOCALES-->
-                <!--INICIO PAGINA PRINCIPAL LOCALES DISPONIBLES-->
+                  <small class="text-muted">ultimas 24 horas</small>
+              </div>
+              <!--FIN PAGINA PRINCIPAL USER-->
+              <!--INICIO PAGINA PRINCIPAL LOCALES-->
 
-                <div class="available">
-                    <span class="material-icons-sharp">store</span>
-                    <div class="middle">
-                        <div class="lef">
-                            <h3>Locales Disponibles</h3>
-                            <h1>{{ cantidadLocalesDisponibles }}</h1>
-                        </div>
-                        <div class="progress-bar-container">
-                            <svg class="progress-svg" viewBox="0 0 100 100">
-                              <circle class="progress-background" cx="50" cy="50" r="45"></circle>
-                              <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="dashArrayLocalesDisponibles" [style.strokeDashoffset]="dashOffsetLocalesDisponibles" [style.stroke]="progressBarColorLocalesDisponibles"></circle>
-                            </svg>
-                            <div class="progress-label">{{ porcentajeLocalesDisponibles.toFixed(0) }}%</div>
-                          </div>
+              <div class="busy">
+                  <span class="material-icons-sharp">store</span>
+                  <div class="middle">
+                    <div class="lef">
+                      <h3>Locales Ocupados</h3>
+                      <h1>{{ totalAsociados }}</h1>
                     </div>
-                    <small class="text-muted">ultimas 24 horas</small>
-                </div>
-                <!--FIN PAGINA PRINCIPAL LOCALES DISPONIBLES-->               
-            </div>
-            
-            
-            <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
-            <div class="notifications1">
-                <h2>ASOCIADOS POR RUBRO</h2>
-                <div class="table-container">
-                    <div class="count-por-rubro">
-                        <div *ngFor="let rubro of countPorRubro | keyvalue">
-                          <div class="rubro-item">
-                            <i class="material-icons-sharp">production_quantity_limits</i>
-                            <div class="barra" [style.width]="rubro.value + '%'">
-                              <div class="barra-fondo"></div>
-                            </div>
-                            <div class="etiqueta">
-                              <span class="value">{{ rubro.value | number:'1.0-2' }}%</span>
-                              <span class="key">{{ rubro.key }}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <small class="text-muted">ultimas 24 horas</small>
-                      
+                    <div class="progress-bar-container">
+                      <svg class="progress-svg" viewBox="0 0 100 100">
+                        <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+      <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="calcularStrokeDasharray()"></circle>
+      
+                      </svg>
+                      <div class="progress-label">{{ (totalAsociados / maxTotalAsociados * 100).toFixed(2) }}%</div>
+                    </div>
+                  </div>
+                  <small class="text-muted">últimas 24 horas</small>
                 </div>
                 
- 
-            </div>
+              <!--FIN PAGINA PRINCIPAL LOCALES-->
+              <!--INICIO PAGINA PRINCIPAL LOCALES DISPONIBLES-->
+
+              <div class="available">
+                  <span class="material-icons-sharp">store</span>
+                  <div class="middle">
+                      <div class="lef">
+                          <h3>Locales Disponibles</h3>
+                          <h1>{{ diferenciaAsociados }}</h1>
+                      </div>
+                      <div class="progress-bar-container">
+                          <svg class="progress-svg" viewBox="0 0 100 100">
+                            <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+      <circle class="progress-bar" cx="50" cy="50" r="45" [style.strokeDasharray]="calcularStrokeDasharrayLocalesDisponibles()"></circle>
+     
+                          </svg>
+                          <div class="progress-label">{{ porcentajeDiferencia.toFixed(2) }}%</div>
+                        </div>
+                  </div>
+                  <small class="text-muted">ultimas 24 horas</small>
+              </div>
+              <!--FIN PAGINA PRINCIPAL LOCALES DISPONIBLES-->               
+          </div>
+
+            <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
+            <div class="notifications1">
+              <h2>ASOCIADOS POR RUBRO</h2>
+              <div class="table-container">
+                  <div class="count-por-rubro">
+                      <div *ngFor="let rubro of countPorRubro | keyvalue">
+                        <div class="rubro-item">
+                          <i class="material-icons-sharp">production_quantity_limits</i>
+                          <div class="barra" [style.width]="rubro.value + '%'">
+                            <div class="barra-fondo"></div>
+                          </div>
+                          <div class="etiqueta">
+                            <span class="value">{{ rubro.value | number:'1.0-2' }}%</span>
+                            <span class="key">{{ rubro.key }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <small class="text-muted">ultimas 24 horas</small>
+                    
+              </div>
+          </div>
             
         </main>
     </div>

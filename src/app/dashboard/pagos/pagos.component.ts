@@ -59,7 +59,6 @@ export class PagosComponent implements OnInit, OnDestroy{
 
   openModal() {
     this.showModal = true;
-    console.log('Abriendo modal');
   }
 
   closeModal() {

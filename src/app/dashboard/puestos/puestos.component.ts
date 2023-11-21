@@ -96,7 +96,6 @@ export class PuestosComponent implements OnInit, OnDestroy {
       this.dataAsociados = asociados;
       // Inicializar resultadosBusqueda con la lista completa al principio
       this.resultadosBusqueda = [...this.dataAsociados];
-      console.log(this.dataAsociados);
       this.totalAsociados = this.dataAsociados.length;
     });
   }
