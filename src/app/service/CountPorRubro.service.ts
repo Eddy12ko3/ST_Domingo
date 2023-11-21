@@ -25,6 +25,7 @@ export class CountPorRubroService {
       Object.keys(countPorRubro).forEach((rubro) => {
         countPorRubro[rubro] = (countPorRubro[rubro] / totalAsociados) * 100;
       });
+       
 
       return countPorRubro;
     }));

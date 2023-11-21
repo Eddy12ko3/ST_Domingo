@@ -28,6 +28,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
   busquedaApellido = '';
   resultadosBusqueda: any[] = [];
   selectedAsociado: any;
+  totalAsociados: number = 0;
 
   constructor(private themeService: ThemeService,
     private asociadosService: ApiAsociadosService,
@@ -96,6 +97,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
       // Inicializar resultadosBusqueda con la lista completa al principio
       this.resultadosBusqueda = [...this.dataAsociados];
       console.log(this.dataAsociados);
+      this.totalAsociados = this.dataAsociados.length;
     });
   }
 

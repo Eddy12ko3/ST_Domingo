@@ -59,10 +59,6 @@
                                 <span class="btnText">Limpiar</span>
                             </button>
 
-                            <button class="registerBtn" (click)="openModal()">
-                                <span class="material-icons-sharp">person_add</span>
-                                <span class="btnText" >Registrar</span>
-                            </button>
 
                         </div>
                     </div>
@@ -71,8 +67,15 @@
             </div>
 
              <div class="notifications1">
-                <h2>LISTAR SOCIOS</h2>
+              
+                <h2 >LISTAR SOCIOS</h2>
                 <div class="table-container">
+                  <div class="container_button_registrar" >
+                    <button class="registerBtn" (click)="openModal()" >
+                      <span class="material-icons-sharp">person_add</span>
+                      <span class="btnText" >Registrar</span>
+                  </button>
+                  </div>
                 <table>
                     <thead>
                         <tr>
@@ -118,6 +121,7 @@
             </div>
 
             </div>
+            
             <div class="modal-bg" *ngIf="showModal">
             <div class="modal">
                 <div class="modal_cerrar" (click)="closeModal()">

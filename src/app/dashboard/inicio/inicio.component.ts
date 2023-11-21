@@ -102,7 +102,7 @@ export class InicioComponent implements OnInit{
   private actualizarCountPorRubro() {
     this.countPorRubroService.getCountPorRubro().subscribe((countPorRubro) => {
       this.countPorRubro = countPorRubro;
-
+      
       
     });
   }
