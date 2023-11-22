@@ -26,9 +26,9 @@ export class PagosComponent implements OnInit, OnDestroy{
   showModalEdit = false;
   resultadosEncontrados = true;
   selectedPago: any;
-  
+
   constructor(
-    private themeService: ThemeService, 
+    private themeService: ThemeService,
     private pagosService: ApiPagosService,
     private formGroup: FormBuilder ,
     private personService: ApiPersonasService,
@@ -50,6 +50,7 @@ export class PagosComponent implements OnInit, OnDestroy{
     });
     this.buscarForm = this.formGroup.group({
       amountToSearch: ['', [Validators.required, Validators.maxLength(20)]],
+      nameToSearch: ['', [Validators.maxLength(50)]],
     });
     this.suscription = this.pagosService.refresh.subscribe(() =>{
       this.obtenerPagos();
@@ -64,7 +65,7 @@ export class PagosComponent implements OnInit, OnDestroy{
   closeModal() {
     this.showModal = false;
     this.formPagos.reset();
-    
+
   }
   abrirModal(pago: DetailPaymentId) {
     this.selectedPago = pago
@@ -108,13 +109,13 @@ export class PagosComponent implements OnInit, OnDestroy{
           this.closeModal()
           this.notificationService.success(value.success);
           this.limpiarFormulario();
-        },  
+        },
         error: (value: any) => {
           this.notificationService.errorEvent(value);
         }
       });
     }
-  } 
+  }
 
   actualizarPagos(){
     if(this.formPagos.valid){
@@ -141,7 +142,7 @@ export class PagosComponent implements OnInit, OnDestroy{
       this.pagosService.deletePagos(pagosId).subscribe({
         next: (value: any) => {
           this.notificationService.success(value.success);
-          
+
         },
         error: (value: any) => {
           this.notificationService.errorEvent(value);
@@ -152,29 +153,41 @@ export class PagosComponent implements OnInit, OnDestroy{
 
   limpiarFormulario() {
     this.buscarForm.get('amountToSearch')?.setValue('');
+    this.buscarForm.get('nameToSearch')?.setValue('');
     this.obtenerPagos();
     this.formPagos.reset();
-    this.resultadosEncontrados = true;
+
   }
 
   buscarPorMonto() {
     const amountToSearch = this.buscarForm.get('amountToSearch')?.value;
+    const nameToSearch = this.buscarForm.get('nameToSearch')?.value;
 
+    let filteredPagos = this.dataPagos;
+
+    // Filtrar por monto
     if (amountToSearch !== null && amountToSearch !== undefined) {
-        const amountToSearchNumber = parseFloat(amountToSearch);
+      const amountToSearchNumber = parseFloat(amountToSearch);
 
-        if (!isNaN(amountToSearchNumber)) {
-            const filteredPagos = this.dataPagos.filter(
-                (pago) => Math.abs(pago.amount - amountToSearchNumber) < 0.01
-            );
-
-            this.dataPagos = filteredPagos;
-            this.resultadosEncontrados = filteredPagos.length > 0; // Actualiza la variable
-        } else {
-            console.warn('Ingrese un número válido para buscar.');
-        }
+      if (!isNaN(amountToSearchNumber)) {
+        filteredPagos = filteredPagos.filter(
+          (pago) => Math.abs(pago.amount - amountToSearchNumber) < 0.01
+        );
+      } else {
+        console.warn('Ingrese un número válido para buscar por monto.');
+      }
     }
-}
+
+    // Filtrar por nombre
+    if (nameToSearch && nameToSearch.trim() !== '') {
+      filteredPagos = filteredPagos.filter(
+        (pago) => (pago.person.name + ' ' + pago.person.lastname).toLowerCase().includes(nameToSearch.toLowerCase())
+      );
+    }
+
+    this.dataPagos = filteredPagos;
+    this.resultadosEncontrados = filteredPagos.length > 0;
+  }
 
   onPersonInput() {
     const inputValue = this.formPagos.get('personName')?.value;

@@ -8,7 +8,7 @@
             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
 
             <!-- REGISTRAR PAGOS  -->
-            
+
             <div class="notifications">
             <h2>BUSCAR PAGO</h2>
                 <form [formGroup]="buscarForm" (ngSubmit)="buscarPorMonto()">
@@ -16,6 +16,14 @@
                         <div class="input-field" >
                             <label for="">MONTO</label>
                             <input type="number" placeholder="Ingresar Monto" required formControlName="amountToSearch">
+                        </div>
+                        <div class="input-field-modal">
+                          <label for="person">NOMBRE</label>
+                          <input type="text" id="person" list="persons" required formControlName="nameToSearch" (input)="onPersonInput()">
+                          <datalist id="persons" class="details">
+
+                            <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
+                          </datalist>
                         </div>
 
                         <div class="container_button_socios">
@@ -46,9 +54,9 @@
                   <span class="btnText" >Registrar</span>
                 </button>
                 </div>
-                <div *ngIf="!resultadosEncontrados">
-                    <p>No hay resultados.</p>
-                </div>
+                <div *ngIf="dataPagos && dataPagos.length === 0">
+                  <p>No hay resultados.</p>
+              </div>
                 <table *ngIf="dataPagos && dataPagos.length > 0">
                 <thead>
                     <tr >
@@ -74,7 +82,7 @@
                             </button>
                         </td>
                     </tr>
-                   
+
                 </tbody>
             </table>
             </div>
@@ -99,11 +107,11 @@
                             <div class="input-field-modal" [class.error]="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
                                 <label for="person">NOMBRE</label>
                                 <input type="text" id="person" list="persons" required formControlName="personName" (input)="onPersonInput()">
-                              
+
                                 <datalist id="persons" class="details">
                                   <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
                                 </datalist>
-                              
+
                                 <!-- Mensaje de error -->
                                 <div *ngIf="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
                                   * Este campo no puede estar vacío
@@ -116,7 +124,7 @@
                                 <div *ngIf="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
                                     * Este campo no puede estar vacío
                                 </div>
-                            </div>                           
+                            </div>
                             </div>
                         <div class="container_button_modal">
                           <button type="submit" [disabled]="!formPagos.valid"   class="guardarBtn" >
@@ -134,7 +142,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- REGISTRAR PAGOS FIN  -->
     </main>
     <div class="modal-bg" *ngIf="showModalEdit">
@@ -158,11 +166,11 @@
                     <div class="input-field-modal" [class.error]="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
                         <label for="person">NOMBRE</label>
                         <input type="text" id="person" list="persons" required formControlName="personName" [ngModel]="selectedPago?.person?.name" (input)="onPersonInput()">
-                      
+
                         <datalist id="persons" class="details">
                           <option *ngFor="let persona of dataPersona" [value]="persona.name + ' ' + persona.lastname"></option>
                         </datalist>
-                      
+
                         <!-- Mensaje de error -->
                         <div *ngIf="formPagos.get('person')?.hasError('required') && formPagos.get('person')?.touched">
                           * Este campo no puede estar vacío
@@ -171,11 +179,11 @@
 
                     <div class="input-field-modal" [class.error]="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
                         <label for="">MONTO</label>
-                        <input type="number" placeholder="Ingresar Monto" required formControlName="amount" [ngModel]="selectedPago?.amount"> 
+                        <input type="number" placeholder="Ingresar Monto" required formControlName="amount" [ngModel]="selectedPago?.amount">
                         <div *ngIf="formPagos.get('amount')?.hasError('required') && formPagos.get('amount')?.touched">
                             * Este campo no puede estar vacío
                         </div>
-                    </div>                           
+                    </div>
                     </div>
                 <div class="container_button_modal">
                   <button type="submit" [disabled]="!formPagos.valid"   class="guardarBtn" >
