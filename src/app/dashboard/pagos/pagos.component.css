@@ -620,4 +620,40 @@ input[type="number"]::-webkit-outer-spin-button {
     border-color: red;  /* Cambia el color del borde a rojo */
     color: red;        /* Cambia el color del texto a rojo */
   }
+
+  .container_button_registrar button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    max-width: 100px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 0 1600px;
+    margin-bottom: 15px;
+    transition: all 0.3s linear;
+    cursor: pointer;
+
+ }
+
+  .container_lista{
+    display: flex; 
+    justify-content: space-between;
+  }
+  
+ .registerBtn {
+    background-color: var(--color-warning);
+    color: white;
+    border: 1px solid var(--color-warning);
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+}
+
+.registerBtn:hover {
+    background-color: rgb(241, 167, 6);
+}
   

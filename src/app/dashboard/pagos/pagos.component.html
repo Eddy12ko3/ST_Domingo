@@ -29,10 +29,6 @@
                                 <span class="btnText">Limpiar</span>
                             </button>
 
-                            <button class="registerBtn" (click)="openModal()">
-                                <span class="material-icons-sharp">payments</span>
-                                <span class="btnText" >Registrar</span>
-                            </button>
 
                         </div>
                     </div>
@@ -44,6 +40,12 @@
         <div class="notifications1">
             <h2>HISTORIAL DE PAGOS </h2>
             <div class="table-container">
+              <div class="container_button_registrar" >
+                <button class="registerBtn" (click)="openModal()">
+                  <span class="material-icons-sharp">payments</span>
+                  <span class="btnText" >Registrar</span>
+                </button>
+                </div>
                 <div *ngIf="!resultadosEncontrados">
                     <p>No hay resultados.</p>
                 </div>

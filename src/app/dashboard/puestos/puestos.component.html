@@ -281,10 +281,6 @@
                   </div>
 
                     
-                    <div class="input-field-modal">
-                      <label>CONDUCIDO</label>
-                      <input type="text" placeholder="Conducido por" required>
-                    </div>
                     <div class="input-field-modal" [class.error]="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
                       <label>CODE</label>
                       <input type="text" placeholder="Ingresar Code" required formControlName="code">
@@ -454,10 +450,6 @@
                         <div *ngIf="formAsociados.get('area')?.hasError('required') && formAsociados.get('area')?.touched">
                           *este campo no puede estar vacío
                         </div>
-                    </div>
-                    <div class="input-field-modal">
-                      <label>CONDUCIDO</label>
-                      <input type="text" placeholder="Conducido por" required>
                     </div>
                     <div class="input-field-modal" [class.error]="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
                       <label>CODE</label>

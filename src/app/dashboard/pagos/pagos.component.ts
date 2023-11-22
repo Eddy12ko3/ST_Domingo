@@ -137,7 +137,7 @@ export class PagosComponent implements OnInit, OnDestroy{
   }
 
   eliminarPagos(pagosId: string) {
-    if (confirm("¿Estás seguro de que deseas eliminar a este asociado?")) {
+    if (confirm("¿Estás seguro de que deseas eliminar a este registro de pago?")) {
       this.pagosService.deletePagos(pagosId).subscribe({
         next: (value: any) => {
           this.notificationService.success(value.success);
