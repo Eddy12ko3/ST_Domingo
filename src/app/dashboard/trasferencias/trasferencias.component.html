@@ -1,13 +1,9 @@
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp">
-
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 
 <body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
-
     <div class="container">
-
         <main>
-                    
             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
                 <h2>GESTION DE TRASFERENCIAS</h2>
@@ -15,30 +11,30 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>DNI</label>
-                            <input type="number" placeholder="Ingresar Dni" required>
+                            <input type="number" placeholder="Ingresar Dni" required />
                         </div>
                         <div class="input-field">
                             <label for="rubro">RUBRO</label>
-                            <input type="text" id="rubro" name="rubro" list="rubros" required>
+                            <input type="text" id="rubro" name="rubro" list="rubros" required />
                         </div>
-                        
+
                         <datalist id="rubros" class="details">
-                            <option value="Abarrotes">
-                            <option value="Bazar">
-                            <option value="Carnes">
-                            <option value="Comedores">
-                            <option value="Embutidos">
-                            <option value="Frutas">
-                            <option value="Golosinas">
-                            <option value="Jugueria">
-                            <option value="Mayorista">
-                            <option value="Miscaleno">
-                            <option value="Pasamaneria">
-                            <option value="Pescado">
-                            <option value="Pollo">
-                            <option value="Porcino">
-                            <option value="Tiendas">
-                            <option value="Tuberculos">
+                            <option value="Abarrotes"></option>
+                            <option value="Bazar"></option>
+                            <option value="Carnes"></option>
+                            <option value="Comedores"></option>
+                            <option value="Embutidos"></option>
+                            <option value="Frutas"></option>
+                            <option value="Golosinas"></option>
+                            <option value="Jugueria"></option>
+                            <option value="Mayorista"></option>
+                            <option value="Miscaleno"></option>
+                            <option value="Pasamaneria"></option>
+                            <option value="Pescado"></option>
+                            <option value="Pollo"></option>
+                            <option value="Porcino"></option>
+                            <option value="Tiendas"></option>
+                            <option value="Tuberculos"></option>
                         </datalist>
 
                         <div class="container_button">
@@ -51,174 +47,169 @@
                                 <span class="btnText">Limpiar</span>
                             </button>
                         </div>
-                        
                     </div>
-                    
                 </form>
             </div>
             <!-- RESULTADOS TRASFERENCIAS  -->
             <div class="notifications1">
                 <h2>RESULTADOS DE BUSQUEDA</h2>
-            
 
                 <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Fecha de Pago</th>
-                            <th>Monto</th>
-                            <th>Rubro</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Roberto </td>
-                            <td>Gomez Gomez </td>
-                            <td>17/09/2023</td>
-                            <td>S/540</td>
-                            <td>Comedores</td>
-                            <td>
-                                <button class="confirmBtn" >
-                                    <i class="material-icons-sharp">done</i>
-                                </button>
-                                <button class="rejectBtn">
-                                    <i class="material-icons-sharp">close</i>
-                                </button>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de Pago</th>
+                                <th>Monto</th>
+                                <th>Rubro</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Roberto</td>
+                                <td>Gomez Gomez</td>
+                                <td>17/09/2023</td>
+                                <td>S/540</td>
+                                <td>Comedores</td>
+                                <td>
+                                    <button class="confirmBtn">
+                                        <i class="material-icons-sharp">done</i>
+                                    </button>
+                                    <button class="rejectBtn">
+                                        <i class="material-icons-sharp">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            </div>
-            
 
             <!-- SOLICITUDES DE TRASFERENCIAS  -->
 
             <div class="notifications1">
-            <h2>SOLICITUDES DE TRASFERENCIAS</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Socio Socilitante</th>
-                            <th>Dni </th>
-                            <th>Local Actual</th>
-                            <th>Local Destino</th>
-                            <th>Estado Solicitud</th>
-                            <th>Metros</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Roberto</td>
-                            <td>24209121 </td>
-                            <td>A - 19 Y 20 </td>
-                            <td>I - 49</td>
-                            <td class="approved" style="color: green">Aprobada</td>
-                            <td>9 mts</td>
-                        </tr>
-                        <tr>
-                            <td>Giovana</td>
-                            <td>24209121 </td>
-                            <td>A - 19 Y 22 </td>
-                            <td>I - 44</td>
-                            <td class="pending" style="color: orange" >Pendiente</td>
-                            <td>10 mts</td>
-                        </tr>
-                        <tr>
-                            <td>Roberto</td>
-                            <td>24209121 </td>
-                            <td>1A - 16 Y 20 </td>
-                            <td>A - 49</td>
-                            <td class="rejectd" style="color: red">Rechazada</td>
-                            <td>20mts</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <h2>SOLICITUDES DE TRASFERENCIAS</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Socio Socilitante</th>
+                                <th>Dni</th>
+                                <th>Local Actual</th>
+                                <th>Local Destino</th>
+                                <th>Estado Solicitud</th>
+                                <th>Metros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Roberto</td>
+                                <td>24209121</td>
+                                <td>A - 19 Y 20</td>
+                                <td>I - 49</td>
+                                <td class="approved" style="color: green">Aprobada</td>
+                                <td>9 mts</td>
+                            </tr>
+                            <tr>
+                                <td>Giovana</td>
+                                <td>24209121</td>
+                                <td>A - 19 Y 22</td>
+                                <td>I - 44</td>
+                                <td class="pending" style="color: orange">Pendiente</td>
+                                <td>10 mts</td>
+                            </tr>
+                            <tr>
+                                <td>Roberto</td>
+                                <td>24209121</td>
+                                <td>1A - 16 Y 20</td>
+                                <td>A - 49</td>
+                                <td class="rejectd" style="color: red">Rechazada</td>
+                                <td>20mts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- TRASFERENCIAS COMPLETADAS  -->
             <div class="notifications1">
-            <h2>TRASFERENCIAS COMPLETAS</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>Fecha </th>
-                            <th>Adquiriente</th>
-                            <th>Puesto</th>
-                            <th>Vendedor</th>
-                            <th>Metros</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>15/02/2023 </td>
-                            <td>FLORES HUAMAN MELIA YRENE </td>
-                            <td>I - 49</td>
-                            <td>MEDINA MEDINA JUSTINA HAYDEE</td>
-                            <td>9 mts</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>15/02/2023 </td>
-                            <td>INJANTE DE LA CRUZ PAULO DANIEL </td>
-                            <td>I - 44</td>
-                            <td>PILLPE CHIPANA TIMOTEA</td>
-                            <td>10 mts</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>15/02/2023 </td>
-                            <td>MEDINA MEDINA NANCY YSABEL </td>
-                            <td>A - 49</td>
-                            <td>DE LA CRUZ RAMOS JOSE</td>
-                            <td>20mts</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>15/02/2023 </td>
-                            <td>LOPEZ LOPEZ SUSANA FIORELLA </td>
-                            <td>A - 49</td>
-                            <td>HERNANDEZ HERNANDEZ WILLIANS</td>
-                            <td>16mts</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>15/02/2023 </td>
-                            <td>SOLAR ORTIZ ROXANA MARIA </td>
-                            <td>A - 49</td>
-                            <td>CUEVA DE LA CRUZ URSULA</td>
-                            <td>5mts</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>15/02/2023 </td>
-                            <td>LOPEZ HERRERA JOSE PABLO </td>
-                            <td>A - 49</td>
-                            <td>PACHECO SALAZAR MIGUEL</td>
-                            <td>10mts</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>15/02/2023 </td>
-                            <td>MEDINA GONZALES CRISTHIAN  </td>
-                            <td>A - 49</td>
-                            <td>HERNADEZ QUISPE ORLANDO</td>
-                            <td>15mts</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2>TRASFERENCIAS COMPLETAS</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Fecha</th>
+                                <th>Adquiriente</th>
+                                <th>Puesto</th>
+                                <th>Vendedor</th>
+                                <th>Metros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>15/02/2023</td>
+                                <td>FLORES HUAMAN MELIA YRENE</td>
+                                <td>I - 49</td>
+                                <td>MEDINA MEDINA JUSTINA HAYDEE</td>
+                                <td>9 mts</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>15/02/2023</td>
+                                <td>INJANTE DE LA CRUZ PAULO DANIEL</td>
+                                <td>I - 44</td>
+                                <td>PILLPE CHIPANA TIMOTEA</td>
+                                <td>10 mts</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>15/02/2023</td>
+                                <td>MEDINA MEDINA NANCY YSABEL</td>
+                                <td>A - 49</td>
+                                <td>DE LA CRUZ RAMOS JOSE</td>
+                                <td>20mts</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>15/02/2023</td>
+                                <td>LOPEZ LOPEZ SUSANA FIORELLA</td>
+                                <td>A - 49</td>
+                                <td>HERNANDEZ HERNANDEZ WILLIANS</td>
+                                <td>16mts</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>15/02/2023</td>
+                                <td>SOLAR ORTIZ ROXANA MARIA</td>
+                                <td>A - 49</td>
+                                <td>CUEVA DE LA CRUZ URSULA</td>
+                                <td>5mts</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>15/02/2023</td>
+                                <td>LOPEZ HERRERA JOSE PABLO</td>
+                                <td>A - 49</td>
+                                <td>PACHECO SALAZAR MIGUEL</td>
+                                <td>10mts</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>15/02/2023</td>
+                                <td>MEDINA GONZALES CRISTHIAN</td>
+                                <td>A - 49</td>
+                                <td>HERNADEZ QUISPE ORLANDO</td>
+                                <td>15mts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            </div>
-            <br>
+            <br />
         </main>
     </div>
 </body>

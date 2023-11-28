@@ -1,52 +1,51 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+<link
+	href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+	rel="stylesheet"
+	rel="stylesheet" />
 
-        <nav class="nav-bar"  [ngClass]="{ 'dark-theme': isDarkTheme }" >
-            <div class="nav-bar"  >
-                <div class="logo">
-                    <img src="assets/logo/logo.png" alt="">
-                    <h2>ST <span class="danger">DOMINGO</span> </h2>
-                </div>
+<nav class="nav-bar" [ngClass]="{ 'dark-theme': isDarkTheme }">
+	<div class="nav-bar">
+		<div class="logo">
+			<img src="assets/logo/logo.png" alt="" />
+			<h2>ST <span class="danger">DOMINGO</span></h2>
+		</div>
 
-                <div class="menu">
-                    <ul class="nav-links">
-                        <li><a routerLink="/dashboard/inicio">Inicio</a></li>
-                        <li><a routerLink="/dashboard/reportes">Reportes</a></li>
-                        <li><a routerLink="/dashboard/puestos">Puestos</a></li>
-                        <li><a routerLink="/dashboard/pagos">Pagos</a></li>
+		<div class="menu">
+			<ul class="nav-links">
+				<li><a routerLink="/dashboard/inicio">Inicio</a></li>
+				<li><a routerLink="/dashboard/reportes">Reportes</a></li>
+				<li><a routerLink="/dashboard/puestos">Puestos</a></li>
+				<li><a routerLink="/dashboard/pagos">Pagos</a></li>
+			</ul>
+		</div>
 
-
-                    </ul>
-                </div>
-
-                <div class="darkLight-searchBox"  >
-                    <div class="dark-light"  (click)="toggleTheme()"  >
-                        <i class="bx" [class.bx-moon]="isMoonIcon" [class.bx-sun]="!isMoonIcon"></i>
-                    </div>
-                    <div class="profile" *ngIf="userInfo">
-                        <div class="info">
-                            <p><span class="danger">{{ userInfo.username + " " + userInfo.userlastname }}</span></p>
-                            <small class="text-muted">{{ userInfo.user }} </small>
-                        </div>
-                        <div class="profile-photo">
-                            <img src="assets/perfil/perfil.png" alt="">
-                        </div>
-                    </div>
-                    <div class="menu">
-                        <ul class="nav-links">
-                            <li><a href="#" (click)="logout()"><span class="material-icons-sharp">logout</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </nav>
-
-
-
-
-
+		<div class="darkLight-searchBox">
+			<div class="dark-light" (click)="toggleTheme()">
+				<i class="bx" [class.bx-moon]="isMoonIcon" [class.bx-sun]="!isMoonIcon"></i>
+			</div>
+			<div class="profile" *ngIf="userInfo">
+				<div class="info">
+					<p>
+						<span class="danger">{{
+							userInfo.username + ' ' + userInfo.userlastname
+						}}</span>
+					</p>
+					<small class="text-muted">{{ userInfo.user }} </small>
+				</div>
+				<div class="profile-photo">
+					<img src="assets/perfil/perfil.png" alt="" />
+				</div>
+			</div>
+			<div class="menu">
+				<ul class="nav-links">
+					<li>
+						<a href="#" (click)="logout()"
+							><span class="material-icons-sharp">logout</span></a
+						>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>

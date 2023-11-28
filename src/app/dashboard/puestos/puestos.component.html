@@ -1,482 +1,898 @@
-
 <body [ngClass]="{ 'dark-theme-variables': isDarkTheme }">
     <div class="container">
-
         <!--INICIO PAGINA PRINCIPAL-->
 
         <main>
-
             <!-- PAGINA PRINCIPAL NOTIFICACIONES-->
             <div class="notifications">
                 <h2>BUSCAR SOCIO</h2>
                 <form (ngSubmit)="buscarAsociados()">
                     <div class="fields">
-                        <div class="input-field" >
-                            <label >DNI</label>
-                            <input [(ngModel)]="busquedaDni"  name="busquedaDni" type="number" placeholder="Ingresar Dni" required>
+                        <div class="input-field">
+                            <label>DNI</label>
+                            <input
+                                [(ngModel)]="busquedaDni"
+                                name="busquedaDni"
+                                type="number"
+                                placeholder="Ingresar Dni"
+                                required />
                         </div>
 
                         <div class="input-field">
                             <label for="rubro">RUBRO</label>
-                            <input [(ngModel)]="busquedaRubro"  type="text" id="rubro" name="rubro" list="rubros" required >
+                            <input
+                                [(ngModel)]="busquedaRubro"
+                                type="text"
+                                id="rubro"
+                                name="rubro"
+                                list="rubros"
+                                required />
                         </div>
 
                         <datalist id="rubros" class="details">
-                            <option value="Abarrotes">
-                            <option value="Bazar">
-                            <option value="Carnes">
-                            <option value="Comedores">
-                            <option value="Embutidos">
-                            <option value="Frutas">
-                            <option value="Golosinas">
-                            <option value="Jugueria">
-                            <option value="Mayorista">
-                            <option value="Miscaleno">
-                            <option value="Pasamaneria">
-                            <option value="Pescado">
-                            <option value="Pollo">
-                            <option value="Porcino">
-                            <option value="Tiendas">
-                            <option value="Tuberculos">
+                            <option value="Abarrotes"></option>
+                            <option value="Bazar"></option>
+                            <option value="Carnes"></option>
+                            <option value="Comedores"></option>
+                            <option value="Embutidos"></option>
+                            <option value="Frutas"></option>
+                            <option value="Golosinas"></option>
+                            <option value="Jugueria"></option>
+                            <option value="Mayorista"></option>
+                            <option value="Miscaleno"></option>
+                            <option value="Pasamaneria"></option>
+                            <option value="Pescado"></option>
+                            <option value="Pollo"></option>
+                            <option value="Porcino"></option>
+                            <option value="Tiendas"></option>
+                            <option value="Tuberculos"></option>
                         </datalist>
 
-                         <div class="input-field">
+                        <div class="input-field">
                             <label for="">Nombre</label>
-                            <input [(ngModel)]="busquedaNombre" name="busquedaNombre" type="text" placeholder="Ingresar Nombre" required>
+                            <input
+                                [(ngModel)]="busquedaNombre"
+                                name="busquedaNombre"
+                                type="text"
+                                placeholder="Ingresar Nombre"
+                                required />
                         </div>
                         <div class="input-field">
-                          <label for="">Apellido</label>
-                          <input [(ngModel)]="busquedaApellido" name="busquedaApellido" type="text" placeholder="Ingresar Apellido" required>
-                      </div>
+                            <label for="">Apellido</label>
+                            <input
+                                [(ngModel)]="busquedaApellido"
+                                name="busquedaApellido"
+                                type="text"
+                                placeholder="Ingresar Apellido"
+                                required />
+                        </div>
                         <div class="container_button_socios">
                             <button class="guardarBtn" (click)="buscarAsociados()">
-                                <span class="material-icons-sharp" >search</span>
+                                <span class="material-icons-sharp">search</span>
                                 <span class="btnText">Buscar</span>
                             </button>
 
-                            <button class="borrarBtn" (click)="limpiarBusqueda()" >
+                            <button class="borrarBtn" (click)="limpiarBusqueda()">
                                 <span class="material-icons-sharp">delete_forever</span>
                                 <span class="btnText">Limpiar</span>
                             </button>
-
-
                         </div>
                     </div>
-
                 </form>
             </div>
 
-             <div class="notifications1">
-              
-                <h2 >LISTAR SOCIOS</h2>
+            <div class="notifications1">
+                <h2>LISTAR SOCIOS</h2>
                 <div class="table-container">
-                  <div class="container_button_registrar" >
-                    <button class="registerBtn" (click)="openModal()" >
-                      <span class="material-icons-sharp">person_add</span>
-                      <span class="btnText" >Registrar</span>
-                  </button>
-                  </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Dni </th>
-                            <th>Celular</th>
-                            <th>Rubro</th>
-                            <th>Sector</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                      <ng-container *ngIf="resultadosBusqueda.length > 0; else noResultados">
-                        <tr *ngFor="let asociado of resultadosBusqueda.length > 0 ? resultadosBusqueda : dataAsociados; let i = index">
-                          <td>{{i + 1 }}</td>
-                          <td>{{ asociado.persons.name }}</td>
-                          <td>{{ asociado.persons.lastname }}</td>
-                          <td>{{ asociado.numDocument.numDocument }}</td>
-                          <td>{{ asociado.persons.cellPhones[0]?.cellNumber || '' }}</td>
-                          <td>{{ asociado.persons.stands[0]?.rubro?.nameField || '' }}</td>
-                          <td>{{ asociado.persons.stands[0]?.sector?.code || '' }}</td>
-                            <td>
-                                <button class="confirmBtn" (click)="abrir(asociado)" >
-                                    <i class="material-icons-sharp">edit</i>
-                                </button>
-                                <button class="rejectBtn" (click)="eliminarAsociado(asociado.associateId)">
-                                    <i class="material-icons-sharp">delete</i>
-                                </button>
-                            </td>
-                        </tr>
-                      </ng-container>
-                        <ng-template #noResultados>
-                          <tr *ngIf="busquedaDni || busquedaRubro || busquedaNombre || busquedaApellido">
-
-                              <td colspan="8">No se encontraron resultados de búsqueda.</td>
-                          </tr>
-                      </ng-template>
-                    </tbody>
-
-                </table>
-            </div>
-
-            </div>
-            
-            <div class="modal-bg" *ngIf="showModal">
-            <div class="modal">
-                <div class="modal_cerrar" (click)="closeModal()">
-                  <span>x</span>
+                    <div class="container_button_registrar">
+                        <button class="registerBtn" (click)="openModal()">
+                            <span class="material-icons-sharp">person_add</span>
+                            <span class="btnText">Registrar</span>
+                        </button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Dni</th>
+                                <th>Celular</th>
+                                <th>Rubro</th>
+                                <th>Sector</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="resultadosBusqueda.length > 0; else noResultados">
+                                <tr
+                                    *ngFor="
+                                        let asociado of resultadosBusqueda.length > 0
+                                            ? resultadosBusqueda
+                                            : dataAsociados;
+                                        let i = index
+                                    ">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ asociado.persons.name }}</td>
+                                    <td>{{ asociado.persons.lastname }}</td>
+                                    <td>{{ asociado.numDocument.numDocument }}</td>
+                                    <td>{{ asociado.persons.cellPhones[0]?.cellNumber || '' }}</td>
+                                    <td>
+                                        {{ asociado.persons.stands[0]?.rubro?.nameField || '' }}
+                                    </td>
+                                    <td>{{ asociado.persons.stands[0]?.sector?.code || '' }}</td>
+                                    <td>
+                                        <button class="confirmBtn" (click)="abrir(asociado)">
+                                            <i class="material-icons-sharp">edit</i>
+                                        </button>
+                                        <button
+                                            class="rejectBtn"
+                                            (click)="eliminarAsociado(asociado.associateId)">
+                                            <i class="material-icons-sharp">delete</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noResultados>
+                                <tr
+                                    *ngIf="
+                                        busquedaDni ||
+                                        busquedaRubro ||
+                                        busquedaNombre ||
+                                        busquedaApellido
+                                    ">
+                                    <td colspan="8">No se encontraron resultados de búsqueda.</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal_mensaje">
-                  <h2>REGISTRO DE ASOCIADO</h2>
-                  <!--<div class="upload">
+            </div>
+
+            <div class="modal-bg" *ngIf="showModal">
+                <div class="modal">
+                    <div class="modal_cerrar" (click)="closeModal()">
+                        <span>x</span>
+                    </div>
+                    <div class="modal_mensaje">
+                        <h2>REGISTRO DE ASOCIADO</h2>
+                        <!--<div class="upload">
                     <img [src]="imageUrl" width="100" height="100" alt="">
                     <div class="round">
                       <input type="file" (change)="onFileSelected($event)">
                       <i class="fa fa-camera" style="color: #fff"></i>
                     </div>
                   </div>-->
-                  <form [formGroup]="formAsociados" (ngSubmit)="registrarAsociados()">
-                    <div class="input-field-modal">
+                        <form [formGroup]="formAsociados" (ngSubmit)="registrarAsociados()">
+                            <div class="input-field-modal">
+                                <div class="fields-modal">
+                                    <div
+                                        class="input-field-modal"
+                                        [ngClass]="{
+                                            error:
+                                                formAsociados.get('folio')?.hasError('minlength') &&
+                                                formAsociados.get('folio')?.touched
+                                        }">
+                                        <label>FOLIO</label>
+                                        <input
+                                            type="number"
+                                            placeholder="Ingresar # Folio"
+                                            required
+                                            formControlName="folio"
+                                            (input)="validateFolioLength()" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados.get('folio')?.hasError('minlength') &&
+                                                formAsociados.get('folio')?.touched
+                                            ">
+                                            Debe ingresar al menos 6 dígitos.
+                                        </div>
+                                    </div>
 
-                      <div class="fields-modal">
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('nombre')?.hasError('minlength') &&
+                                            formAsociados.get('nombre')?.touched
+                                        ">
+                                        <label>NOMBRE</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Nombre"
+                                            required
+                                            formControlName="nombre" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('nombre')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('nombre')?.touched
+                                            ">
+                                            *este campo no puede estar vacio
+                                        </div>
+                                    </div>
 
-                        <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('folio')?.hasError('minlength') && formAsociados.get('folio')?.touched}">
-                          <label>FOLIO</label>
-                          <input type="number" placeholder="Ingresar # Folio" required formControlName="folio" (input)="validateFolioLength()">
-                          <div *ngIf="formAsociados.get('folio')?.hasError('minlength') && formAsociados.get('folio')?.touched">
-                            Debe ingresar al menos 6 dígitos.
-                          </div>
-                        </div>
-                        
-                        <div class="input-field-modal" [class.error]="formAsociados.get('nombre')?.hasError('minlength') && formAsociados.get('nombre')?.touched">
-                          <label>NOMBRE</label>
-                          <input type="text" placeholder="Ingresar Nombre" required formControlName="nombre">
-                          <div *ngIf="formAsociados.get('nombre')?.hasError('minlength') && formAsociados.get('nombre')?.touched">
-                            *este campo no puede estar vacio
-                          </div>
-                        </div>
-                        
-                          <div class="input-field-modal" [class.error]="formAsociados.get('apellido')?.hasError('minlength') && formAsociados.get('apellido')?.touched">
-                              <label>APELLIDO</label>
-                              <input type="text" placeholder="Ingresar Apellido" required formControlName="apellido">
-                              <div *ngIf="formAsociados.get('apellido')?.hasError('minlength') && formAsociados.get('apellido')?.touched">
-                                *este campo no puede estar vacio
-                              </div>
-                          </div>
-                          <div class="input-field-modal">
-                            <label>EDAD</label>
-                            <input type="number" placeholder="Ingresar Edad" required >
-                          </div>
-                          <div class="input-field-modal" [class.error]="formAsociados.get('document')?.hasError('required') && formAsociados.get('document')?.touched">
-                            <label>TIPO_DOCUMENTO</label>
-                            <select name="tipo_documento" required formControlName="document">
-                              <option value="" disabled selected>Seleccione</option>
-                              <option [ngValue]="1">Dni</option>
-                              <option [ngValue]="2">Carnet_Exranjeria</option>
-                            </select>
-                            <div *ngIf="formAsociados.get('document')?.hasError('required') && formAsociados.get('document')?.touched">
-                              Debes seleccionar un tipo de documento.
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('apellido')?.hasError('minlength') &&
+                                            formAsociados.get('apellido')?.touched
+                                        ">
+                                        <label>APELLIDO</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Apellido"
+                                            required
+                                            formControlName="apellido" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('apellido')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('apellido')?.touched
+                                            ">
+                                            *este campo no puede estar vacio
+                                        </div>
+                                    </div>
+                                    <div class="input-field-modal">
+                                        <label>EDAD</label>
+                                        <input type="number" placeholder="Ingresar Edad" required />
+                                    </div>
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('document')?.hasError('required') &&
+                                            formAsociados.get('document')?.touched
+                                        ">
+                                        <label>TIPO_DOCUMENTO</label>
+                                        <select
+                                            name="tipo_documento"
+                                            required
+                                            formControlName="document">
+                                            <option value="" disabled selected>Seleccione</option>
+                                            <option [ngValue]="1">Dni</option>
+                                            <option [ngValue]="2">Carnet_Exranjeria</option>
+                                        </select>
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('document')
+                                                    ?.hasError('required') &&
+                                                formAsociados.get('document')?.touched
+                                            ">
+                                            Debes seleccionar un tipo de documento.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [ngClass]="{
+                                            error:
+                                                formAsociados
+                                                    .get('numDocumento')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('numDocumento')?.touched
+                                        }">
+                                        <label>N° DOCUMENTO</label>
+                                        <input
+                                            type="number"
+                                            placeholder="Ingresar N° Documento"
+                                            required
+                                            formControlName="numDocumento"
+                                            (input)="validateNumDocumentoLength()" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('numDocumento')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('numDocumento')?.touched
+                                            ">
+                                            Debe ingresar al menos 8 dígitos.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [ngClass]="{
+                                            error:
+                                                formAsociados
+                                                    .get('fecha_nac')
+                                                    ?.hasError('required') &&
+                                                formAsociados.get('fecha_nac')?.touched
+                                        }">
+                                        <label>FECHA NACIMIENTO</label>
+                                        <input
+                                            type="date"
+                                            placeholder="Ingresar Fecha"
+                                            required
+                                            formControlName="fecha_nac"
+                                            (input)="validateFechaNac()" />
+
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('fecha_nac')
+                                                    ?.hasError('required') &&
+                                                formAsociados.get('fecha_nac')?.touched
+                                            ">
+                                            Este campo no puede estar vacío.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('genero')?.hasError('required') &&
+                                            formAsociados.get('genero')?.touched
+                                        ">
+                                        <label>SEXO</label>
+                                        <select name="sexo" required formControlName="genero">
+                                            <option value="" disabled selected>Seleccione</option>
+                                            <option [ngValue]="1">Hombre</option>
+                                            <option [ngValue]="2">Mujer</option>
+                                        </select>
+                                        <div
+                                            *ngIf="
+                                                formAsociados.get('genero')?.hasError('required') &&
+                                                formAsociados.get('genero')?.touched
+                                            ">
+                                            Por favor, seleccione el sexo.
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="input-field-modal"
+                                        [ngClass]="{
+                                            error:
+                                                formAsociados
+                                                    .get('telefono')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('telefono')?.touched
+                                        }">
+                                        <label>TELEFONO</label>
+                                        <input
+                                            type="number"
+                                            placeholder="Ingresar Telefono"
+                                            required
+                                            formControlName="telefono"
+                                            (input)="validateTelefonoLength()" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('telefono')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('telefono')?.touched
+                                            ">
+                                            Debe ingresar al menos 9 dígitos.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('operador')?.hasError('required') &&
+                                            formAsociados.get('operador')?.touched
+                                        ">
+                                        <label>OPERADOR</label>
+                                        <select name="operador" required formControlName="operador">
+                                            <option value="" disabled selected>Seleccione</option>
+                                            <option [ngValue]="4">Claro</option>
+                                            <option [ngValue]="1">Entel</option>
+                                            <option [ngValue]="2">Bitel</option>
+                                            <option [ngValue]="3">Movistar</option>
+                                        </select>
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('operador')
+                                                    ?.hasError('required') &&
+                                                formAsociados.get('operador')?.touched
+                                            ">
+                                            Debe seleccionar su operador.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('direccion')?.hasError('minlength') &&
+                                            formAsociados.get('direccion')?.touched
+                                        ">
+                                        <label>DIRECCION</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Direccion"
+                                            required
+                                            formControlName="direccion" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('direccion')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('direccion')?.touched
+                                            ">
+                                            *este campo no puede estar vacio
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('sector')?.hasError('minlength') &&
+                                            formAsociados.get('sector')?.touched
+                                        ">
+                                        <label>SECTOR</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Sector"
+                                            required
+                                            formControlName="sector" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados
+                                                    .get('sector')
+                                                    ?.hasError('minlength') &&
+                                                formAsociados.get('sector')?.touched
+                                            ">
+                                            *este campo no puede estar vacio
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('rubro')?.hasError('required') &&
+                                            formAsociados.get('rubro')?.touched
+                                        ">
+                                        <label for="rubro">RUBRO</label>
+                                        <input
+                                            type="text"
+                                            id="rubro"
+                                            name="rubro"
+                                            list="rubros"
+                                            required
+                                            formControlName="rubro"
+                                            (input)="validateRubro()" />
+                                        <datalist id="rubros" class="details">
+                                            <option value="Abarrotes"></option>
+                                            <option value="Bazar"></option>
+                                            <option value="Carnes"></option>
+                                            <option value="Comedores"></option>
+                                            <option value="Embutidos"></option>
+                                            <option value="Frutas"></option>
+                                            <option value="Golosinas"></option>
+                                            <option value="Jugueria"></option>
+                                            <option value="Mayorista"></option>
+                                            <option value="Miscaleno"></option>
+                                            <option value="Pasamaneria"></option>
+                                            <option value="Pescado"></option>
+                                            <option value="Pollo"></option>
+                                            <option value="Porcino"></option>
+                                            <option value="Tiendas"></option>
+                                            <option value="Tuberculos"></option>
+                                        </datalist>
+                                        <div
+                                            *ngIf="
+                                                formAsociados.get('rubro')?.hasError('required') &&
+                                                formAsociados.get('rubro')?.touched
+                                            ">
+                                            *Este campo no puede estar vacío.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('area')?.hasError('required') &&
+                                            formAsociados.get('area')?.touched
+                                        ">
+                                        <label>AREA</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Área"
+                                            required
+                                            formControlName="area"
+                                            (blur)="addMts()" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados.get('area')?.hasError('required') &&
+                                                formAsociados.get('area')?.touched
+                                            ">
+                                            *este campo no puede estar vacío
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="input-field-modal"
+                                        [class.error]="
+                                            formAsociados.get('code')?.hasError('minlength') &&
+                                            formAsociados.get('code')?.touched
+                                        ">
+                                        <label>CODE</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Ingresar Code"
+                                            required
+                                            formControlName="code" />
+                                        <div
+                                            *ngIf="
+                                                formAsociados.get('code')?.hasError('minlength') &&
+                                                formAsociados.get('code')?.touched
+                                            ">
+                                            *este campo no puede estar vacio
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container_button_modal">
+                                    <button
+                                        type="submit"
+                                        [disabled]="!formAsociados.valid"
+                                        class="guardarBtn">
+                                        <span class="material-icons-sharp">save</span>
+                                        <span class="btnText">Guardar</span>
+                                    </button>
+                                    <button class="limpiarBtn" (click)="closeModal()">
+                                        <span class="material-icons-sharp">delete_forever</span>
+                                        <span class="btnText">Descartar</span>
+                                    </button>
+                                </div>
                             </div>
-                          </div>
-                          
-                          <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('numDocumento')?.hasError('minlength') && formAsociados.get('numDocumento')?.touched}">
-                            <label>N° DOCUMENTO</label>
-                            <input type="number" placeholder="Ingresar N° Documento" required formControlName="numDocumento" (input)="validateNumDocumentoLength()">
-                            <div *ngIf="formAsociados.get('numDocumento')?.hasError('minlength') && formAsociados.get('numDocumento')?.touched">
-                              Debe ingresar al menos 8 dígitos.
-                            </div>
-                          </div>
-                          
-                          <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('fecha_nac')?.hasError('required') && formAsociados.get('fecha_nac')?.touched}">
-                            <label>FECHA NACIMIENTO</label>
-                            <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac" (input)="validateFechaNac()">
-
-                            <div *ngIf="formAsociados.get('fecha_nac')?.hasError('required') && formAsociados.get('fecha_nac')?.touched">
-                              Este campo no puede estar vacío.
-                            </div>
-                          </div>
-                          
-                          <div class="input-field-modal" [class.error]="formAsociados.get('genero')?.hasError('required') && formAsociados.get('genero')?.touched">
-                            <label>SEXO</label>
-                            <select name="sexo" required formControlName="genero">
-                              <option value="" disabled selected>Seleccione</option>
-                              <option [ngValue]="1">Hombre</option>
-                              <option [ngValue]="2">Mujer</option>
-                          </select>
-                          <div *ngIf="formAsociados.get('genero')?.hasError('required') && formAsociados.get('genero')?.touched">
-                            Por favor, seleccione el sexo.
-                          </div>
-                          </div>
-                          <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('telefono')?.hasError('minlength') && formAsociados.get('telefono')?.touched}">
-                            <label>TELEFONO</label>
-                            <input type="number" placeholder="Ingresar Telefono" required formControlName="telefono" (input)="validateTelefonoLength()">
-                            <div *ngIf="formAsociados.get('telefono')?.hasError('minlength') && formAsociados.get('telefono')?.touched">
-                              Debe ingresar al menos 9 dígitos.
-                            </div>
-                          </div>
-                          
-                          <div class="input-field-modal" [class.error]="formAsociados.get('operador')?.hasError('required') && formAsociados.get('operador')?.touched">
-                            <label>OPERADOR</label>
-                            <select name="operador" required formControlName="operador">
-                              <option value="" disabled selected>Seleccione</option>
-                              <option [ngValue]="4">Claro</option>
-                              <option [ngValue]="1">Entel</option>
-                              <option [ngValue]="2">Bitel</option>
-                              <option [ngValue]="3">Movistar</option>
-                          </select>
-                          <div *ngIf="formAsociados.get('operador')?.hasError('required') && formAsociados.get('operador')?.touched">
-                            Debe seleccionar su operador.
-                          </div>
-                          </div>
-
-                          <div class="input-field-modal" [class.error]="formAsociados.get('direccion')?.hasError('minlength') && formAsociados.get('direccion')?.touched">
-                            <label>DIRECCION</label>
-                            <input type="text" placeholder="Ingresar Direccion" required formControlName="direccion">
-                            <div *ngIf="formAsociados.get('direccion')?.hasError('minlength') && formAsociados.get('direccion')?.touched">
-                              *este campo no puede estar vacio
-                            </div>
-                          </div>
-
-                          <div class="input-field-modal" [class.error]="formAsociados.get('sector')?.hasError('minlength') && formAsociados.get('sector')?.touched">
-                            <label>SECTOR</label>
-                            <input type="text" placeholder="Ingresar Sector" required formControlName="sector">
-                          <div *ngIf="formAsociados.get('sector')?.hasError('minlength') && formAsociados.get('sector')?.touched">
-                            *este campo no puede estar vacio
-                          </div>
-                      </div>
-
-                      <div class="input-field-modal" [class.error]="formAsociados.get('rubro')?.hasError('required') && formAsociados.get('rubro')?.touched">
-                        <label for="rubro">RUBRO</label>
-                        <input type="text" id="rubro" name="rubro" list="rubros" required formControlName="rubro" (input)="validateRubro()">
-                        <datalist id="rubros" class="details">
-                        <option value="Abarrotes">
-                        <option value="Bazar">
-                        <option value="Carnes">
-                        <option value="Comedores">
-                        <option value="Embutidos">
-                        <option value="Frutas">
-                        <option value="Golosinas">
-                        <option value="Jugueria">
-                        <option value="Mayorista">
-                        <option value="Miscaleno">
-                        <option value="Pasamaneria">
-                        <option value="Pescado">
-                        <option value="Pollo">
-                        <option value="Porcino">
-                        <option value="Tiendas">
-                        <option value="Tuberculos">
-                    </datalist>
-                    <div *ngIf="formAsociados.get('rubro')?.hasError('required') && formAsociados.get('rubro')?.touched">
-                      *Este campo no puede estar vacío.
+                        </form>
                     </div>
-                      </div>
-
-                    <div class="input-field-modal" [class.error]="formAsociados.get('area')?.hasError('required') && formAsociados.get('area')?.touched">
-                    <label>AREA</label>
-                    <input type="text" placeholder="Ingresar Área" required formControlName="area" (blur)="addMts()">
-                    <div *ngIf="formAsociados.get('area')?.hasError('required') && formAsociados.get('area')?.touched">
-                      *este campo no puede estar vacío
-                    </div>
-                  </div>
-
-                    
-                    <div class="input-field-modal" [class.error]="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
-                      <label>CODE</label>
-                      <input type="text" placeholder="Ingresar Code" required formControlName="code">
-                      <div *ngIf="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
-                        *este campo no puede estar vacio
-                      </div>
-                    </div>
-
-                  </div>
-                    <div class="container_button_modal">
-                      <button type="submit" [disabled]="!formAsociados.valid" class="guardarBtn" >
-                        <span class="material-icons-sharp">save</span>
-                        <span class="btnText">Guardar</span>
-                      </button>
-                        <button class="limpiarBtn" (click)="closeModal()">
-                            <span class="material-icons-sharp">delete_forever</span>
-                            <span class="btnText">Descartar</span>
-                        </button>
-                    </div>
-                  </div>
-                  
-                    </form>
                 </div>
             </div>
-        </div>
-    </main>
-    <div class="modal-bg" *ngIf="showModalEdit">
-      <div class="modal">
-          <div class="modal_cerrar" (click)="cerrar()" >
-            <span>x</span>
-          </div>
-          <div class="modal_mensaje">
-            <h2>EDITAR ASOCIADO</h2>
-            <!--<div class="upload">
+        </main>
+        <div class="modal-bg" *ngIf="showModalEdit">
+            <div class="modal">
+                <div class="modal_cerrar" (click)="cerrar()">
+                    <span>x</span>
+                </div>
+                <div class="modal_mensaje">
+                    <h2>EDITAR ASOCIADO</h2>
+                    <!--<div class="upload">
               <img [src]="imageUrl" width="100" height="100" alt="">
               <div class="round">
                 <input type="file" (change)="onFileSelected($event)">
                 <i class="fa fa-camera" style="color: #fff"></i>
               </div>
             </div>-->
-            <form [formGroup]="formAsociados" (ngSubmit)="actualizarAsociados()">
-              <div class="input-field-modal">
-
-                <div class="fields-modal">
-
-                  <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('folio')?.hasError('minlength') && formAsociados.get('folio')?.touched}">
-                      <label>FOLIO</label>
-                      <input type="number" placeholder="Ingresar # Folio" required formControlName="folio" [ngModel]="selectedAsociado?.folio" (input)="validateFolioLength()">
-                      <div *ngIf="formAsociados.get('folio')?.hasError('minlength') && formAsociados.get('folio')?.touched">
-                        Debe ingresar al menos 6 dígitos.
-                      </div>
-                  </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('nombre')?.hasError('minlength') && formAsociados.get('nombre')?.touched">
-                        <label>NOMBRE</label>
-                        <input type="text" placeholder="Ingresar Nombre" required formControlName="nombre" [ngModel]="selectedAsociado?.persons?.name">
-                        <div *ngIf="formAsociados.get('nombre')?.hasError('minlength') && formAsociados.get('nombre')?.touched">
-                          *este campo no puede estar vacio
+                    <form [formGroup]="formAsociados" (ngSubmit)="actualizarAsociados()">
+                        <div class="input-field-modal">
+                            <div class="fields-modal">
+                                <div
+                                    class="input-field-modal"
+                                    [ngClass]="{
+                                        error:
+                                            formAsociados.get('folio')?.hasError('minlength') &&
+                                            formAsociados.get('folio')?.touched
+                                    }">
+                                    <label>FOLIO</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Ingresar # Folio"
+                                        required
+                                        formControlName="folio"
+                                        [ngModel]="selectedAsociado?.folio"
+                                        (input)="validateFolioLength()" />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('folio')?.hasError('minlength') &&
+                                            formAsociados.get('folio')?.touched
+                                        ">
+                                        Debe ingresar al menos 6 dígitos.
+                                    </div>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [class.error]="
+                                        formAsociados.get('nombre')?.hasError('minlength') &&
+                                        formAsociados.get('nombre')?.touched
+                                    ">
+                                    <label>NOMBRE</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Ingresar Nombre"
+                                        required
+                                        formControlName="nombre"
+                                        [ngModel]="selectedAsociado?.persons?.name" />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('nombre')?.hasError('minlength') &&
+                                            formAsociados.get('nombre')?.touched
+                                        ">
+                                        *este campo no puede estar vacio
+                                    </div>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [class.error]="
+                                        formAsociados.get('apellido')?.hasError('minlength') &&
+                                        formAsociados.get('apellido')?.touched
+                                    ">
+                                    <label>APELLIDO</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Ingresar Apellido"
+                                        required
+                                        formControlName="apellido"
+                                        [ngModel]="selectedAsociado?.persons?.lastname" />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('apellido')?.hasError('minlength') &&
+                                            formAsociados.get('apellido')?.touched
+                                        ">
+                                        *este campo no puede estar vacio
+                                    </div>
+                                </div>
+                                <div class="input-field-modal">
+                                    <label>EDAD</label>
+                                    <input type="number" placeholder="Ingresar Edad" required />
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [class.error]="
+                                        formAsociados.get('document')?.hasError('required') &&
+                                        formAsociados.get('document')?.touched
+                                    ">
+                                    <label>TIPO_DOCUMENTO</label>
+                                    <select
+                                        name="tipo_documento"
+                                        required
+                                        formControlName="document"
+                                        [ngModel]="
+                                            selectedAsociado?.numDocument?.tipoDocumento?.tipoDocId
+                                        ">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option [ngValue]="1">Dni</option>
+                                        <option [ngValue]="2">Carnet de Exranjeria</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [ngClass]="{
+                                        error:
+                                            formAsociados
+                                                .get('numDocumento')
+                                                ?.hasError('minlength') &&
+                                            formAsociados.get('numDocumento')?.touched
+                                    }">
+                                    <label>N° DOCUMENTO</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Ingresar N° Documento"
+                                        required
+                                        formControlName="numDocumento"
+                                        [ngModel]="selectedAsociado?.numDocument?.numDocument"
+                                        (input)="validateNumDocumentoLength()" />
+                                    <div
+                                        *ngIf="
+                                            formAsociados
+                                                .get('numDocumento')
+                                                ?.hasError('minlength') &&
+                                            formAsociados.get('numDocumento')?.touched
+                                        ">
+                                        Debe ingresar al menos 9 dígitos.
+                                    </div>
+                                </div>
+                                <div class="input-field-modal">
+                                    <label>FECHA NACIMIENTO</label>
+                                    <input
+                                        type="date"
+                                        placeholder="Ingresar Fecha"
+                                        required
+                                        formControlName="fecha_nac"
+                                        [ngModel]="selectedAsociado?.persons?.date_birth_string" />
+                                </div>
+                                <div class="input-field-modal">
+                                    <label>SEXO</label>
+                                    <select
+                                        name="sexo"
+                                        required
+                                        formControlName="genero"
+                                        [ngModel]="selectedAsociado?.persons?.gender?.genderId">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option [ngValue]="1">Hombre</option>
+                                        <option [ngValue]="2">Mujer</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [ngClass]="{
+                                        error:
+                                            formAsociados.get('telefono')?.hasError('minlength') &&
+                                            formAsociados.get('telefono')?.touched
+                                    }">
+                                    <label>TELEFONO</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Ingresar Telefono"
+                                        required
+                                        formControlName="telefono"
+                                        [ngModel]="
+                                            selectedAsociado?.persons?.cellPhones[0]?.cellNumber
+                                        "
+                                        (input)="validateTelefonoLength()" />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('telefono')?.hasError('minlength') &&
+                                            formAsociados.get('telefono')?.touched
+                                        ">
+                                        Debe ingresar al menos 9 dígitos.
+                                    </div>
+                                </div>
+                                <div class="input-field-modal">
+                                    <label>OPERADOR</label>
+                                    <select
+                                        name="operador"
+                                        required
+                                        formControlName="operador"
+                                        [ngModel]="
+                                            selectedAsociado?.persons?.cellPhones[0]?.operators
+                                                ?.operatorId
+                                        ">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option [ngValue]="1">Entel</option>
+                                        <option [ngValue]="2">Bitel</option>
+                                        <option [ngValue]="3">Movistar</option>
+                                        <option [ngValue]="4">Claro</option>
+                                    </select>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [class.error]="
+                                        formAsociados.get('direccion')?.hasError('minlength') &&
+                                        formAsociados.get('direccion')?.touched
+                                    ">
+                                    <label>DIRECCION</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Ingresar Direccion"
+                                        required
+                                        formControlName="direccion"
+                                        [ngModel]="
+                                            selectedAsociado?.persons?.addresses[0]?.description
+                                        " />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('direccion')?.hasError('minlength') &&
+                                            formAsociados.get('direccion')?.touched
+                                        ">
+                                        *este campo no puede estar vacio
+                                    </div>
+                                </div>
+                                <div
+                                    class="input-field-modal"
+                                    [class.error]="
+                                        formAsociados.get('sector')?.hasError('minlength') &&
+                                        formAsociados.get('sector')?.touched
+                                    ">
+                                    <label>SECTOR</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Ingresar Sector"
+                                        required
+                                        formControlName="sector"
+                                        [ngModel]="
+                                            selectedAsociado?.persons?.stands[0]?.sector?.code
+                                        " />
+                                    <div
+                                        *ngIf="
+                                            formAsociados.get('sector')?.hasError('minlength') &&
+                                            formAsociados.get('sector')?.touched
+                                        ">
+                                        *este campo no puede estar vacio
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('apellido')?.hasError('minlength') && formAsociados.get('apellido')?.touched">
-                        <label>APELLIDO</label>
-                        <input type="text" placeholder="Ingresar Apellido" required formControlName="apellido" [ngModel]="selectedAsociado?.persons?.lastname">
-                        <div *ngIf="formAsociados.get('apellido')?.hasError('minlength') && formAsociados.get('apellido')?.touched">
-                          *este campo no puede estar vacio
+
+                        <div class="fields-modal">
+                            <div
+                                class="input-field-modal"
+                                [class.error]="
+                                    formAsociados.get('rubro')?.hasError('required') &&
+                                    formAsociados.get('rubro')?.touched
+                                ">
+                                <label for="rubro">RUBRO</label>
+                                <input
+                                    type="text"
+                                    id="rubro"
+                                    name="rubro"
+                                    list="rubros"
+                                    required
+                                    formControlName="rubro"
+                                    [ngModel]="
+                                        selectedAsociado?.persons?.stands[0]?.rubro?.nameField
+                                    "
+                                    (input)="validateRubro()" />
+
+                                <datalist id="rubros" class="details">
+                                    <option value="" disabled selected>Seleccione</option>
+                                    <option value="Abarrotes"></option>
+                                    <option value="Bazar"></option>
+                                    <option value="Carnes"></option>
+                                    <option value="Comedores"></option>
+                                    <option value="Embutidos"></option>
+                                    <option value="Frutas"></option>
+                                    <option value="Golosinas"></option>
+                                    <option value="Jugueria"></option>
+                                    <option value="Mayorista"></option>
+                                    <option value="Miscaleno"></option>
+                                    <option value="Pasamaneria"></option>
+                                    <option value="Pescado"></option>
+                                    <option value="Pollo"></option>
+                                    <option value="Porcino"></option>
+                                    <option value="Tiendas"></option>
+                                    <option value="Tuberculos"></option>
+                                </datalist>
+                                <div
+                                    *ngIf="
+                                        formAsociados.get('rubro')?.hasError('required') &&
+                                        formAsociados.get('rubro')?.touched
+                                    ">
+                                    *Este campo no puede estar vacío.
+                                </div>
+                            </div>
+
+                            <div
+                                class="input-field-modal"
+                                [class.error]="
+                                    formAsociados.get('area')?.hasError('required') &&
+                                    formAsociados.get('area')?.touched
+                                ">
+                                <label>AREA</label>
+                                <input
+                                    type="text"
+                                    placeholder="Ingresar Area"
+                                    required
+                                    formControlName="area"
+                                    [ngModel]="selectedAsociado?.persons?.stands[0]?.areas?.size"
+                                    (blur)="addMts()" />
+                                <div
+                                    *ngIf="
+                                        formAsociados.get('area')?.hasError('required') &&
+                                        formAsociados.get('area')?.touched
+                                    ">
+                                    *este campo no puede estar vacío
+                                </div>
+                            </div>
+                            <div
+                                class="input-field-modal"
+                                [class.error]="
+                                    formAsociados.get('code')?.hasError('minlength') &&
+                                    formAsociados.get('code')?.touched
+                                ">
+                                <label>CODE</label>
+                                <input
+                                    type="text"
+                                    placeholder="Ingresar Code"
+                                    required
+                                    formControlName="code"
+                                    [ngModel]="selectedAsociado?.persons?.stands[0]?.code" />
+                                <div
+                                    *ngIf="
+                                        formAsociados.get('code')?.hasError('minlength') &&
+                                        formAsociados.get('code')?.touched
+                                    ">
+                                    *este campo no puede estar vacio
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-field-modal">
-                      <label>EDAD</label>
-                      <input type="number" placeholder="Ingresar Edad" required >
-                    </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('document')?.hasError('required') && formAsociados.get('document')?.touched">
-                      <label>TIPO_DOCUMENTO</label>
-                      <select name="tipo_documento" required formControlName="document" [ngModel]="selectedAsociado?.numDocument?.tipoDocumento?.tipoDocId">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option [ngValue]="1">Dni</option>
-                        <option [ngValue]="2">Carnet de Exranjeria</option>
-                        
-                    </select>
-                    </div>
-                    <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('numDocumento')?.hasError('minlength') && formAsociados.get('numDocumento')?.touched}">
-                      <label>N° DOCUMENTO</label>
-                      <input type="number" placeholder="Ingresar N° Documento" required formControlName="numDocumento" [ngModel]="selectedAsociado?.numDocument?.numDocument" (input)="validateNumDocumentoLength()">
-                      <div *ngIf="formAsociados.get('numDocumento')?.hasError('minlength') && formAsociados.get('numDocumento')?.touched">
-                        Debe ingresar al menos 9 dígitos.
-                      </div>
-                    </div>
-                    <div class="input-field-modal">
-                      <label>FECHA NACIMIENTO</label>
-                      <input type="date" placeholder="Ingresar Fecha" required formControlName="fecha_nac" [ngModel]="selectedAsociado?.persons?.date_birth_string">
-                      
-                    </div>
-                    <div class="input-field-modal">
-                      <label>SEXO</label>
-                      <select name="sexo" required formControlName="genero" [ngModel]="selectedAsociado?.persons?.gender?.genderId">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option [ngValue]="1">Hombre</option>
-                        <option [ngValue]="2">Mujer</option>
-                    </select>
-                    </div>
-                    <div class="input-field-modal" [ngClass]="{'error': formAsociados.get('telefono')?.hasError('minlength') && formAsociados.get('telefono')?.touched}">
-                      <label>TELEFONO</label>
-                      <input type="number" placeholder="Ingresar Telefono" required formControlName="telefono" [ngModel]="selectedAsociado?.persons?.cellPhones[0]?.cellNumber" (input)="validateTelefonoLength()">
-                      <div *ngIf="formAsociados.get('telefono')?.hasError('minlength') && formAsociados.get('telefono')?.touched">
-                        Debe ingresar al menos 9 dígitos.
-                      </div>
-                    </div>
-                    <div class="input-field-modal">
-                      <label>OPERADOR</label>
-                      <select name="operador" required formControlName="operador" [ngModel]="selectedAsociado?.persons?.cellPhones[0]?.operators?.operatorId">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option [ngValue]="1">Entel</option>
-                        <option [ngValue]="2">Bitel</option>
-                        <option [ngValue]="3">Movistar</option>
-                        <option [ngValue]="4">Claro</option>
-                    </select>
-                    </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('direccion')?.hasError('minlength') && formAsociados.get('direccion')?.touched">
-                      <label>DIRECCION</label>
-                      <input type="text" placeholder="Ingresar Direccion" required formControlName="direccion" [ngModel]="selectedAsociado?.persons?.addresses[0]?.description">
-                      <div *ngIf="formAsociados.get('direccion')?.hasError('minlength') && formAsociados.get('direccion')?.touched">
-                        *este campo no puede estar vacio
-                      </div>
-                    </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('sector')?.hasError('minlength') && formAsociados.get('sector')?.touched">
-                      <label>SECTOR</label>
-                      <input type="text" placeholder="Ingresar Sector" required formControlName="sector" [ngModel]="selectedAsociado?.persons?.stands[0]?.sector?.code">
-                      <div *ngIf="formAsociados.get('sector')?.hasError('minlength') && formAsociados.get('sector')?.touched">
-                        *este campo no puede estar vacio
-                      </div>
-                    </div>
+                        <div class="container_button_modal">
+                            <button
+                                type="submit"
+                                [disabled]="!formAsociados.valid"
+                                class="guardarBtn">
+                                <span class="material-icons-sharp">save</span>
+                                <span class="btnText">Guardar</span>
+                            </button>
+                            <button class="limpiarBtn" (click)="cerrar()">
+                                <span class="material-icons-sharp">delete_forever</span>
+                                <span class="btnText">Descartar</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-              </div>
-
-              <div class="fields-modal">
-                  <div class="input-field-modal" [class.error]="formAsociados.get('rubro')?.hasError('required') && formAsociados.get('rubro')?.touched">
-                      <label for="rubro">RUBRO</label>
-                  <input type="text" id="rubro" name="rubro" list="rubros" required formControlName="rubro" [ngModel]="selectedAsociado?.persons?.stands[0]?.rubro?.nameField" (input)="validateRubro()">
-              
-
-              <datalist id="rubros" class="details">
-                  <option value="" disabled selected>Seleccione</option>
-                  <option value="Abarrotes">
-                  <option value="Bazar">
-                  <option value="Carnes">
-                  <option value="Comedores">
-                  <option value="Embutidos">
-                  <option value="Frutas">
-                  <option value="Golosinas">
-                  <option value="Jugueria">
-                  <option value="Mayorista">
-                  <option value="Miscaleno">
-                  <option value="Pasamaneria">
-                  <option value="Pescado">
-                  <option value="Pollo">
-                  <option value="Porcino">
-                  <option value="Tiendas">
-                  <option value="Tuberculos">
-              </datalist>
-              <div *ngIf="formAsociados.get('rubro')?.hasError('required') && formAsociados.get('rubro')?.touched">
-                *Este campo no puede estar vacío.
-              </div>
             </div>
-
-                    <div class="input-field-modal" [class.error]="formAsociados.get('area')?.hasError('required') && formAsociados.get('area')?.touched">
-                        <label>AREA</label>
-                        <input type="text" placeholder="Ingresar Area" required formControlName="area" [ngModel]="selectedAsociado?.persons?.stands[0]?.areas?.size" (blur)="addMts()">
-                        <div *ngIf="formAsociados.get('area')?.hasError('required') && formAsociados.get('area')?.touched">
-                          *este campo no puede estar vacío
-                        </div>
-                    </div>
-                    <div class="input-field-modal" [class.error]="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
-                      <label>CODE</label>
-                      <input type="text" placeholder="Ingresar Code" required formControlName="code" [ngModel]="selectedAsociado?.persons?.stands[0]?.code">
-                      <div *ngIf="formAsociados.get('code')?.hasError('minlength') && formAsociados.get('code')?.touched">
-                        *este campo no puede estar vacio
-                      </div>
-                    </div>
-
-                  </div>
-                      <div class="container_button_modal">
-                        <button type="submit" [disabled]="!formAsociados.valid" class="guardarBtn" >
-                          <span class="material-icons-sharp">save</span>
-                          <span class="btnText">Guardar</span>
-                        </button>
-                          <button class="limpiarBtn" (click)="cerrar()">
-                              <span class="material-icons-sharp">delete_forever</span>
-                              <span class="btnText">Descartar</span>
-                          </button>
-                      </div>
-
-              </form>
-          </div>
-      </div>
+        </div>
     </div>
-    </div>
-
-
-
 </body>

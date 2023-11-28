@@ -1,48 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap} from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { DetailPayment } from '../../../interfaces/pagos.interface';
 import { environment } from 'src/environment/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class ApiPagosService {
-    private _refresh = new Subject<void>();
-    
-    constructor(private http: HttpClient) { }
+	private _refresh = new Subject<void>();
 
-    get refresh(){
-      return this._refresh; 
-    }
-    public insertPagos(pagos: DetailPayment){
-      return this.http.post(`${environment.API_REST.URL}/pagos/create`, pagos)
-      .pipe(
-        tap(()=> {
-          this._refresh.next(); 
-        })
-      );
-    }
+	constructor(private http: HttpClient) {}
 
-    public obtenerPagos(): Observable<any>{
-      return this.http.get(`${environment.API_REST.URL}/pagos/load`);
-    }
+	get refresh() {
+		return this._refresh;
+	}
+	public insertPagos(pagos: DetailPayment) {
+		return this.http.post(`${environment.API_REST.URL}/pagos/create`, pagos).pipe(
+			tap(() => {
+				this._refresh.next();
+			}),
+		);
+	}
 
-    public updatePagos(id: string, pagos: DetailPayment){
-      return this.http.put(`${environment.API_REST.URL}/pagos/update/${id}`, pagos)
-      .pipe(
-        tap(()=> {
-          this._refresh.next(); 
-        })
-      );
-    }
-    
-    public deletePagos(id: string){
-      return this.http.delete(`${environment.API_REST.URL}/pagos/delete/${id}`)
-      .pipe(
-        tap(()=> {
-          this._refresh.next(); 
-        })
-      );
-    }
+	public obtenerPagos(): Observable<any> {
+		return this.http.get(`${environment.API_REST.URL}/pagos/load`);
+	}
+
+	public updatePagos(id: string, pagos: DetailPayment) {
+		return this.http.put(`${environment.API_REST.URL}/pagos/update/${id}`, pagos).pipe(
+			tap(() => {
+				this._refresh.next();
+			}),
+		);
+	}
+
+	public deletePagos(id: string) {
+		return this.http.delete(`${environment.API_REST.URL}/pagos/delete/${id}`).pipe(
+			tap(() => {
+				this._refresh.next();
+			}),
+		);
+	}
 }

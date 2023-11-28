@@ -1,5 +1,5 @@
-import { Associates } from "./asociado.get.interface";
+import { Associates } from './asociado.get.interface';
 
-export interface AssociateId extends Associates{
-    associateId: number;
+export interface AssociateId extends Associates {
+	associateId: number;
 }

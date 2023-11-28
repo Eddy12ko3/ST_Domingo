@@ -1,5 +1,5 @@
-import { DetailPayments } from "./pagos.get.interface";
+import { DetailPayments } from './pagos.get.interface';
 
-export interface DetailPaymentId extends DetailPayments{
-    detailPaymentId: string
+export interface DetailPaymentId extends DetailPayments {
+	detailPaymentId: string;
 }

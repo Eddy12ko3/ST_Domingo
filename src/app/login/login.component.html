@@ -1,46 +1,66 @@
-<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 
-    <body>
-        <img class="wave" src="assets/login/ola.png">
-        <div class="container">
-            <div class="img">
-                <img src="assets/login/img.svg">
-            </div>
-            <div class="login-content">
-                <form [formGroup]="formLogin" (ngSubmit)="loginUser()">
-                    <h2 class="title">HOLA, BIENVENIDO DE NUEVO </h2>
-                    <div class="input-div">
-                        <div class="i"> 
-                                   <i class="fas fa-id-card"></i>
-                              </div>
-                        <div class="username" [ngClass]="{'error': formLogin.get('usuario')?.hasError('required') && formLogin.get('usuario')?.touched}">
-                            <input type="number" formControlName="usuario">
-                            <label >Nº DOCUMENTO</label>
-                            <div class="red" *ngIf="formLogin.get('usuario')?.hasError('required') && formLogin.get('usuario')?.touched">
-                                Campo requerido.
-                              </div>
-                        </div>
-                    </div>
-                    <div class="input-div">
-                        <div class="i"> 
-                                   <i class="fas fa-lock"></i>
-                              </div>
-                        <div class="username" [ngClass]="{'error': formLogin.get('contraseña')?.hasError('required') && formLogin.get('contraseña')?.touched}">
-                            <input type="password" formControlName="contraseña">
-                            <label >PASSWORD</label>
-                            <div class="red" *ngIf="formLogin.get('contraseña')?.hasError('required') && formLogin.get('contraseña')?.touched">
-                                Campo requerido.
-                              </div>
-                        </div>
-                    </div>
-                    
-                      <a routerLink="/register">REGISTRARSE</a>
+<body>
+	<img class="wave" src="assets/login/ola.png" />
+	<div class="container">
+		<div class="img">
+			<img src="assets/login/img.svg" />
+		</div>
+		<div class="login-content">
+			<form [formGroup]="formLogin" (ngSubmit)="loginUser()">
+				<h2 class="title">HOLA, BIENVENIDO DE NUEVO</h2>
+				<div class="input-div">
+					<div class="i">
+						<i class="fas fa-id-card"></i>
+					</div>
+					<div
+						class="username"
+						[ngClass]="{
+							error:
+								formLogin.get('usuario')?.hasError('required') &&
+								formLogin.get('usuario')?.touched
+						}">
+						<input type="number" formControlName="usuario" />
+						<label>Nº DOCUMENTO</label>
+						<div
+							class="red"
+							*ngIf="
+								formLogin.get('usuario')?.hasError('required') &&
+								formLogin.get('usuario')?.touched
+							">
+							Campo requerido.
+						</div>
+					</div>
+				</div>
+				<div class="input-div">
+					<div class="i">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div
+						class="username"
+						[ngClass]="{
+							error:
+								formLogin.get('contraseña')?.hasError('required') &&
+								formLogin.get('contraseña')?.touched
+						}">
+						<input type="password" formControlName="contraseña" />
+						<label>PASSWORD</label>
+						<div
+							class="red"
+							*ngIf="
+								formLogin.get('contraseña')?.hasError('required') &&
+								formLogin.get('contraseña')?.touched
+							">
+							Campo requerido.
+						</div>
+					</div>
+				</div>
 
-                      <input type="submit"[disabled]="!formLogin.valid" class="btn" value="Login" >
+				<a routerLink="/register">REGISTRARSE</a>
 
-                </form>
-        </div>
-    </div>
-    
+				<input type="submit" [disabled]="!formLogin.valid" class="btn" value="Login" />
+			</form>
+		</div>
+	</div>
 </body>

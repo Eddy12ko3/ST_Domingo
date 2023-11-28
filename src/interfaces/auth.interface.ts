@@ -1,4 +1,4 @@
-export interface Auth{
-    numDocument: number;
-    password: string;
+export interface Auth {
+	numDocument: number;
+	password: string;
 }

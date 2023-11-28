@@ -2,21 +2,20 @@ import { Component } from '@angular/core';
 import { ThemeService } from '../../service/controllers/theme.service';
 
 @Component({
-  selector: 'app-trasferencias',
-  templateUrl: './trasferencias.component.html',
-  styleUrls: ['./trasferencias.component.css']
+    selector: 'app-trasferencias',
+    templateUrl: './trasferencias.component.html',
+    styleUrls: ['./trasferencias.component.css'],
 })
 export class TrasferenciasComponent {
-  isDarkTheme: boolean = false; // Estado del tema
+    isDarkTheme: boolean = false; // Estado del tema
 
-  constructor(private themeService: ThemeService) {
-    this.themeService.isDarkMode$.subscribe(isDarkMode => {
-      this.isDarkTheme = isDarkMode;
-    });
-  }
+    constructor(private themeService: ThemeService) {
+        this.themeService.isDarkMode$.subscribe(isDarkMode => {
+            this.isDarkTheme = isDarkMode;
+        });
+    }
 
-  toggleTheme() {
-    this.themeService.toggleDarkMode();
-
-}
+    toggleTheme() {
+        this.themeService.toggleDarkMode();
+    }
 }
