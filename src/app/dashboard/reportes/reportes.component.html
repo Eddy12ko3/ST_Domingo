@@ -52,39 +52,20 @@
 			<h2>PAGOS RECIENTES</h2>
 			<div class="notifications1">
 				<div class="table-container">
-					<table>
-						<thead>
+					<table datatable [dtOptions]="dtOptions" class="table table-rounded">
+						<tfoot>
 							<tr>
-								<th>Nombres</th>
-								<th>Apellidos</th>
-								<th>Fecha de pago</th>
-								<th>Monto</th>
-								<th>Rubro</th>
+								<th></th>
+								<th><input type="text" placeholder="Nombre" /></th>
+								<th><input type="text" placeholder="Apellidos" /></th>
+								<th><input type="text" placeholder="N° de documento" /></th>
+								<th><input type="text" placeholder="Direccion" /></th>
+								<th><input type="text" placeholder="Celular" /></th>
+								<th><input type="text" placeholder="Rubro" /></th>
+								<th><input type="text" placeholder="Pagos" /></th>
+								<th></th>
 							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Roberto</td>
-								<td>Gomez Gomez</td>
-								<td>17/09/2023</td>
-								<td>S/540.00</td>
-								<td>Comedores</td>
-							</tr>
-							<tr>
-								<td>Giovana</td>
-								<td>Hilario Almora</td>
-								<td>18/09/2023</td>
-								<td>S/500.00</td>
-								<td>Comedores</td>
-							</tr>
-							<tr>
-								<td>Roberto</td>
-								<td>Hernandez Lopez</td>
-								<td>17/10/2023</td>
-								<td>S/540.00</td>
-								<td>Comedores</td>
-							</tr>
-						</tbody>
+						</tfoot>
 					</table>
 				</div>
 			</div>

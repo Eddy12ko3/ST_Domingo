@@ -12,19 +12,28 @@ import { PuestosComponent } from './puestos/puestos.component';
 import { ModalComponent } from './modal/modal.component';
 import { ThemeService } from '../service/controllers/theme.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
-    declarations: [
-        DashboardComponent,
-        NavbarComponent,
-        PagosComponent,
-        ReportesComponent,
-        TrasferenciasComponent,
-        InicioComponent,
-        PuestosComponent,
-        ModalComponent,
-    ],
-    imports: [CommonModule, DashboardRoutingModule, ReactiveFormsModule, FormsModule],
-    providers: [ThemeService],
+	declarations: [
+		DashboardComponent,
+		NavbarComponent,
+		PagosComponent,
+		ReportesComponent,
+		TrasferenciasComponent,
+		InicioComponent,
+		PuestosComponent,
+		ModalComponent,
+	],
+	imports: [
+		CommonModule,
+		DashboardRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		DataTablesModule,
+		Select2Module,
+	],
+	providers: [ThemeService],
 })
 export class DashboardModule {}
