@@ -17,6 +17,17 @@ body{
     gap: 1.8rem;
 
 }
+.current-date-time{
+  display: flex;
+}
+
+.current-date-time p{
+
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
 
 /*MAIN*/
 main{
@@ -33,7 +44,7 @@ main .partners{
 
 main .insights{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.6rem;
 }
 
@@ -323,3 +334,98 @@ main .notifications1 .table-container {
 
 
 
+  .vertical-container {
+    background-color: var(--color-background); 
+    color: var(--text-color); 
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    border: none;
+    
+  }
+  
+  
+  /* Estilos generales para el calendario */
+  div .calender{
+  text-align: center;
+  font-family: Arial, sans-serif;
+  width: 100%; /* Cambia el ancho al 100% para que ocupe todo el espacio disponible */
+    max-width: 500px; 
+  }
+  
+  .month-navigation {
+  display: flex;
+  margin: 10px;
+  font-size: 18px;
+  
+  }
+  
+  .month-navigation p{
+    margin-top: 15px;
+    margin-right: 20px;
+  }
+  
+  .month-navigation button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0;
+  color: #0BD5B0;
+  margin-left: 10px;
+  }
+  
+  .month-navigation button:hover {
+  color: #0AC49D;
+  }
+  
+  table {
+    width: 400px;
+  border-collapse: collapse; 
+  border: none; 
+  background-color: var(--color-background);
+  border-radius: 30px;
+  }
+  
+  td.inactive {
+  color: var(--color-dark-variant);
+  }
+  th, td {
+    padding: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  }
+  
+   th {
+  
+  color: gray;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none; 
+  }
+  
+  
+  /* Estilos para los días */
+  td {
+  border-radius: 15px 15px 15px 15px;
+  border: none; 
+  transition: background-color 0.3s; 
+  }
+  
+  
+  .calender td {
+  font-weight: bold;
+  
+  }
+  
+  /* Estilos para cambiar el fondo de color al pasar el cursor */
+  .calender td:hover {
+    background-color: #0AC49D;
+    cursor: pointer;
+    color: #F0F0F0;
+  }
+  
+  .current-day {
+    background-color: #25d1acc7;
+    color: #F0F0F0;
+  }

@@ -10,7 +10,6 @@ import { authSessionGuard } from './service/guard/auth-session.guard';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataTablesModule } from 'angular-datatables';
-import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
 	declarations: [AppComponent, LoginComponent, RegisterComponent],
@@ -23,7 +22,6 @@ import { Select2Module } from 'ng-select2-component';
 		BrowserAnimationsModule, // required animations module
 		ToastrModule.forRoot(), // ToastrModule added
 		DataTablesModule,
-		Select2Module,
 	],
 	providers: [
 		// Registra el interceptor como un proveedor

@@ -189,7 +189,8 @@
 										<button
 											type="submit"
 											[disabled]="!formPagos.valid"
-											class="guardarBtn">
+											class="guardarBtn"
+											[ngClass]="{ 'disabled-btn': !formPagos.valid }">
 											<span class="material-icons-sharp">save</span>
 											<span class="btnText">Guardar</span>
 										</button>
@@ -303,7 +304,8 @@
 								<button
 									type="submit"
 									[disabled]="!formPagos.valid"
-									class="guardarBtn">
+									class="guardarBtn"
+									[ngClass]="{ 'disabled-btn': !formPagos.valid }">
 									<span class="material-icons-sharp">save</span>
 									<span class="btnText">Guardar</span>
 								</button>

@@ -3,6 +3,18 @@ import { ThemeService } from '../../service/controllers/theme.service';
 import { ApiUserService } from 'src/app/service/api/api.user.service';
 import { NotificationService } from 'src/app/service/controllers/notification.service';
 import { CountPorRubroService } from 'src/app/service/controllers/CountPorRubro.service';
+import {
+	addDays,
+	startOfMonth,
+	endOfMonth,
+	startOfWeek,
+	endOfWeek,
+	format,
+	isSameMonth,
+	addMonths,
+	subMonths,
+} from 'date-fns';
+import { es } from 'date-fns/locale';
 
 @Component({
 	selector: 'app-inicio',
@@ -24,7 +36,8 @@ export class InicioComponent implements OnInit {
 	porcentajeTotalSocios = 100;
 
 	countPorRubro: Record<string, number> = {};
-
+	currentDate = new Date();
+	currentDateTime: Date = new Date();
 	constructor(
 		private themeService: ThemeService,
 		private userService: ApiUserService,
@@ -39,6 +52,9 @@ export class InicioComponent implements OnInit {
 	ngOnInit(): void {
 		this.loadUserInfo();
 		this.actualizarCountPorRubro();
+		setInterval(() => {
+			this.currentDateTime = new Date();
+		}, 1000);
 	}
 
 	// Métodos para el primer gráfico
@@ -63,6 +79,44 @@ export class InicioComponent implements OnInit {
 
 	toggleTheme() {
 		this.themeService.toggleDarkMode();
+	}
+	getMonthGrid() {
+		const weeks = [];
+		const startMonth = startOfMonth(this.currentDate);
+		const endMonth = endOfMonth(this.currentDate);
+
+		let startDate = startOfWeek(startMonth, { weekStartsOn: 0 });
+
+		while (startDate <= endMonth) {
+			const week = [];
+			for (let i = 0; i < 7; i++) {
+				week.push({
+					date: format(startDate, 'yyyy-MM-dd', { locale: es }),
+					isCurrentMonth: isSameMonth(startDate, startMonth),
+				});
+				startDate = addDays(startDate, 1);
+			}
+			weeks.push(week);
+		}
+
+		return weeks;
+	}
+
+	navigate(months: number) {
+		this.currentDate =
+			months > 0 ? addMonths(this.currentDate, 1) : subMonths(this.currentDate, 1);
+	}
+
+	isToday(date: string): boolean {
+		const today = new Date();
+
+		const dateToCompare = new Date(date);
+
+		return (
+			dateToCompare.getDate() === today.getDate() - 1 &&
+			dateToCompare.getMonth() === today.getMonth() &&
+			dateToCompare.getFullYear() === today.getFullYear()
+		);
 	}
 
 	loadUserInfo(): void {

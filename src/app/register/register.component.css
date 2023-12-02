@@ -71,7 +71,18 @@ form{
     
 }
 
+.i,
+.password,
+.eye {
+    display: flex;
+    align-items: center;
+    
+}
 
+.i i,
+.eye i {
+    transition: .3s;
+}
 .i{
 	color: #d9d9d9;
 	display: flex;
@@ -79,9 +90,7 @@ form{
 	align-items: center;
 }
 
-.i i{
-	transition: .3s;
-}
+
 
 .input-div > div{
     position: relative;
@@ -196,6 +205,58 @@ form .username{
     font-size: 14px;
   }
 
+  form .password{
+    position: relative;
+    border-bottom: 2px solid #32be8f;
+    margin: 20px 0;
+  }
+  
+  .password {
+      position: relative;
+      margin: 10px 0;
+    }
+    
+    .password input {
+      width: 100%;
+      padding: 0 5px;
+      height: 40px;
+      font-size: 16px;
+      border: none;
+      background: none;
+      outline: none;
+    }
+    
+    .password label {
+      position: absolute;
+      top: -10%;
+      left: 5px;
+  
+      transform: translateY(60%);
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+    
+    
+    .password input:valid ~ label,
+    .password input:not(:placeholder-shown) ~ label {
+      top: -30px;
+      color: #999;
+    }
+    .input-div:focus-within .password .eye button i{
+    color: #32be8f;
+  }
+    .password span::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #555;
+      transition: 0.5s;
+    }
+
   .select-div {
     display: flex;
     align-items: center;
@@ -235,13 +296,7 @@ form .username{
     color: #32be8f;
   }
   
-  .select {
-    width: 100%;
-    height: 45px;
-    border: none;
-    background: none;
-    outline: none;
-  }
+  
   
   .select-option {
     cursor: pointer;
@@ -253,8 +308,6 @@ form .username{
     background: #32be8f;
     color: #fff;
   }
-  
- 
   
   .select {
     position: relative;
@@ -303,6 +356,48 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .red2{
   color: red;
-  
+  margin-top: -30px;
   
 }
+
+.input-div.error .password .eye button i {
+  color: red;
+}
+.input-div.error .i {
+  color: red;
+}
+.input-div.error .username label {
+  color: red;
+}
+
+.input-div.error .username {
+  border-bottom: 2px solid red;
+}
+.select-div.error .i {
+  color: red;
+}
+
+.select-div.error .select-container label {
+  color: red;
+}
+.select-div.error .select {
+  border-color: red; 
+}
+
+.input-div.error .password label {
+  color: red;
+}
+
+.input-div.error .password {
+  border-bottom: 2px solid red; 
+}
+
+.password .red {
+  color: red;
+  position: absolute;
+  bottom: -5px; 
+  left: 100px; 
+  transform: translateY(100%);
+  
+}
+ 

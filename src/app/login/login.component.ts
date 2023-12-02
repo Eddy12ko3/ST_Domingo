@@ -11,6 +11,7 @@ import { NotificationService } from '../service/controllers/notification.service
 })
 export class LoginComponent implements OnInit {
 	formLogin!: FormGroup;
+	showPassword: boolean = false;
 
 	constructor(
 		private apiService: ApiUserService,
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
 			usuario: ['', [Validators.required, Validators.maxLength(8)]],
 			contraseña: ['', [Validators.required, Validators.maxLength(50)]],
 		});
+	}
+	togglePasswordVisibility() {
+		console.log('Toggle password visibility called');
+		this.showPassword = !this.showPassword;
 	}
 
 	loginUser() {

@@ -9,18 +9,18 @@
 		</div>
 		<div class="login-content">
 			<form [formGroup]="formLogin" (ngSubmit)="loginUser()">
-				<h2 class="title">HOLA, BIENVENIDO DE NUEVO</h2>
-				<div class="input-div">
+				<h2 class="title">HOLA, BIENVENIDO</h2>
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formLogin.get('usuario')?.hasError('required') &&
+							formLogin.get('usuario')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-id-card"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formLogin.get('usuario')?.hasError('required') &&
-								formLogin.get('usuario')?.touched
-						}">
+					<div class="username">
 						<input type="number" formControlName="usuario" />
 						<label>Nº DOCUMENTO</label>
 						<div
@@ -33,19 +33,38 @@
 						</div>
 					</div>
 				</div>
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formLogin.get('contraseña')?.hasError('required') &&
+							formLogin.get('contraseña')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-lock"></i>
 					</div>
 					<div
-						class="username"
+						class="password"
 						[ngClass]="{
 							error:
 								formLogin.get('contraseña')?.hasError('required') &&
 								formLogin.get('contraseña')?.touched
 						}">
-						<input type="password" formControlName="contraseña" />
+						<input
+							type="{{ showPassword ? 'text' : 'password' }}"
+							formControlName="contraseña" />
 						<label>PASSWORD</label>
+
+						<div class="eye">
+							<button type="button" (click)="togglePasswordVisibility()">
+								<i
+									class="fas"
+									[ngClass]="{
+										'fa-eye': showPassword,
+										'fa-eye-slash': !showPassword
+									}"></i>
+							</button>
+						</div>
 						<div
 							class="red"
 							*ngIf="

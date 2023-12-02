@@ -10,17 +10,17 @@
 		<div class="login-content">
 			<form [formGroup]="formRegister" (ngSubmit)="registrarUsuario()">
 				<h2 class="title">REGISTRARSE</h2>
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formRegister.get('nombre')?.hasError('required') &&
+							formRegister.get('nombre')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-user"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formRegister.get('nombre')?.hasError('required') &&
-								formRegister.get('nombre')?.touched
-						}">
+					<div class="username">
 						<input
 							[class.is-invalid]="
 								formRegister.get('nombre')?.touched &&
@@ -40,17 +40,17 @@
 					</div>
 				</div>
 
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formRegister.get('apellidos')?.hasError('required') &&
+							formRegister.get('apellidos')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-user"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formRegister.get('apellidos')?.hasError('required') &&
-								formRegister.get('apellidos')?.touched
-						}">
+					<div class="username">
 						<input type="text" formControlName="apellidos" />
 						<label for="apellido">APELLIDO</label>
 						<div
@@ -64,45 +64,45 @@
 					</div>
 				</div>
 
-				<div class="select-div">
+				<div
+					class="select-div"
+					[ngClass]="{
+						error:
+							formRegister.get('tipodoc')?.hasError('required') &&
+							formRegister.get('tipodoc')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-address-card"></i>
 					</div>
-					<div
-						class="select-container"
-						[ngClass]="{
-							error:
-								formRegister.get('tipodoc')?.hasError('required') &&
-								formRegister.get('tipodoc')?.touched
-						}">
+					<div class="select-container">
 						<label for="sex" class="select-label">DOCUMENTO</label>
 						<select class="select" id="sex" name="sex" formControlName="tipodoc">
 							<option value=""></option>
 							<option [ngValue]="1">DNI</option>
 							<option [ngValue]="2">CARNET EXTRANJERIA</option>
 						</select>
-						<div
-							class="red2"
-							*ngIf="
-								formRegister.get('tipodoc')?.hasError('required') &&
-								formRegister.get('tipodoc')?.touched
-							">
-							Campo requerido.
-						</div>
 					</div>
 				</div>
+				<div
+					class="red2"
+					*ngIf="
+						formRegister.get('tipodoc')?.hasError('required') &&
+						formRegister.get('tipodoc')?.touched
+					">
+					Campo requerido.
+				</div>
 
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formRegister.get('usuario')?.hasError('required') &&
+							formRegister.get('usuario')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-id-card"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formRegister.get('usuario')?.hasError('required') &&
-								formRegister.get('usuario')?.touched
-						}">
+					<div class="username">
 						<input type="number" formControlName="usuario" />
 						<label>Nº DOCUMENTO</label>
 						<div
@@ -116,19 +116,31 @@
 					</div>
 				</div>
 
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formRegister.get('contraseña')?.hasError('required') &&
+							formRegister.get('contraseña')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-lock"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formRegister.get('contraseña')?.hasError('required') &&
-								formRegister.get('contraseña')?.touched
-						}">
-						<input type="password" formControlName="contraseña" />
+					<div class="password">
+						<input
+							type="{{ showPassword ? 'text' : 'password' }}"
+							formControlName="contraseña" />
 						<label>PASSWORD</label>
+						<div class="eye">
+							<button type="button" (click)="togglePasswordVisibility()">
+								<i
+									class="fas"
+									[ngClass]="{
+										'fa-eye': showPassword,
+										'fa-eye-slash': !showPassword
+									}"></i>
+							</button>
+						</div>
 						<div
 							class="red"
 							*ngIf="
@@ -140,17 +152,17 @@
 					</div>
 				</div>
 
-				<div class="input-div">
+				<div
+					class="input-div"
+					[ngClass]="{
+						error:
+							formRegister.get('fecha_nac')?.hasError('required') &&
+							formRegister.get('fecha_nac')?.touched
+					}">
 					<div class="i">
 						<i class="fas fa-calendar"></i>
 					</div>
-					<div
-						class="username"
-						[ngClass]="{
-							error:
-								formRegister.get('fecha_nac')?.hasError('required') &&
-								formRegister.get('fecha_nac')?.touched
-						}">
+					<div class="username">
 						<input type="date" formControlName="fecha_nac" />
 						<label>FECHA</label>
 						<div

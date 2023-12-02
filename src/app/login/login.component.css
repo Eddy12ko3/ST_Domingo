@@ -68,9 +68,7 @@ form{
     display: grid;
     grid-template-columns: 7% 93%;
     
-    
 }
-
 
 .i{
 	color: #d9d9d9;
@@ -79,13 +77,22 @@ form{
 	align-items: center;
 }
 
-.i i{
-	transition: .3s;
+.i,
+.password,
+.eye {
+    display: flex;
+    align-items: center;
+    
 }
 
-.input-div > div{
+.i i,
+.eye i {
+    transition: .3s;
+}
+
+.input-div > div {
     position: relative;
-	height: 45px;
+    height: 45px;
 }
 
 a{
@@ -149,7 +156,7 @@ form .username{
     position: absolute;
     top: -10%;
     left: 5px;
-    
+
     transform: translateY(60%);
     font-size: 16px;
     pointer-events: none;
@@ -173,8 +180,61 @@ form .username{
     background: #555;
     transition: 0.5s;
   }
+
+  form .password{
+    position: relative;
+    border-bottom: 2px solid #32be8f;
+    margin: 20px 0;
+  }
+  
+  .password {
+      position: relative;
+      margin: 10px 0;
+    }
+    
+    .password input {
+      width: 100%;
+      padding: 0 5px;
+      height: 40px;
+      font-size: 16px;
+      border: none;
+      background: none;
+      outline: none;
+    }
+    
+    .password label {
+      position: absolute;
+      top: -10%;
+      left: 5px;
+  
+      transform: translateY(60%);
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+    
+    
+    .password input:valid ~ label,
+    .password input:not(:placeholder-shown) ~ label {
+      top: -30px;
+      color: #999;
+    }
+    
+    .password span::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #555;
+      transition: 0.5s;
+    }
   
   .input-div:focus-within .i {
+    color: #32be8f;
+  }
+  .input-div:focus-within .password .eye button i{
     color: #32be8f;
   }
   .username input:focus ~ label {
@@ -185,107 +245,15 @@ form .username{
     display: flex;
     align-items: center;
   }
-  
-  .i {
-    margin-right: 10px;
-  }
-  
-  .username input[type="date"] {
-    font-family: Poppins, sans-serif ;
-    color: #999;
-    font-size: 14px;
-  }
 
-  .select-div {
-    display: flex;
-    align-items: center;
-  }
-  
-  .select-container {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom 0.3s;
-    width: 100%;
-  }
-  
-  .select-label {
-    position: relative;
-    top: -30px;
-    left: 10px;
-    color: #999;
-    font-size: 16px;
-    pointer-events: none;
-  }
-  
-  
-  .select {
-    border: none;
-    width: 100%;
-  }
-  
-  
-  
+ 
   .i {
     margin-right: 10px;
     color: #d9d9d9;
   }
   
-  .select-div:focus-within .i {
-    color: #32be8f;
-  }
-  
-  .select {
-    width: 100%;
-    height: 45px;
-    border: none;
-    background: none;
-    outline: none;
-  }
-  
-  .select-option {
-    cursor: pointer;
-    color: #32be8f;
-    font-size: 16px;
-  }
-  
-  .select-option:focus {
-    background: #32be8f;
-    color: #fff;
-  }
-  
- 
-  
-  .select {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .select-div:focus-within .select {
-    transform: scale(1.1);
-    opacity: 1;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  }
-  
-  .select-div:not(:focus-within) .select {
-    transform: scale(1);
-    opacity: 0.7;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  }
-  
-  form .select{
-	position: relative;
-	border-bottom: 2px solid #32be8f;
-	margin: 30px 0;
-}
 
-
-.select-container:focus-within .select-label {
-    color: #32be8f;
-  }
+  
 
   input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -296,4 +264,36 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .red{
   color: red;
+  
+}
+.input-div.error .i {
+  color: red;
+}
+
+.input-div.error .password .eye button i {
+  color: red;
+}
+
+.input-div.error .username label {
+  color: red;
+}
+
+.input-div.error .username {
+  border-bottom: 2px solid red; 
+}
+.input-div.error .password label {
+  color: red;
+}
+
+.input-div.error .password {
+  border-bottom: 2px solid red; 
+}
+
+.password .red {
+  color: red;
+  position: absolute;
+  bottom: -5px; 
+  left: 100px; 
+  transform: translateY(100%);
+  
 }

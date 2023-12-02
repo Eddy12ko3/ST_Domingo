@@ -1,13 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-
-
-
-
-
 body{
-    width: 100vw;
-    height: 100vh;
+    width: 220vh;
+    height: 100vh;;
     font-family: poppins, sans-serif;
     font-size: 0.88rem;
     background: var(--color-background);
@@ -17,14 +12,12 @@ body{
 }
 
 .container{
-    padding-top: 100px;
-    width: 96%;
-    margin: 0 auto;
-    gap: 1.8rem;
+    padding-top: 80px;
+    width: 100%;
+    margin-left: 40px;
+   
     
 }
-
-
 
 /*REPORTES*/
 
@@ -200,7 +193,8 @@ main .notifications1{
  }
 
  main .notifications1 .table-container {
-    max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+    max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+    
     overflow-y: auto; /* Activa el desplazamiento vertical si es necesario */
     background: var(--color-white);
     border-radius: var(--card-border-radius);

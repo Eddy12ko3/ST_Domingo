@@ -12,6 +12,7 @@ import { NotificationService } from '../service/controllers/notification.service
 })
 export class RegisterComponent implements OnInit {
 	formRegister!: FormGroup;
+	showPassword: boolean = false;
 	dataUsers: Array<User> = new Array<User>();
 
 	constructor(
@@ -31,7 +32,10 @@ export class RegisterComponent implements OnInit {
 			tipodoc: ['', [Validators.required]],
 		});
 	}
-
+	togglePasswordVisibility() {
+		console.log('Toggle password visibility called');
+		this.showPassword = !this.showPassword;
+	}
 	registrarUsuario() {
 		console.log(this.formRegister.value);
 		if (this.formRegister.valid) {

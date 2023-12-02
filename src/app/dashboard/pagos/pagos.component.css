@@ -657,3 +657,12 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: rgb(241, 167, 6);
 }
   
+
+.disabled-btn {
+  background-color: gray;
+  cursor: not-allowed;
+  
+}
+.disabled-btn:hover {
+  background-color: rgb(72, 82, 76);
+}

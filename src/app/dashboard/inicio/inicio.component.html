@@ -2,6 +2,11 @@
 	<div class="container">
 		<main>
 			<h1>Dashboard</h1>
+			<div class="current-date-time">
+				<p>{{ currentDateTime | date: 'dd/MM/yyyy' }}</p>
+				|
+				<p>{{ currentDateTime | date: 'hh:mm:ss a' }}</p>
+			</div>
 			<!--INICIO PAGINA PRINCIPAL USER-->
 			<div class="insights">
 				<div class="user">
@@ -75,6 +80,36 @@
 						</div>
 					</div>
 					<small class="text-muted">ultimas 24 horas</small>
+				</div>
+				<div class="calender">
+					<div class="month-navigation">
+						<p>{{ currentDate | date: 'MMMM y' }}</p>
+						<button (click)="navigate(-1)">
+							<span class="material-icons-sharp"> chevron_left </span>
+						</button>
+						<button (click)="navigate(1)">
+							<span class="material-icons-sharp"> chevron_right </span>
+						</button>
+					</div>
+					<table>
+						<tr>
+							<th>D</th>
+							<th>L</th>
+							<th>M</th>
+							<th>M</th>
+							<th>J</th>
+							<th>V</th>
+							<th>S</th>
+						</tr>
+						<tr *ngFor="let week of getMonthGrid()">
+							<td
+								*ngFor="let day of week"
+								[class.inactive]="!day.isCurrentMonth"
+								[class.current-day]="isToday(day.date)">
+								{{ day.date | date: 'd' }}
+							</td>
+						</tr>
+					</table>
 				</div>
 				<!--FIN PAGINA PRINCIPAL LOCALES DISPONIBLES-->
 			</div>
