@@ -112,8 +112,11 @@
 												error:
 													formPagos
 														.get('datepayment')
-														?.hasError('required') &&
-													formPagos.get('datepayment')?.touched
+														?.hasError('required') ||
+													(formPagos
+														.get('datepayment')
+														?.hasError('fechaFutura') &&
+														formPagos.get('datepayment')?.touched)
 											}">
 											<label for="">FECHA PAGO</label>
 											<input
@@ -130,7 +133,17 @@
 												">
 												Este campo no puede estar vacío.
 											</div>
+											<div
+												*ngIf="
+													formPagos
+														.get('datepayment')
+														?.hasError('fechaFutura') &&
+													formPagos.get('datepayment')?.touched
+												">
+												No se puede ingresar una fecha futura.
+											</div>
 										</div>
+
 										<div
 											class="input-field-modal"
 											[class.error]="
@@ -226,8 +239,12 @@
 									class="input-field-modal"
 									[ngClass]="{
 										error:
-											formPagos.get('datepayment')?.hasError('required') &&
-											formPagos.get('datepayment')?.touched
+											(formPagos.get('datepayment')?.hasError('required') &&
+												formPagos.get('datepayment')?.touched) ||
+											(formPagos
+												.get('datepayment')
+												?.hasError('fechaFutura') &&
+												formPagos.get('datepayment')?.touched)
 									}">
 									<label for="">FECHA PAGO</label>
 									<input
@@ -243,7 +260,15 @@
 										">
 										Este campo no puede estar vacío.
 									</div>
+									<div
+										*ngIf="
+											formPagos.get('datepayment')?.hasError('fechaFutura') &&
+											formPagos.get('datepayment')?.touched
+										">
+										No se puede ingresar una fecha futura.
+									</div>
 								</div>
+
 								<div
 									class="input-field-modal"
 									[class.error]="

@@ -83,7 +83,7 @@ main .insights h3{
 
 .progress-bar-container {
    position: relative;
-   width: 90px; /* Ajusta el tamaño del contenedor según tus necesidades */
+   width: 90px; 
    height: 90px;
  }
 
@@ -95,14 +95,14 @@ main .insights h3{
 
  .progress-background {
    fill: none;
-   stroke: #eee; /* Color del fondo del círculo */
-   stroke-width: 10; /* Grosor del círculo */
+   stroke: #eee; 
+   stroke-width: 10; 
  }
 
  .progress-bar {
    fill: none;
    stroke: var(--color-primary);
-   stroke-width: 10; /* Grosor de la barra de progreso */
+   stroke-width: 10; 
    stroke-linecap: round;
    transition: stroke-dasharray 0.5s ease;
  }
@@ -137,48 +137,6 @@ main .insights h3{
     display: block;
  }
 /*NOTIFICACIONES*/
- main .notifications{
-    margin-top: 2rem;
-
- }
-
-
- main .notifications h2{
-    margin-bottom: 0.8rem;
-
- }
-
-
- main .notifications table{
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
- }
-
- main .notifications table:hover{
-    box-shadow: none;
- }
-
- main table tbody td{
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
- }
-
- main table tbody tr:last-child td{
-    border: none;
- }
-
- main .notifications a{
-    text-align: center;
-    display: block;
-    margin: 1rem auto;
-    color: var(--color-primary);
- }
 
 
  /*SCROLL*/
@@ -203,8 +161,6 @@ main .insights h3{
  main .notifications1 .table-container {
     width: 100%;
     max-height: 450px; /* Ajusta la altura máxima según tus necesidades */
-
-
     background: var(--color-white);
     border-radius: var(--card-border-radius);
     padding: var(--card-padding);
@@ -221,37 +177,12 @@ main .notifications1 table {
     width: 100%;
 }
 
-main table tbody td {
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
-}
-
-main table tbody tr:last-child td {
-    border: none;
-}
-
 main .notifications1 a {
     text-align: center;
     display: block;
     margin: 1rem auto;
     color: var(--color-primary);
 }
-
-
- main .notifications1 table:hover{
-    box-shadow: none;
- }
-
- main table tbody td{
-    height: 2.8rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
- }
-
- main table tbody tr:last-child td{
-    border: none;
- }
 
  main .notifications1 a{
     text-align: center;
@@ -274,8 +205,6 @@ main .notifications1 .table-container::-webkit-scrollbar-thumb {
 main .notifications1 .table-container {
   width: 100%;
   max-height: 450px; /* Ajusta la altura máxima según tus necesidades */
-
-
   background: var(--color-white);
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
@@ -331,20 +260,6 @@ main .notifications1 .table-container {
     white-space: nowrap;
     text-align: center;
   }
-
-
-
-  .vertical-container {
-    background-color: var(--color-background); 
-    color: var(--text-color); 
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    border: none;
-    
-  }
-  
-  
   /* Estilos generales para el calendario */
   div .calender{
   text-align: center;
@@ -383,7 +298,7 @@ main .notifications1 .table-container {
     width: 400px;
   border-collapse: collapse; 
   border: none; 
-  background-color: var(--color-background);
+  background-color: var(--color-white);
   border-radius: 30px;
   }
   
@@ -429,3 +344,15 @@ main .notifications1 .table-container {
     background-color: #25d1acc7;
     color: #F0F0F0;
   }
+
+  @keyframes fillAnimationtotal {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.fill-animation-total{
+    stroke-dasharray: 283; 
+    stroke-dashoffset: 283;
+    animation: fillAnimationtotal 2s forwards;
+}

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../service/controllers/theme.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ApiPagosService } from 'src/app/service/api/api.pagos.service';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -43,7 +43,13 @@ export class PagosComponent implements OnInit, OnDestroy {
 		this.obtenerPagos();
 		this.obtenerPersona();
 		this.formPagos = this.formGroup.group({
-			datepayment: ['', [Validators.required]],
+			datepayment: [
+				this.getFormattedCurrentDate(), // Inicializar con la fecha actual
+				{
+					validators: [Validators.required, this.fechaNoFuturaValidator()],
+					updateOn: 'blur',
+				},
+			],
 			person: ['', [Validators.required, Validators.maxLength(50)]],
 			amount: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
 			personName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -63,7 +69,12 @@ export class PagosComponent implements OnInit, OnDestroy {
 
 	closeModal() {
 		this.showModal = false;
-		this.formPagos.reset();
+		this.formPagos.patchValue({
+			datepayment: this.getFormattedCurrentDate(),
+			person: '',
+			amount: '',
+			personName: '',
+		});
 	}
 	abrirModal(pago: DetailPaymentId) {
 		this.selectedPago = pago;
@@ -75,6 +86,13 @@ export class PagosComponent implements OnInit, OnDestroy {
 
 	cerrarModal() {
 		this.showModalEdit = false;
+		this.selectedPago = null; // Limpiar los datos del modal de edición
+		this.formPagos.patchValue({
+			datepayment: this.getFormattedCurrentDate(),
+			person: '',
+			amount: '',
+			personName: '',
+		});
 	}
 
 	ngOnDestroy(): void {
@@ -216,5 +234,28 @@ export class PagosComponent implements OnInit, OnDestroy {
 			// Restablece el campo oculto a un valor vacío en caso de que se haya establecido previamente.
 			this.formPagos.get('person')?.setValue('');
 		}
+	}
+	fechaNoFuturaValidator(): ValidatorFn {
+		return (control: AbstractControl): { [key: string]: any } | null => {
+			const selectedDate = control.value;
+
+			if (selectedDate) {
+				const currentDate = new Date();
+				const selectedDateObj = new Date(selectedDate);
+
+				if (selectedDateObj > currentDate) {
+					// Devuelve un error si la fecha es futura
+					return { fechaFutura: true };
+				}
+			}
+
+			// La validación pasa si la fecha no es futura
+			return null;
+		};
+	}
+	private getFormattedCurrentDate(): string {
+		const currentDate = new Date();
+		const isoString = currentDate.toISOString().split('T')[0];
+		return isoString;
 	}
 }

@@ -261,16 +261,8 @@
 										class="input-field-modal"
 										[ngClass]="{
 											error:
-												formAsociados
-													.get('numDocumento')
-													?.hasError('required') &&
-												formAsociados
-													.get('numDocumento')
-													?.hasError('minlength') &&
-												formAsociados.get('numDocumento')?.touched &&
-												formAsociados
-													.get('numDocumento')
-													?.hasError('maxlength')
+												formAsociados.get('numDocumento')?.invalid &&
+												formAsociados.get('numDocumento')?.touched
 										}">
 										<label>N° DOCUMENTO*</label>
 										<input
@@ -295,7 +287,7 @@
 													?.hasError('maxlength') &&
 												formAsociados.get('numDocumento')?.touched
 											">
-											El maximo de caracteres es 12
+											El máximo de caracteres es 12
 										</div>
 										<div
 											*ngIf="
@@ -314,10 +306,25 @@
 											error:
 												formAsociados
 													.get('fecha_nac')
+													?.hasError('invalidDate') ||
+												(formAsociados
+													.get('fecha_nac')
 													?.hasError('required') &&
-												formAsociados.get('fecha_nac')?.touched
+													formAsociados.get('fecha_nac')?.touched)
 										}">
-										<label>FECHA NACIMIENTO*</label>
+										<label
+											[ngClass]="{
+												error:
+													formAsociados
+														.get('fecha_nac')
+														?.hasError('invalidDate') ||
+													(formAsociados
+														.get('fecha_nac')
+														?.hasError('required') &&
+														formAsociados.get('fecha_nac')?.touched)
+											}"
+											>FECHA NACIMIENTO</label
+										>
 										<input
 											type="date"
 											placeholder="Ingresar Fecha"
@@ -325,14 +332,26 @@
 											formControlName="fecha_nac"
 											(input)="validateFechaNac()" />
 
+										<!-- Mensaje de error -->
+										<div
+											*ngIf="
+												formAsociados
+													.get('fecha_nac')
+													?.hasError('invalidDate') &&
+												formAsociados.get('fecha_nac')?.touched
+											"
+											class="error-message">
+											{{ 'La fecha no es válida.' }}
+										</div>
 										<div
 											*ngIf="
 												formAsociados
 													.get('fecha_nac')
 													?.hasError('required') &&
 												formAsociados.get('fecha_nac')?.touched
-											">
-											Debe seleccionar una fecha.
+											"
+											class="error-message">
+											{{ 'Este campo no puede estar vacío.' }}
 										</div>
 									</div>
 
@@ -666,14 +685,8 @@
 									class="input-field-modal"
 									[ngClass]="{
 										error:
-											formAsociados
-												.get('numDocumento')
-												?.hasError('required') &&
-											formAsociados
-												.get('numDocumento')
-												?.hasError('minlength') &&
-											formAsociados.get('numDocumento')?.touched &&
-											formAsociados.get('numDocumento')?.hasError('maxlength')
+											formAsociados.get('numDocumento')?.invalid &&
+											formAsociados.get('numDocumento')?.touched
 									}">
 									<label>N° DOCUMENTO</label>
 									<input
@@ -713,11 +726,7 @@
 								</div>
 								<div
 									class="input-field-modal"
-									[ngClass]="{
-										error:
-											formAsociados.get('fecha_nac')?.hasError('required') &&
-											formAsociados.get('fecha_nac')?.touched
-									}">
+									[class.error]="isFechaNacimientoFutura()">
 									<label>FECHA NACIMIENTO</label>
 									<input
 										type="date"
@@ -725,12 +734,8 @@
 										required
 										formControlName="fecha_nac"
 										[ngModel]="selectedAsociado?.persons?.date_birth_string" />
-									<div
-										*ngIf="
-											formAsociados.get('fecha_nac')?.hasError('required') &&
-											formAsociados.get('fecha_nac')?.touched
-										">
-										Debe seleccionar una fecha.
+									<div *ngIf="isFechaNacimientoFutura()">
+										La fecha de nacimiento no puede ser futura.
 									</div>
 								</div>
 								<div

@@ -229,7 +229,13 @@ export class PuestosComponent implements OnInit, OnDestroy {
 				});
 		}
 	}
+	isFechaNacimientoFutura(): boolean {
+		const fechaNacControl = this.formAsociados.get('fecha_nac');
+		const fechaNacValue = new Date(fechaNacControl?.value);
+		const fechaActual = new Date();
 
+		return fechaNacValue > fechaActual;
+	}
 	// En tu componente
 	eliminarAsociado(asociadoId: string) {
 		if (confirm('¿Estás seguro de que deseas eliminar a este asociado?')) {
@@ -336,8 +342,14 @@ export class PuestosComponent implements OnInit, OnDestroy {
 			// Convertir la cadena de fecha a un objeto Date
 			const fechaNacValue = new Date(fechaNacControl.value);
 
-			// Verificar si la fecha es válida y si está en el pasado
-			if (!fechaNacValue || fechaNacValue > new Date()) {
+			// Obtener la fecha actual
+			const fechaActual = new Date();
+
+			// Verificar si la fecha está vacía
+			if (!fechaNacControl.value) {
+				fechaNacControl.setErrors({ required: true });
+			} else if (fechaNacValue > fechaActual) {
+				// Verificar si la fecha es futura
 				fechaNacControl.setErrors({ invalidDate: true });
 			} else {
 				fechaNacControl.setErrors(null);

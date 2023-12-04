@@ -607,29 +607,25 @@ main .notifications button{
 
   .input-field-modal.error input,
   .input-field-modal.error select,
-  .input-field-modal.error input[type="date"] {
-    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
-  }
-  
-  .input-field-modal.error label,
-  .input-field-modal.error div {
-    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
-    
-  }
-
-
+  .input-field-modal.error input[type="date"],
   .input-field-modal.error input[type="number"] {
-    border-color: red;  /* Cambia el color del borde del input cuando hay un error */
+      border-color: red;  
+      color: red;  /* Agrega este estilo para el color del texto en el input type="number" */
   }
   
   .input-field-modal.error label,
   .input-field-modal.error div {
-    color: red;  /* Cambia el color del texto del mensaje de error y de la etiqueta cuando hay un error */
+      color: red;  
   }
-  .error input {
-    border-color: red;  /* Cambia el color del borde a rojo */
-    color: red;        /* Cambia el color del texto a rojo */
+  
+  .error-message {
+      color: red;
   }
+
+  .error {
+    color: red;
+}
+  
   
 
   .container_button_registrar button{
