@@ -36,7 +36,7 @@ export class NotificationService {
 	}
 	errorEvent(event: HttpErrorResponse) {
 		if (event.error.error) {
-			this.notification.error(event.error.error, 'Error');
+			this.notification.error(event.error.error, event.error.errorRaw);
 		} else {
 			this.notification.error(
 				'Ocurrió un error desconocido, contactar con el equipo de soporte.',

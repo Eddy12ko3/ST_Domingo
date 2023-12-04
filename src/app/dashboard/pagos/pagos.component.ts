@@ -99,6 +99,7 @@ export class PagosComponent implements OnInit, OnDestroy {
 	}
 
 	registrarPagos() {
+		console.log(this.formPagos.value);
 		if (this.formPagos.valid) {
 			this.pagosService
 				.insertPagos({
@@ -120,6 +121,7 @@ export class PagosComponent implements OnInit, OnDestroy {
 	}
 
 	actualizarPagos() {
+		console.log(this.formPagos.value);
 		if (this.formPagos.valid) {
 			const pagosId = this.selectedPago?.detailPaymentId;
 			this.pagosService

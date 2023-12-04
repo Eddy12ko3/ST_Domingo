@@ -53,33 +53,31 @@ export class PuestosComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
+		this.formAsociados = this.formGroup.group({
+			folio: ['', [Validators.required]],
+			nombre: ['', [Validators.required, Validators.maxLength(50)]],
+			apellido: ['', [Validators.required, Validators.maxLength(50)]],
+			numDocumento: [
+				'',
+				[Validators.required, Validators.minLength(8), Validators.maxLength(12)],
+			],
+			fecha_nac: ['', [Validators.required]],
+			document: ['', [Validators.required]],
+			genero: ['', [Validators.required]],
+			telefono: ['', [Validators.maxLength(9)]],
+			operador: ['', [Validators.required]],
+			direccion: ['', [Validators.maxLength(50)]],
+			rubroName: ['', [Validators.required]],
+			rubro: ['', [Validators.required]],
+			area: ['', [Validators.required, Validators.maxLength(20)]],
+			code: ['', [Validators.required, Validators.maxLength(50)]],
+			sector: ['', [Validators.required, Validators.maxLength(50)]],
+		});
 		this.obtenerAsociados();
 		this.obtenerOperador();
 		this.obtenerGenero();
 		this.obtenerTipoDocumento();
 		this.obtenerRubro();
-		this.formAsociados = this.formGroup.group({
-			folio: ['', [Validators.required, Validators.minLength(6)]],
-			nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-			apellido: [
-				'',
-				[Validators.required, Validators.minLength(2), Validators.maxLength(50)],
-			],
-			numDocumento: ['', [Validators.required, Validators.minLength(8)]],
-			fecha_nac: ['', [Validators.required]],
-			document: ['', [Validators.required]],
-			genero: ['', [Validators.required]],
-			telefono: ['', [Validators.required, Validators.maxLength(9)]],
-			operador: ['', [Validators.required]],
-			direccion: [
-				'',
-				[Validators.required, Validators.minLength(3), Validators.maxLength(50)],
-			],
-			rubro: ['', [Validators.required]],
-			area: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-			code: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-			sector: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-		});
 		this.suscription = this.asociadosService.refresh.subscribe(() => {
 			this.obtenerAsociados();
 		});
@@ -147,7 +145,17 @@ export class PuestosComponent implements OnInit, OnDestroy {
 		});
 	}
 	registrarAsociados() {
+		console.log('Estado del formulario:', this.formAsociados.status);
+		console.log(this.formAsociados.status);
+		console.log('Errores del formulario:', this.formAsociados.errors);
+		Object.keys(this.formAsociados.controls).forEach((key) => {
+			const controlErrors = this.formAsociados.get(key)?.errors;
+			if (controlErrors != null) {
+				console.log(`Errores en ${key}:`, controlErrors);
+			}
+		});
 		if (this.formAsociados.valid) {
+			console.log('Datos a enviar al servidor:', this.formAsociados.value);
 			this.asociadosService
 				.insertAsociado({
 					folio: this.formAsociados.get('folio')?.value ?? 0,
@@ -167,18 +175,29 @@ export class PuestosComponent implements OnInit, OnDestroy {
 				})
 				.subscribe({
 					next: (value: any) => {
+						console.log('Respuesta exitosa:', value);
 						this.closeModal();
 						this.formAsociados.reset();
 						this.notificationService.success(value.success);
 					},
 					error: (value: any) => {
+						console.error('Error en la solicitud:', value);
 						this.notificationService.errorEvent(value);
 					},
 				});
+		} else {
+			console.log('El formulario no es válido. No se enviarán datos al servidor.');
 		}
 	}
 
 	actualizarAsociados() {
+		console.log(this.formAsociados.value);
+		Object.keys(this.formAsociados.controls).forEach((key) => {
+			const controlErrors = this.formAsociados.get(key)?.errors;
+			if (controlErrors != null) {
+				console.log(`Errores en ${key}:`, controlErrors);
+			}
+		});
 		if (this.formAsociados.valid) {
 			const asociadoId = this.selectedAsociado?.associateId;
 			this.asociadosService
@@ -271,17 +290,17 @@ export class PuestosComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	validateFolioLength() {
-		const folioControl = this.formAsociados.get('folio');
-		if (folioControl && folioControl.value) {
-			const folioValue = folioControl.value.toString();
-			if (folioValue.length < 6) {
-				folioControl.setErrors({ minlength: true });
-			} else {
-				folioControl.setErrors(null);
-			}
-		}
-	}
+	// validateFolioLength() {
+	// 	const folioControl = this.formAsociados.get('folio');
+	// 	if (folioControl && folioControl.value) {
+	// 		const folioValue = folioControl.value.toString();
+	// 		if (folioValue.length < 6) {
+	// 			folioControl.setErrors({ minlength: true });
+	// 		} else {
+	// 			folioControl.setErrors(null);
+	// 		}
+	// 	}
+	// }
 
 	validateNumDocumentoLength() {
 		const numDocumentoControl = this.formAsociados.get('numDocumento');
@@ -289,6 +308,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
 			const numDocumentoValue = numDocumentoControl.value.toString();
 			if (numDocumentoValue.length < 8) {
 				numDocumentoControl.setErrors({ minlength: true });
+			} else if (numDocumentoValue.length > 12) {
+				numDocumentoControl.setErrors({ maxlength: true });
 			} else {
 				numDocumentoControl.setErrors(null);
 			}
@@ -299,8 +320,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
 		const telefonoControl = this.formAsociados.get('telefono');
 		if (telefonoControl && telefonoControl.value) {
 			const telefonoValue = telefonoControl.value.toString();
-			if (telefonoValue.length < 9) {
-				telefonoControl.setErrors({ minlength: true });
+			if (telefonoValue.length > 9) {
+				telefonoControl.setErrors({ maxlength: true });
 			} else {
 				telefonoControl.setErrors(null);
 			}
@@ -325,7 +346,7 @@ export class PuestosComponent implements OnInit, OnDestroy {
 	}
 
 	validateRubro() {
-		const rubroControl = this.formAsociados.get('rubro');
+		const rubroControl = this.formAsociados.get('rubroName');
 		if (rubroControl) {
 			// Verificar si el valor está vacío y establecer el error correspondiente
 			if (!rubroControl.value) {
@@ -334,6 +355,25 @@ export class PuestosComponent implements OnInit, OnDestroy {
 				// Limpiar los errores si el valor es válido
 				rubroControl.setErrors(null);
 			}
+		}
+	}
+
+	onRubroInput() {
+		const inputValue = this.formAsociados.get('rubroName')?.value;
+		const selectedRubro = this.dataRubro.find((rubro) => rubro.nameField === inputValue);
+
+		if (selectedRubro) {
+			// Mantén el nombre en la interfaz de usuario.
+			this.formAsociados.get('rubroName')?.setValue(selectedRubro.nameField);
+
+			// Almacena el ID en el campo oculto.
+			this.formAsociados.get('rubro')?.setValue(selectedRubro.fieldId);
+		} else {
+			// Si la persona no se encuentra, mantén el nombre en lugar de asignar un ID.
+			this.formAsociados.get('rubroName')?.setValue(inputValue);
+
+			// Restablece el campo oculto a un valor vacío en caso de que se haya establecido previamente.
+			this.formAsociados.get('rubro')?.setValue(null);
 		}
 	}
 }
