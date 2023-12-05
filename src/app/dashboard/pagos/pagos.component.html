@@ -251,8 +251,7 @@
 										type="date"
 										placeholder="Ingresar Fecha"
 										required
-										formControlName="datepayment"
-										[ngModel]="selectedPago?.datePayment_string" />
+										formControlName="datepayment" />
 									<div
 										*ngIf="
 											formPagos.get('datepayment')?.hasError('required') &&
@@ -272,8 +271,8 @@
 								<div
 									class="input-field-modal"
 									[class.error]="
-										formPagos.get('person')?.hasError('required') &&
-										formPagos.get('person')?.touched
+										formPagos.get('personName')?.hasError('required') &&
+										formPagos.get('personName')?.touched
 									">
 									<label for="person">NOMBRE</label>
 									<input
@@ -282,9 +281,7 @@
 										list="persons"
 										required
 										formControlName="personName"
-										[ngModel]="selectedPago?.person?.name"
 										(input)="onPersonInput()" />
-
 									<datalist id="persons" class="details">
 										<option
 											*ngFor="let persona of dataPersona"
@@ -292,12 +289,11 @@
 												persona.name + ' ' + persona.lastname
 											"></option>
 									</datalist>
-
 									<!-- Mensaje de error -->
 									<div
 										*ngIf="
-											formPagos.get('person')?.hasError('required') &&
-											formPagos.get('person')?.touched
+											formPagos.get('personName')?.hasError('required') &&
+											formPagos.get('personName')?.touched
 										">
 										* Este campo no puede estar vacío
 									</div>
@@ -334,6 +330,7 @@
 									<span class="material-icons-sharp">save</span>
 									<span class="btnText">Guardar</span>
 								</button>
+
 								<button class="limpiarBtn" (click)="cerrarModal()">
 									<span class="material-icons-sharp">delete_forever</span>
 									<span class="btnText">Descartar</span>

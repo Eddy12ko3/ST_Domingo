@@ -97,6 +97,15 @@ export class PuestosComponent implements OnInit, OnDestroy {
 
 	abrir(asociado: AssociateId) {
 		this.selectedAsociado = asociado;
+		this.formAsociados.patchValue({
+			folio: asociado.folio,
+			nombre: asociado.persons.name,
+			apellido: asociado.persons.lastname,
+			numDocumento: asociado.numDocument.numDocument,
+
+			rubroName: asociado.persons.stands[0]?.rubro?.nameField,
+			rubro: asociado.persons.stands[0]?.rubro?.fieldId,
+		});
 		this.selectedAsociado.persons.date_birth_string = new Date(
 			this.selectedAsociado.persons.date_birth,
 		)

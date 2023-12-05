@@ -78,9 +78,17 @@ export class PagosComponent implements OnInit, OnDestroy {
 	}
 	abrirModal(pago: DetailPaymentId) {
 		this.selectedPago = pago;
-		this.selectedPago.datePayment_string = new Date(this.selectedPago.datePayment)
-			.toISOString()
-			.split('T')[0];
+		const formattedDate = new Date(pago.datePayment).toISOString().split('T')[0];
+
+		this.formPagos.patchValue({
+			datepayment: formattedDate,
+			personName: `${pago.person.name} ${pago.person.lastname}`,
+			amount: pago.amount,
+			// Otros campos del formulario
+		});
+
+		this.onPersonInput(); // Asegúrate de llamar a onPersonInput para actualizar el estado del formulario.
+
 		this.showModalEdit = true;
 	}
 
@@ -234,7 +242,11 @@ export class PagosComponent implements OnInit, OnDestroy {
 			// Restablece el campo oculto a un valor vacío en caso de que se haya establecido previamente.
 			this.formPagos.get('person')?.setValue('');
 		}
+
+		// Actualiza la validación del formulario después de establecer el valor.
+		this.formPagos.get('personName')?.updateValueAndValidity();
 	}
+
 	fechaNoFuturaValidator(): ValidatorFn {
 		return (control: AbstractControl): { [key: string]: any } | null => {
 			const selectedDate = control.value;
