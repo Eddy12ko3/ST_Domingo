@@ -59,7 +59,7 @@
 							<span class="btnText">Registrar</span>
 						</button>
 					</div>
-					<div *ngIf="dataPagos && dataPagos.length === 0">
+					<div *ngIf="buscarForm.dirty && dataPagos && dataPagos.length === 0">
 						<p>No hay resultados.</p>
 					</div>
 					<table *ngIf="dataPagos && dataPagos.length > 0">

@@ -224,10 +224,10 @@
 											*Campo requerido
 										</div>
 									</div>
-									<div class="input-field-modal">
+									<!--<div class="input-field-modal">
 										<label>EDAD</label>
 										<input type="number" placeholder="Ingresar Edad" required />
-									</div>
+									</div>-->
 									<div
 										class="input-field-modal"
 										[class.error]="
@@ -648,10 +648,10 @@
 										*Campo requerido
 									</div>
 								</div>
-								<div class="input-field-modal">
+								<!--<div class="input-field-modal">
 									<label>EDAD</label>
 									<input type="number" placeholder="Ingresar Edad" required />
-								</div>
+								</div>-->
 								<div
 									class="input-field-modal"
 									[class.error]="
@@ -866,101 +866,101 @@
 										*Campo requerido
 									</div>
 								</div>
-							</div>
-						</div>
 
-						<div class="fields-modal">
-							<div
-								class="input-field-modal"
-								[class.error]="
-									formAsociados.get('rubro')?.hasError('required') &&
-									formAsociados.get('rubro')?.touched
-								">
-								<label for="rubro">RUBRO</label>
-								<input
-									type="text"
-									id="rubro"
-									name="rubro"
-									list="rubros"
-									required
-									formControlName="rubroName"
-									[ngModel]="
-										selectedAsociado?.persons?.stands[0]?.rubro?.nameField
-									"
-									(input)="onRubroInput()" />
-
-								<datalist id="rubros" class="details">
-									<option
-										*ngFor="let rubro of dataRubro"
-										[ngValue]="rubro.fieldId">
-										{{ rubro.nameField }}
-									</option>
-								</datalist>
 								<div
-									*ngIf="
+									class="input-field-modal"
+									[class.error]="
 										formAsociados.get('rubro')?.hasError('required') &&
 										formAsociados.get('rubro')?.touched
 									">
-									*Este campo no puede estar vacío.
-								</div>
-							</div>
+									<label for="rubro">RUBRO</label>
+									<input
+										type="text"
+										id="rubro"
+										name="rubro"
+										list="rubros"
+										required
+										formControlName="rubroName"
+										[ngModel]="
+											selectedAsociado?.persons?.stands[0]?.rubro?.nameField
+										"
+										(input)="onRubroInput()" />
 
-							<div
-								class="input-field-modal"
-								[class.error]="
-									formAsociados.get('area')?.hasError('required') &&
-									formAsociados.get('area')?.touched
-								">
-								<label>AREA</label>
-								<input
-									type="text"
-									placeholder="Ingresar Area"
-									required
-									formControlName="area"
-									[ngModel]="selectedAsociado?.persons?.stands[0]?.areas?.size"
-									(blur)="addMts()" />
+									<datalist id="rubros" class="details">
+										<option
+											*ngFor="let rubro of dataRubro"
+											[ngValue]="rubro.fieldId">
+											{{ rubro.nameField }}
+										</option>
+									</datalist>
+									<div
+										*ngIf="
+											formAsociados.get('rubro')?.hasError('required') &&
+											formAsociados.get('rubro')?.touched
+										">
+										*Este campo no puede estar vacío.
+									</div>
+								</div>
+
 								<div
-									*ngIf="
+									class="input-field-modal"
+									[class.error]="
 										formAsociados.get('area')?.hasError('required') &&
 										formAsociados.get('area')?.touched
 									">
-									*este campo no puede estar vacío
+									<label>AREA</label>
+									<input
+										type="text"
+										placeholder="Ingresar Area"
+										required
+										formControlName="area"
+										[ngModel]="
+											selectedAsociado?.persons?.stands[0]?.areas?.size
+										"
+										(blur)="addMts()" />
+									<div
+										*ngIf="
+											formAsociados.get('area')?.hasError('required') &&
+											formAsociados.get('area')?.touched
+										">
+										*este campo no puede estar vacío
+									</div>
 								</div>
-							</div>
-							<div
-								class="input-field-modal"
-								[class.error]="
-									formAsociados.get('code')?.hasError('required') &&
-									formAsociados.get('code')?.touched
-								">
-								<label>CODE</label>
-								<input
-									type="text"
-									placeholder="Ingresar Code"
-									required
-									formControlName="code"
-									[ngModel]="selectedAsociado?.persons?.stands[0]?.code" />
 								<div
-									*ngIf="
+									class="input-field-modal"
+									[class.error]="
 										formAsociados.get('code')?.hasError('required') &&
 										formAsociados.get('code')?.touched
 									">
-									*este campo no puede estar vacio
+									<label>CODE</label>
+									<input
+										type="text"
+										placeholder="Ingresar Code"
+										required
+										formControlName="code"
+										[ngModel]="selectedAsociado?.persons?.stands[0]?.code" />
+									<div
+										*ngIf="
+											formAsociados.get('code')?.hasError('required') &&
+											formAsociados.get('code')?.touched
+										">
+										*este campo no puede estar vacio
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="container_button_modal">
-							<button
-								type="submit"
-								class="guardarBtn"
-								[ngClass]="{ 'disabled-btn': !formAsociados.valid }">
-								<span class="material-icons-sharp">save</span>
-								<span class="btnText">Guardar</span>
-							</button>
-							<button class="limpiarBtn" (click)="cerrar()">
-								<span class="material-icons-sharp">delete_forever</span>
-								<span class="btnText">Descartar</span>
-							</button>
+							<div class="container_button_modal">
+								<button
+									type="submit"
+									class="guardarBtn"
+									[ngClass]="{ 'disabled-btn': !formAsociados.valid }">
+									<span class="material-icons-sharp">save</span>
+									<span class="btnText">Guardar</span>
+								</button>
+								<button class="limpiarBtn" (click)="cerrar()">
+									<span class="material-icons-sharp">delete_forever</span>
+									<span class="btnText">Descartar</span>
+								</button>
+							</div>
 						</div>
 					</form>
 				</div>
