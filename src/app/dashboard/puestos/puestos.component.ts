@@ -131,7 +131,6 @@ export class PuestosComponent implements OnInit, OnDestroy {
 			this.totalAsociados = this.dataAsociados.length;
 		});
 	}
-
 	obtenerGenero() {
 		this.generoService.obtenerGenero().subscribe((genero) => {
 			this.dataGenero = genero;
@@ -295,8 +294,8 @@ export class PuestosComponent implements OnInit, OnDestroy {
 			}
 
 			// Agregar 'mts.' al final del valor
-			if (!areaValue.endsWith('mts.')) {
-				areaValue += ' mts.';
+			if (!areaValue.endsWith('mts2.')) {
+				areaValue += ' mts2.';
 				areaControl.setValue(areaValue);
 			}
 

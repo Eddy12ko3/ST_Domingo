@@ -77,9 +77,12 @@
 					<div class="select-container">
 						<label for="sex" class="select-label">DOCUMENTO</label>
 						<select class="select" id="sex" name="sex" formControlName="tipodoc">
-							<option value=""></option>
-							<option [ngValue]="1">DNI</option>
-							<option [ngValue]="2">CARNET EXTRANJERIA</option>
+							<option value="" disabled selected>Seleccione</option>
+							<option
+								*ngFor="let documento of dataTipoDocumento"
+								[ngValue]="documento.tipoDocId">
+								{{ documento.description }}
+							</option>
 						</select>
 					</div>
 				</div>
